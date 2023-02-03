@@ -1,6 +1,6 @@
 # Ecommerce - MAGPIE
 
-![magpieLogo](https://user-images.githubusercontent.com/122261059/216590098-7fa3c759-9ede-422e-aa65-35dcc49849f2.png)
+![magpieLogo](https://user-images.githubusercontent.com/122261059/216592356-a5d558ac-43e2-4ab1-a6c2-cc74c945f7a5.jpg)
 
 
 ## Java Project - Team 1
@@ -14,4 +14,4 @@
 - Bayardo Antonio Hidalgo
 
 ### Team Representative: 
-- _[pending...] Up to vote_
+- María del Olmo Hernández (temporary) _[pending... Up to vote]_
