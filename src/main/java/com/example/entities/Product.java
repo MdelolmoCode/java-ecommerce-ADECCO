@@ -12,11 +12,14 @@ public class Product {
 
     private String name;
     private String description;
-    Double price;
-    String category;
+    private Double price;
+    private String category;
+
     @ManyToOne
-    Manufacturer manufacturer;
-    Long stockLeft;
+    @JoinColumn(name = "manufacturer_id")
+    private Manufacturer manufacturer;
+
+    private Long stockLeft;
 
     public Product() {
     }
