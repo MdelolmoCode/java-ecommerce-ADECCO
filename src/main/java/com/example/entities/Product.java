@@ -108,4 +108,5 @@ public class Product {
                 ", stockLeft=" + stockLeft +
                 '}';
     }
+
 }

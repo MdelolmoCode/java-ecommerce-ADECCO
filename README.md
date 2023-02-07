@@ -14,7 +14,7 @@
 - Bayardo Antonio Hidalgo
 
 ### Team Representative: 
-- María del Olmo Hernández (temporary) _[pending... Up to vote]_
+- María del Olmo Hernández 
 
 # Resumen del proyecto
 
