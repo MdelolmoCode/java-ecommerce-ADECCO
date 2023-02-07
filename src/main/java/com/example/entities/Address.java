@@ -34,56 +34,63 @@ public class Address {
         return id;
     }
 
-    public void setId(Long id) {
+    public Address setId(Long id) {
         this.id = id;
+        return this;
     }
 
     public String getStreetType() {
         return streetType;
     }
 
-    public void setStreetType(String streetType) {
+    public Address setStreetType(String streetType) {
         this.streetType = streetType;
+        return this;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public Address setName(String name) {
         this.name = name;
+        return this;
     }
 
     public String getCity() {
         return city;
     }
 
-    public void setCity(String city) {
+    public Address setCity(String city) {
         this.city = city;
+        return this;
     }
 
     public String getState() {
         return state;
     }
 
-    public void setState(String state) {
+    public Address setState(String state) {
         this.state = state;
+        return this;
     }
 
     public String getCountry() {
         return country;
     }
 
-    public void setCountry(String country) {
+    public Address setCountry(String country) {
         this.country = country;
+        return this;
     }
 
     public String getZipcode() {
         return zipcode;
     }
 
-    public void setZipcode(String zipcode) {
+    public Address setZipcode(String zipcode) {
         this.zipcode = zipcode;
+        return this;
     }
 
     @Override

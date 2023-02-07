@@ -38,56 +38,63 @@ public class Product {
         return id;
     }
 
-    public void setId(Long id) {
+    public Product setId(Long id) {
         this.id = id;
+        return this;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public Product setName(String name) {
         this.name = name;
+        return this;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
+    public Product setDescription(String description) {
         this.description = description;
+        return this;
     }
 
     public Double getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public Product setPrice(Double price) {
         this.price = price;
+        return this;
     }
 
     public String getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public Product setCategory(String category) {
         this.category = category;
+        return this;
     }
 
     public Manufacturer getManufacturer() {
         return manufacturer;
     }
 
-    public void setManufacturer(Manufacturer manufacturer) {
+    public Product setManufacturer(Manufacturer manufacturer) {
         this.manufacturer = manufacturer;
+        return this;
     }
 
     public Long getStockLeft() {
         return stockLeft;
     }
 
-    public void setStockLeft(Long stockLeft) {
+    public Product setStockLeft(Long stockLeft) {
         this.stockLeft = stockLeft;
+        return this;
     }
 
     @Override

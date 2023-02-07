@@ -36,40 +36,45 @@ public class Manufacturer {
         return id;
     }
 
-    public void setId(Long id) {
+    public Manufacturer setId(Long id) {
         this.id = id;
+        return this;
     }
 
     public String getCif() {
         return cif;
     }
 
-    public void setCif(String cif) {
+    public Manufacturer setCif(String cif) {
         this.cif = cif;
+        return this;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public Manufacturer setName(String name) {
         this.name = name;
+        return this;
     }
 
     public Address getAddress() {
         return address;
     }
 
-    public void setAddress(Address address) {
+    public Manufacturer setAddress(Address address) {
         this.address = address;
+        return this;
     }
 
     public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
+    public Manufacturer setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+        return this;
     }
 
     @Override
