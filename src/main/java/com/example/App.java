@@ -32,7 +32,7 @@ public class App {
 
 		// product
 		ProductRepository productRepo = context.getBean(ProductRepository.class);
-		Product product1 = new Product(null,"name1","description1",10.99D,"category1",
+		/*Product product1 = new Product(null,"name1","description1",10.99D,"category1",
 				manufacturer1,10L);
 		Product product2 = new Product(null,"name2","description2",20.99D,"category2",
 				manufacturer1,20L);
@@ -41,7 +41,7 @@ public class App {
 		productRepo.save(product1);
 		productRepo.save(product2);
 		productRepo.save(product3);
-
+*/
 
 
 	}
