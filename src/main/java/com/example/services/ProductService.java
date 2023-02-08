@@ -16,13 +16,14 @@ public interface ProductService {
     List<Product> findAllByPriceBetween(Double minPrice, Double maxPrice);
     List<Product> findAllByManufacturerId(Long id);
     List<Product> findAllAvailable();
-    Product save(Product product);
+    Product save(Product product); // crear nuevo producto
     Product update(Product product);
+    Product changeAvailability(Product product); // si hay 0 stock (isAvailable==0), cambiar a no disponible. y viceversa
     void deleteById(Long id);
 
     // LÓGICA DE NEGOCIO
-    boolean addStock(Product product, Long amount);
-    boolean removeStock(Product product, Long amount);
+    boolean addStock(Product product, Long amount); // sería update ??
+    boolean removeStock(Product product, Long amount); // sería update ??
     boolean isAvailable(Product product); // comprobar si hay stock (stock !0)
 
 

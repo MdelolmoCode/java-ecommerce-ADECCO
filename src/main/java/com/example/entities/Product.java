@@ -3,6 +3,7 @@ package com.example.entities;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -16,7 +17,7 @@ public class Product {
     private String description;
     private Double price;
     @ManyToMany
-    private List<Category> category;
+    private List<Category> category = new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name = "manufacturer_id")
