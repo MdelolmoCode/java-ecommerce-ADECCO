@@ -3,6 +3,8 @@ package com.example.entities;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 public class Product {
 
@@ -13,18 +15,20 @@ public class Product {
     private String name;
     private String description;
     private Double price;
-    private String category;
+    @ManyToMany
+    private List<Category> category;
 
     @ManyToOne
     @JoinColumn(name = "manufacturer_id")
     private Manufacturer manufacturer;
 
     private Long stockLeft;
+    private boolean available;
 
     public Product() {
     }
 
-    public Product(Long id, String name, String description, Double price, String category, Manufacturer manufacturer, Long stockLeft) {
+    public Product(Long id, String name, String description, Double price, List<Category> category, Manufacturer manufacturer, Long stockLeft, boolean available) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -32,6 +36,7 @@ public class Product {
         this.category = category;
         this.manufacturer = manufacturer;
         this.stockLeft = stockLeft;
+        this.available = available;
     }
 
     public Long getId() {
@@ -70,11 +75,11 @@ public class Product {
         return this;
     }
 
-    public String getCategory() {
+    public List<Category> getCategory() {
         return category;
     }
 
-    public Product setCategory(String category) {
+    public Product setCategory(List<Category> category) {
         this.category = category;
         return this;
     }
@@ -94,6 +99,15 @@ public class Product {
 
     public Product setStockLeft(Long stockLeft) {
         this.stockLeft = stockLeft;
+        return this;
+    }
+
+    public boolean isAvailable() {
+        return available;
+    }
+
+    public Product setAvailable(boolean available) {
+        this.available = available;
         return this;
     }
 
