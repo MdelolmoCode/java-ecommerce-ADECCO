@@ -16,6 +16,7 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(unique = true)
     private Long orderNumber;
     /* Descomentar tras crear clase Cart
     @OneToOne
