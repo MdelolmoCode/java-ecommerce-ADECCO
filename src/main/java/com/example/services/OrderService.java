@@ -12,4 +12,8 @@ public interface OrderService {
     Optional<Order> findByOrderNumber(Long orderNumber);
     List<Order> findByAddressCity(String city);
 
+    Order save(Order order);
+    Order update(Order order);
+    void deleteById(Long id);
+
 }
