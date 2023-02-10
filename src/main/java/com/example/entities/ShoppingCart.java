@@ -3,6 +3,9 @@ package com.example.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 @Setter
 @ToString
@@ -24,7 +27,8 @@ public class ShoppingCart {
     Double totalPrice;
 
     @OneToMany
-    List<CartItem> cartItem;
+    private List<CartItem> cartItems = new ArrayList<>();
+
 
 
 }
