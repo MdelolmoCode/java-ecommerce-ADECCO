@@ -4,6 +4,9 @@ package com.example.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 @Setter
 @ToString
@@ -26,7 +29,7 @@ public class Customer {
     private String email;
 
     @OneToMany
-    private Address address;
+    private List<Address> addresses = new ArrayList<>();
 
     private String phone;
 
