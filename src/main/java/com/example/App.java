@@ -2,13 +2,18 @@ package com.example;
 
 import com.example.entities.Address;
 import com.example.entities.Manufacturer;
+import com.example.entities.Order;
 import com.example.entities.Product;
 import com.example.repositories.AddressRepository;
 import com.example.repositories.ManufacturerRepository;
+import com.example.repositories.OrderRepository;
 import com.example.repositories.ProductRepository;
+import com.example.services.OrderService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
+
+import java.util.List;
 
 @SpringBootApplication
 public class App {
@@ -43,7 +48,13 @@ public class App {
 		productRepo.save(product3);
 */
 
-
+		OrderRepository orderRepo = context.getBean(OrderRepository.class);
+		OrderService orderService = context.getBean(OrderService.class);
+		Order order1 = new Order(null, 1000L, address1);
+		Order order2 = new Order(null, 2000L, address2);
+		Order order3 = new Order(null, 3000L, address2);
+		orderRepo.saveAll(List.of(order1, order2, order3));
+		orderService.findByAddressCity("city2").forEach(System.out::println);
 	}
 
 }
