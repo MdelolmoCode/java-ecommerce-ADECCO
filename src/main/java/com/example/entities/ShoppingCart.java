@@ -15,7 +15,8 @@ import lombok.*;
 public class ShoppingCart {
 
     @Id
-    private Long Id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @OneToOne
     Customer customer;
