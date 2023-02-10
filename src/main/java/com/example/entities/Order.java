@@ -10,6 +10,7 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 @Entity
+@Table(name = "orders") // No puede llamarse 'order' porque es una keyword en SQL
 public class Order {
 
     @Id
@@ -20,11 +21,8 @@ public class Order {
     private Long orderNumber;
     /* Descomentar tras crear clase Cart
     @OneToOne
-    private Cart cart;*/
-    /* Descomentar tras crear clase Customer
-    @OneToOne
-    private Customer customer;*/
-    @OneToOne
+    private ShoppingCart shoppingCart;*/
+    @ManyToOne
     private Address address;
 
 }

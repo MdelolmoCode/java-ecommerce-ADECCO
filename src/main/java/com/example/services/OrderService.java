@@ -10,5 +10,6 @@ public interface OrderService {
     List<Order> findAll();
     Optional<Order> findById(Long id);
     Optional<Order> findByOrderNumber(Long orderNumber);
+    List<Order> findByAddressCity(String city);
 
 }
