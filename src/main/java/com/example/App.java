@@ -96,9 +96,8 @@ public class App {
 
 
 		// productRepo.saveAll(product1,product2,product3);
-		productRepo.save(product1);
-		productRepo.save(product2);
-		productRepo.save(product3);
+		productRepo.saveAll(List.of(product1,product2,product3));
+
 
 	}
 

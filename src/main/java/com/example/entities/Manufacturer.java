@@ -17,16 +17,12 @@ public class Manufacturer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @Column(unique = true)
     private String cif;
-
     private String name;
-
     @OneToOne
     @JoinColumn(name = "address_id", unique = true)
     private Address address;
-
     private String phoneNumber;
 
     public Manufacturer(String cif, String name, Address address, String phoneNumber) {
