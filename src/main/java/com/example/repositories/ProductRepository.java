@@ -11,12 +11,11 @@ import java.util.Optional;
 public interface ProductRepository extends JpaRepository<Product, Long> {
 
     Optional<Product> findByName(String name);
+    boolean existsById(Long id);
     List<Product> findByAvailableTrue();
     List<Product> findByPriceBetween(Double priceMin, Double priceMax);
     List<Product> findByStockLeftLessThan(Long amount);
     List<Product> findByCategories_Name(String name);
     List<Product> findByManufacturer_Cif(String cif);
-
-
 
 }

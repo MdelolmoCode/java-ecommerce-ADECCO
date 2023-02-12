@@ -22,6 +22,11 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public boolean existsById(Long id) {
+        return productRepo.existsById(id);
+    }
+
+    @Override
     public Optional<Product> findById(Long id) {
         log.info("findById {}", id);
         if (id == null || id <= 0)

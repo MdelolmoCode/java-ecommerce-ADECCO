@@ -9,6 +9,7 @@ public interface ProductService {
 
     // CRUD
     List<Product> findAll();
+    boolean existsById(Long id);
     Optional<Product> findById(Long id);
     Optional<Product> findByName(String name);
     List<Product> findByPriceBetween(Double minPrice, Double maxPrice);
