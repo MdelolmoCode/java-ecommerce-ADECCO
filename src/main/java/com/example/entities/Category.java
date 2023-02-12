@@ -1,6 +1,14 @@
 package com.example.entities;
 
 import jakarta.persistence.*;
+import lombok.*;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+@ToString
+@Builder
 
 @Entity
 @Table(name = "category")
@@ -10,39 +18,10 @@ public class Category {
     @Column(name = "id", nullable = false)
     private Long id;
     private String name;
+    private Boolean mature;
 
-    public Category() {
-    }
-
-    public Category(Long id, String name) {
-        this.id = id;
+    public Category(String name, Boolean mature) {
         this.name = name;
+        this.mature = mature;
     }
-
-    public Long getId() {
-        return id;
-    }
-
-    public Category setId(Long id) {
-        this.id = id;
-        return this;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public Category setName(String name) {
-        this.name = name;
-        return this;
-    }
-
-    @Override
-    public String toString() {
-        return "Category{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
-    }
-
 }
