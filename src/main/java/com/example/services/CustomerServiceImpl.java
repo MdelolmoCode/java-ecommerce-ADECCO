@@ -32,12 +32,12 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Optional <Customer> findBySurname(String surname) {
-        return this.customerRepository.findBySurname(surname);
+        return customerRepository.findBySurname(surname);
     }
 
     @Override
     public Customer findByEmail(String email) {
-        return null;
+        return customerRepository.findByEmail(email);
     }
 
     @Override
