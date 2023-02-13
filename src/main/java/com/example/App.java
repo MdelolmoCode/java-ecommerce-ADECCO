@@ -12,6 +12,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 
+import java.util.List;
+
 @SpringBootApplication
 public class App {
 
@@ -45,6 +47,14 @@ public class App {
 		productRepo.save(product3);
 */
 
+		testOrder(context);
+	}
+
+	private static void testOrder(ApplicationContext context) {
+		Address address1 = new Address(null, "street1","name1","city1","state1","country1","zipcode1");
+		Address address2 = new Address(null, "street2","name2","city2","state2","country1","zipcode2");
+		AddressRepository addressRepo = context.getBean(AddressRepository.class);
+		addressRepo.saveAll(List.of(address1, address2));
 
 		OrderService orderService = context.getBean(OrderService.class);
 		Order order1 = new Order(null, 1000L, address1);

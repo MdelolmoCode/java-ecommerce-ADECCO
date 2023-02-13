@@ -52,7 +52,7 @@ public class OrderServiceImpl implements OrderService {
             throw new IllegalArgumentException("Pedido nulo.");
 
         if(order.getId() != null)
-            update(order);
+            return update(order);
 
         try {
             return orderRepository.save(order);
