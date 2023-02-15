@@ -3,25 +3,30 @@ package com.example.services;
 import com.example.entities.CartItem;
 import com.example.repositories.CartItemRepository;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @Service
 @AllArgsConstructor
 public class CartItemServiceImpl implements CartItemService
 {
     private final CartItemRepository cartItemRepo;
 
+
     @Override
     public List<CartItem> findAll()
     {
+        log.info("findAll");
         return cartItemRepo.findAll();
     }
 
     @Override
     public boolean existsById(Long id)
     {
+        log.info("ExistBy{}", id);
         if(id == null)
             return false;
 
@@ -31,12 +36,14 @@ public class CartItemServiceImpl implements CartItemService
     @Override
     public Optional<CartItem> findById(Long id)
     {
+        log.info("FindBy{}",id);
         return cartItemRepo.findById(id);
     }
 
     @Override
     public List<CartItem> findByProductId(Long id)
     {
+        log.info("FindByProduct{}", id);
         return cartItemRepo.findByProductId(id);
 //        List<CartItem> cartItemsByProcduct = new ArrayList<>();
 //
@@ -51,6 +58,7 @@ public class CartItemServiceImpl implements CartItemService
     @Override
     public List<CartItem> findByShoppinCart(Long id)
     {
+        log.info("FindByShoppingCart{}", id);
         return cartItemRepo.findByShoppinCart(id);
 //        List<CartItem> cartItemsByShoppingCart = new ArrayList<>();
 //
@@ -68,12 +76,14 @@ public class CartItemServiceImpl implements CartItemService
     @Override
     public List<CartItem> findByAmountIs(Long amount)
     {
+        log.info("FindByAmountIs{}", amount);
         return cartItemRepo.findByAmountIs(amount);
     }
 
     @Override
     public List<CartItem> findByAmountGreaterThanEqual(Long minAmount)
     {
+        log.info("FindByAmountGreaterThanEqual{}", minAmount);
         if(minAmount == null || minAmount < 0)
             return null;
         return cartItemRepo.findByAmountGreaterThanEqual(minAmount);
@@ -82,12 +92,14 @@ public class CartItemServiceImpl implements CartItemService
     @Override
     public List<CartItem> findByAmountIsLessThanEqual(Long maxAmount)
     {
+        log.info("FindByAmountIsLessThanEqual{}", maxAmount);
         return cartItemRepo.findByAmountIsLessThanEqual(maxAmount);
     }
 
     @Override
     public List<CartItem> findByAmountIsBetween(long minAmount, Long maxAmount)
     {
+        log.info("FindByAmountIsBetween {} and {}", minAmount, maxAmount);
         return cartItemRepo.findByAmountIsBetween(minAmount, maxAmount);
     }
 
@@ -96,26 +108,100 @@ public class CartItemServiceImpl implements CartItemService
     @Override
     public List<CartItem> findByPriceIs(double price)
     {
+        log.info("FindByPriceIs{}", price);
         return cartItemRepo.findByPriceIs(price);
     }
 
     @Override
     public List<CartItem> findByPriceIsGreaterThanEqual(double price)
     {
+        log.info("FindByPriceIsGreaterThanEqual {}", price);
         return cartItemRepo.findByPriceIsGreaterThanEqual(price);
     }
 
     @Override
     public List<CartItem> findByPriceIsLessThanEqual(double price)
     {
+        log.info("FindByPriceIsLessThanEqual {}", price);
         return cartItemRepo.findByPriceIsLessThanEqual(price);
     }
 
     @Override
     public List<CartItem> findByPriceIsBetween(double minPrice, double maxPrice)
     {
+        log.info("FindByPriceIsBetween {} and {}", minPrice, maxPrice);
         return cartItemRepo.findByPriceIsBetween(minPrice, maxPrice);
     }
 
+    //================================================================================================
+
+    @Override
+    public CartItem save(CartItem cartItem)
+    {
+        log.info("Saving {}", cartItem);
+        if(cartItem != null)
+        {
+            cartItemRepo.save(cartItem);
+            return cartItem;
+        }
+        return null;
+    }
+
+    @Override
+    public void update(CartItem cartItem)
+    {
+        log.info("Update {}", cartItem);
+        if(cartItem != null)
+            cartItemRepo.save(cartItem);
+    }
+
+    @Override
+    public void delete(CartItem cartItem)
+    {
+        log.info("Delete {}", cartItem);
+        if(cartItem != null)
+            cartItemRepo.delete(cartItem);
+    }
+
+    //============================  BUSINESS LOGIC  ===================================
+
+    @Override
+    public void addAmountById(Long id, Long amount)
+    {
+        log.info("AddAmountById {} {}", id, amount);
+
+        if(id == null || amount <= 0)
+            return;
+
+        Optional<CartItem> optionalCartItem = cartItemRepo.findById(id);
+        if(optionalCartItem.isPresent())
+        {
+            CartItem cartItem = optionalCartItem.get();
+            Long amountPresent = cartItem.getAmount();
+            cartItem.setAmount(amount + amountPresent);
+        }
+    }
+
+    @Override
+    public void removeAmount(Long id, Long amount)
+    {
+        log.info("RemoveAmountById {} {}", id, amount);
+
+        if(id == null || amount >= 0)
+            return;
+
+        Optional<CartItem> optionalCartItem = cartItemRepo.findById(id);
+        if(optionalCartItem.isPresent())
+        {
+            CartItem cartItem = optionalCartItem.get();
+            Long amountPresent = cartItem.getAmount();
+            if(amountPresent - amount > 0)
+            {
+                cartItem.setAmount(amountPresent - amount);
+            }else{
+                cartItem.setAmount(0L);
+            }
+        }
+    }
 
 }

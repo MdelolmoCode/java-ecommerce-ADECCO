@@ -26,4 +26,17 @@ public interface CartItemService
     List<CartItem> findByPriceIsBetween(double minPrice, double maxPrice);
 
 
+    CartItem save(CartItem cartItem);
+
+    void update(CartItem cartItem);
+
+    void delete(CartItem cartItem);
+
+    //=====================  BUSINESS LOGIC  ========================
+
+    void addAmountById(Long cartItem, Long amount);
+
+    void removeAmount(Long cartItem, Long amount);
+
+
 }
