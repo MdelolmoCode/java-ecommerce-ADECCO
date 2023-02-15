@@ -3,29 +3,32 @@ package com.example.services;
 import com.example.entities.Product;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ProductService {
 
     // CRUD
     List<Product> findAll();
-    List<Product> findAllById(Long id);
-    List<Product> findAllByName(String name);
-    List<Product> findAllByCategory(String category);
-    List<Product> findAllByPriceGreaterThan(Double price);
-    List<Product> findAllByPriceLessThan(Double price);
-    List<Product> findAllByPriceBetween(Double minPrice, Double maxPrice);
-    List<Product> findAllByManufacturerId(Long id);
-    List<Product> findAllAvailable();
-    Product save(Product product);
+    boolean existsById(Long id);
+    Optional<Product> findById(Long id);
+    Optional<Product> findByName(String name);
+    List<Product> findByPriceBetween(Double minPrice, Double maxPrice);
+    List<Product> findByPriceGreaterThan(Double price);
+    List<Product> findByPriceLessThan(Double price);
+    List<Product> findByStockLeftLessThan(Long amount);
+    List<Product> findByAvailableTrue();
+    List<Product> findByCategories_Name(String name);
+    List<Product> findByManufacturer_Cif(String cif);
+
+    Product save(Product product); // crear nuevo producto
     Product update(Product product);
-    void deleteById(Long id);
+    void deleteById (Long id);
 
-    // LÓGICA DE NEGOCIO
-    boolean addStock(Product product, Long amount);
-    boolean removeStock(Product product, Long amount);
+
+    // BUSINESS LOGIC
+    void addStock(Product product, Long amount);
+    void removeStock(Product product, Long amount);
     boolean isAvailable(Product product); // comprobar si hay stock (stock !0)
-
-
-
+    Product changeAvailability(Product product); // si hay 0 stock (isAvailable==0), cambiar a no disponible. y viceversa
 
 }
