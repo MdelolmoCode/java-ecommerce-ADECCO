@@ -44,7 +44,7 @@ public class CartItemServiceImpl implements CartItemService
     public List<CartItem> findByProductId(Long id)
     {
         log.info("FindByProduct{}", id);
-        return cartItemRepo.findByProductId(id);
+        return cartItemRepo.findAllByProductId(id);
 //        List<CartItem> cartItemsByProcduct = new ArrayList<>();
 //
 //        for (CartItem c : cartItemRepo.findAll()) {
@@ -59,7 +59,7 @@ public class CartItemServiceImpl implements CartItemService
     public List<CartItem> findByShoppinCart(Long id)
     {
         log.info("FindByShoppingCart{}", id);
-        return cartItemRepo.findByShoppinCart(id);
+        return cartItemRepo.findAllByShoppingCart(id);
 //        List<CartItem> cartItemsByShoppingCart = new ArrayList<>();
 //
 //        for (CartItem c : cartItemRepo.findAll())
@@ -77,7 +77,7 @@ public class CartItemServiceImpl implements CartItemService
     public List<CartItem> findByAmountIs(Long amount)
     {
         log.info("FindByAmountIs{}", amount);
-        return cartItemRepo.findByAmountIs(amount);
+        return cartItemRepo.findAllByAmountIs(amount);
     }
 
     @Override
@@ -86,21 +86,21 @@ public class CartItemServiceImpl implements CartItemService
         log.info("FindByAmountGreaterThanEqual{}", minAmount);
         if(minAmount == null || minAmount < 0)
             return null;
-        return cartItemRepo.findByAmountGreaterThanEqual(minAmount);
+        return cartItemRepo.findAllByAmountGreaterThanEqual(minAmount);
     }
 
     @Override
     public List<CartItem> findByAmountIsLessThanEqual(Long maxAmount)
     {
         log.info("FindByAmountIsLessThanEqual{}", maxAmount);
-        return cartItemRepo.findByAmountIsLessThanEqual(maxAmount);
+        return cartItemRepo.findAllByAmountIsLessThanEqual(maxAmount);
     }
 
     @Override
     public List<CartItem> findByAmountIsBetween(long minAmount, Long maxAmount)
     {
         log.info("FindByAmountIsBetween {} and {}", minAmount, maxAmount);
-        return cartItemRepo.findByAmountIsBetween(minAmount, maxAmount);
+        return cartItemRepo.findAllByAmountIsBetween(minAmount, maxAmount);
     }
 
     //================================================================================================
@@ -109,28 +109,28 @@ public class CartItemServiceImpl implements CartItemService
     public List<CartItem> findByPriceIs(double price)
     {
         log.info("FindByPriceIs{}", price);
-        return cartItemRepo.findByPriceIs(price);
+        return cartItemRepo.findAllByPriceIs(price);
     }
 
     @Override
     public List<CartItem> findByPriceIsGreaterThanEqual(double price)
     {
         log.info("FindByPriceIsGreaterThanEqual {}", price);
-        return cartItemRepo.findByPriceIsGreaterThanEqual(price);
+        return cartItemRepo.findAllByPriceIsGreaterThanEqual(price);
     }
 
     @Override
     public List<CartItem> findByPriceIsLessThanEqual(double price)
     {
         log.info("FindByPriceIsLessThanEqual {}", price);
-        return cartItemRepo.findByPriceIsLessThanEqual(price);
+        return cartItemRepo.findAllByPriceIsLessThanEqual(price);
     }
 
     @Override
     public List<CartItem> findByPriceIsBetween(double minPrice, double maxPrice)
     {
         log.info("FindByPriceIsBetween {} and {}", minPrice, maxPrice);
-        return cartItemRepo.findByPriceIsBetween(minPrice, maxPrice);
+        return cartItemRepo.findAllByPriceIsBetween(minPrice, maxPrice);
     }
 
     //================================================================================================
