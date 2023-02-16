@@ -32,14 +32,15 @@ public class App {
 
 		createDemoData();
 
-		for(Product product : productService.findAllByPriceBetween(8.00,25.0))
+		System.out.println("------============ AQUI EMPIEZA ============-------------");
+		for(Product product : productService.findAllByPriceBetween(18.00,88.0))
 			System.out.println(product);
 
-		// productService.findByPriceBetween(8.00,25.0);
 
 	}
 
 	private static void createDemoData() {
+/*
 
 		// categories
 		CategoryRepository categoryRepo = context.getBean(CategoryRepository.class);
@@ -53,7 +54,8 @@ public class App {
 		categoryRepo.save(category3);
 		categoryRepo.save(category4);
 
-		/*List<Category> categories1 = new ArrayList<>();
+		*/
+/*List<Category> categories1 = new ArrayList<>();
 		categories1.add(category1);
 		categories1.add(category2);
 
@@ -63,7 +65,8 @@ public class App {
 
 		List<Category> categories3 = new ArrayList<>();
 		categories3.add(category3);
-		categories3.add(category4);*/
+		categories3.add(category4);*//*
+
 
 
 		// address
@@ -82,6 +85,7 @@ public class App {
 		manufacturerRepo.save(manufacturer1);
 		manufacturerRepo.save(manufacturer2);
 
+*/
 
 		// product
 		// productos sin ID, Category ni Manufacturer
@@ -100,11 +104,16 @@ public class App {
 		Product product6 = new Product("jaula de pájaro", "desc jaula de pájaro", 60.99, 60L,true);
 		Product product7 = new Product("hilo negro", "desc hilo negro", 70.99, 70L,false);
 		Product product8 = new Product("set cubertería", "desc set cubertería", 80.99, 0L,false);
+		Product product9 = new Product("ordenador", "desc ordenador", 90.99, 90L,true);
+		Product product10 = new Product("pistola", "desc pistola", 100.99, 100L,true);
 
 
-		productRepo.saveAll(List.of(product1,product2,product3,product4,product5,product6,product7,product8));
+		productRepo.saveAll(List.of(product1,product2,product3,product4,product5,
+				product6,product7,product8, product9, product10));
 
-		testOrder(context);
+
+
+		// testOrder(context);
 	}
 
 	private static void testOrder(ApplicationContext context) {

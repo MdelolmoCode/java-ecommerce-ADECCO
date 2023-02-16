@@ -173,6 +173,8 @@ public class ProductServiceImpl implements ProductService {
 
         Long finalAmount = productFromDB.getStockLeft() + amount;
         productFromDB.setStockLeft(finalAmount);
+
+        productRepo.save(productFromDB);
     }
 
     @Override
@@ -190,8 +192,10 @@ public class ProductServiceImpl implements ProductService {
         if(productFromDB.getStockLeft() == amount)
             changeAvailability(productFromDB);
 
-        Long finalAmount = productFromDB.getStockLeft() - amount;
-        productFromDB.setStockLeft(finalAmount);
+        Long newAmount = productFromDB.getStockLeft() - amount;
+        productFromDB.setStockLeft(newAmount);
+
+        productRepo.save(productFromDB);
     }
 
     @Override
