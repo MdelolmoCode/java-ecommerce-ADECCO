@@ -15,10 +15,9 @@ public interface CustomerService {
     Optional <Customer> findBySurname(String surname);
     Customer findByEmail(String email);
 
-    public void create();
-    public void save();
-    public void update();
-    public void deleteCustomer();
+    public Customer save(Customer customer);
+    public void update(Customer customer);
+    public void deleteById(Long id);
 
 
 
