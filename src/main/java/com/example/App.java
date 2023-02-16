@@ -15,9 +15,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import java.util.List;
 
 @SpringBootApplication
@@ -35,7 +32,7 @@ public class App {
 
 		createDemoData();
 
-		for(Product product : productService.findByPriceBetween(8.00,25.0))
+		for(Product product : productService.findAllByPriceBetween(8.00,25.0))
 			System.out.println(product);
 
 		// productService.findByPriceBetween(8.00,25.0);
@@ -87,20 +84,25 @@ public class App {
 
 
 		// product
+		// productos sin ID, Category ni Manufacturer
 		ProductRepository productRepo = context.getBean(ProductRepository.class);
-		Product product1 = new Product("name1","description1",10.99,10L,true,manufacturer1);
-		product1.getCategories().add(category1);
-		product1.getCategories().add(category2);
-		Product product2 = new Product("name2","description2",20.99,20L,true,manufacturer1);
-		product2.getCategories().add(category1);
-		product2.getCategories().add(category3);
-		Product product3 = new Product("name3","description3",30.99,30L,true,manufacturer2);
-		product3.getCategories().add(category2);
-		product3.getCategories().add(category4);
+		Product product1 = new Product("pincel", "desc pincel", 10.99, 10L,true);
+		/*product1.getCategories().add(category1);
+		product1.getCategories().add(category2);*/
+		Product product2 = new Product("botella", "desc botella", 20.99, 20L,true);
+		/*product2.getCategories().add(category1);
+		product2.getCategories().add(category3);*/
+		Product product3 = new Product("pegamento", "desc pegamento", 30.99, 30L,true);
+		/*product3.getCategories().add(category2);
+		product3.getCategories().add(category4);*/
+		Product product4 = new Product("lámpara", "desc lámpara", 40.99, 40L,true);
+		Product product5 = new Product("monedero de cuero", "desc monedero de cuero", 50.99, 50L,true);
+		Product product6 = new Product("jaula de pájaro", "desc jaula de pájaro", 60.99, 60L,true);
+		Product product7 = new Product("hilo negro", "desc hilo negro", 70.99, 70L,false);
+		Product product8 = new Product("set cubertería", "desc set cubertería", 80.99, 0L,false);
 
 
-		// productRepo.saveAll(product1,product2,product3);
-		productRepo.saveAll(List.of(product1,product2,product3));
+		productRepo.saveAll(List.of(product1,product2,product3,product4,product5,product6,product7,product8));
 
 		testOrder(context);
 	}

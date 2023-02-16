@@ -29,6 +29,7 @@ public class Product {
     @JoinColumn(name = "manufacturer_id")
     private Manufacturer manufacturer;
 
+    // constructor sin ID
     public Product(String name, String description, Double price, Long stockLeft, Boolean available, List<Category> categories, Manufacturer manufacturer) {
         this.name = name;
         this.description = description;
@@ -39,12 +40,12 @@ public class Product {
         this.manufacturer = manufacturer;
     }
 
-    public Product(String name, String description, Double price, Long stockLeft, Boolean available, Manufacturer manufacturer) {
+    // constructor sin ID, Category ni Manufacturer
+    public Product(String name, String description, Double price, Long stockLeft, Boolean available) {
         this.name = name;
         this.description = description;
         this.price = price;
         this.stockLeft = stockLeft;
         this.available = available;
-        this.manufacturer = manufacturer;
     }
 }

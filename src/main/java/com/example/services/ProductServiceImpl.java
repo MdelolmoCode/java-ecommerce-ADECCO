@@ -1,11 +1,14 @@
 package com.example.services;
 
 import com.example.entities.Product;
+import com.example.exception.EntitySavingException;
 import com.example.repositories.ProductRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,11 +21,14 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<Product> findAll() {
         log.info("findAll");
-        return this.productRepo.findAll();
+        return productRepo.findAll();
     }
 
     @Override
     public boolean existsById(Long id) {
+        log.info("existsById {}", id);
+        if(id == null)
+            return false;
         return productRepo.existsById(id);
     }
 
@@ -31,82 +37,115 @@ public class ProductServiceImpl implements ProductService {
         log.info("findById {}", id);
         if (id == null || id <= 0)
             return Optional.empty();
-        return this.productRepo.findById(id);
+        return productRepo.findById(id);
     }
 
+    @Override
+    public List<Product> findAllByNameContainsIgnoreCase(String name) {
+        log.info("findAllByNameContainsIgnoreCase {}", name);
+
+        if(!StringUtils.hasLength(name))
+            return new ArrayList<>();
+
+        return productRepo.findAllByNameContainsIgnoreCase(name);
+    }
+
+/*
     @Override
     public Optional<Product> findByName(String name) {
         log.info("findByName {}", name);
         if (name == null)
             return Optional.empty();
-        return this.productRepo.findByName(name);
+        return productRepo.findByName(name);
     }
+*/
 
     @Override
-    public List<Product> findByPriceBetween(Double minPrice, Double maxPrice) {
+    public List<Product> findAllByPriceBetween(Double minPrice, Double maxPrice) {
         log.info("findByPriceBetween {} and {}", minPrice, maxPrice);
-        List<Product> products = this.productRepo.findAll();
-
-
-        return this.productRepo.findByPriceBetween(minPrice, maxPrice);
+        return productRepo.findAllByPriceBetween(minPrice, maxPrice);
     }
 
     @Override
-    public List<Product> findByPriceGreaterThan(Double price) {
+    public List<Product> findAllByPriceGreaterThan(Double price) {
         log.info("findByPriceGreaterThan {}", price);
-        return null;
+        return productRepo.findAllByPriceGreaterThan(price);
     }
 
     @Override
-    public List<Product> findByPriceLessThan(Double price) {
+    public List<Product> findAllByPriceLessThan(Double price) {
         log.info("findByPriceLessThan {}", price);
-        return null;
+        return productRepo.findAllByPriceLessThan(price);
     }
 
     @Override
-    public List<Product> findByStockLeftLessThan(Long amount) {
+    public List<Product> findAllByStockLeftLessThan(Long amount) {
         log.info("findByStockLeftLessThan {}", amount);
-        return null;
+        return productRepo.findAllByStockLeftLessThan(amount);
     }
 
     @Override
-    public List<Product> findByAvailableTrue() {
+    public List<Product> findAllByAvailableTrue() {
         log.info("findByAvailableTrue");
-        return null;
+        return productRepo.findAllByAvailableTrue();
     }
 
     @Override
-    public List<Product> findByCategories_Name(String name) {
+    public List<Product> findAllByCategories_Name(String name) {
         log.info("findByCategories_Name {}", name);
-        return null;
+        return productRepo.findAllByCategories_Name(name);
     }
 
     @Override
-    public List<Product> findByManufacturer_Cif(String cif) {
+    public List<Product> findAllByManufacturer_Cif(String cif) {
         log.info("findByManufacturer_Cif {}", cif);
-        return null;
+        return productRepo.findAllByManufacturer_Cif(cif);
     }
 
     @Override
     public Product save(Product product) {
         log.info("save Product {}", product);
+
+        if(product == null)
+            throw new IllegalArgumentException("Product cannot be null");
+
+        if(product.getId() != null)
+            update(product);
+
         try {
             this.productRepo.save(product);
         } catch (Exception e) {
             log.error("Error al guardar Product", e);
         }
-        return product;
+        throw new EntitySavingException("Error guardando usuario");
     }
 
     @Override
     public Product update(Product product) {
         log.info("update Product {}", product);
-        return product;
+
+        if(product == null)
+            throw new IllegalArgumentException("Product cannot be null");
+
+        if(product.getId() == null)
+            throw new IllegalArgumentException("Product ID cannot be null");
+
+        Product productFromDB = productRepo.findById(product.getId()).get();
+        productFromDB.setName(product.getName());
+        productFromDB.setDescription(product.getDescription());
+        productFromDB.setPrice(product.getPrice());
+        try{
+            return productRepo.save(productFromDB);
+        } catch(Exception e){
+            log.error("Error saving product", e);
+        }
+        throw new EntitySavingException("Error saving product");
     }
 
     @Override
     public void deleteById(Long id) {
         log.info("deleteById {}", id);
+
         try {
             this.productRepo.deleteById(id);
         } catch (Exception e) {
@@ -115,26 +154,78 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public void deleteAllById(List<Long> ids) {
+        log.info("deleteAllById");
+        productRepo.deleteAllById(ids);
+    }
+
+    @Override
+    public void saveAll(List<Product> products) {
+        log.info("saveAll");
+        productRepo.saveAll(products);
+    }
+
+    @Override
     public void addStock(Product product, Long amount) {
         log.info("addStock product: {}, amount: {}", product, amount);
 
+        Product productFromDB = productRepo.findById(product.getId()).get();
+
+        Long finalAmount = productFromDB.getStockLeft() + amount;
+        productFromDB.setStockLeft(finalAmount);
     }
 
     @Override
     public void removeStock(Product product, Long amount) {
         log.info("removeStock product: {}, amount: {}", product, amount);
 
+        if(isAvailable(product) != true)
+            throw new IllegalArgumentException("Product not available");
+
+        if (product.getStockLeft() < amount)
+            throw new IllegalArgumentException("Error. Not enough stock left to remove");
+
+        Product productFromDB = productRepo.findById(product.getId()).get();
+
+        if(productFromDB.getStockLeft() == amount)
+            changeAvailability(productFromDB);
+
+        Long finalAmount = productFromDB.getStockLeft() - amount;
+        productFromDB.setStockLeft(finalAmount);
     }
 
     @Override
     public boolean isAvailable(Product product) {
         log.info("isAvailable product: {}", product);
+
+        if(product.getAvailable() == true)
+            return true;
+
         return false;
     }
 
     @Override
     public Product changeAvailability(Product product) {
         log.info("changeAvailability product: {}", product);
-        return null;
+
+        if(product == null)
+            throw new IllegalArgumentException("Product cannot be null");
+
+        if(product.getId() == null)
+            throw new IllegalArgumentException("Product ID cannot be null");
+
+        Product productFromDB = productRepo.findById(product.getId()).get();
+
+        if(productFromDB.getAvailable() == true)
+            productFromDB.setAvailable(false);
+        else productFromDB.setAvailable(true);
+
+        try{
+            return productRepo.save(productFromDB);
+        } catch(Exception e){
+            log.error("Error saving product", e);
+        }
+        throw new EntitySavingException("Error saving product");
     }
+
 }
