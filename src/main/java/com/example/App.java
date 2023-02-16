@@ -15,9 +15,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import java.util.List;
 
 @SpringBootApplication
@@ -120,7 +117,7 @@ public class App {
 		orderService.save(order3);
 		orderService.findAll().forEach(System.out::println);
 
-		orderService.findByAddressCity("city2").forEach(System.out::println);
+		orderService.findAllByAddressCity("city2").forEach(System.out::println);
 
 		orderService.deleteById(2L);
 		orderService.findAll().forEach(System.out::println);

@@ -22,11 +22,13 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<Order> findAll() {
+        log.info("findAll");
         return orderRepository.findAll();
     }
 
     @Override
     public Optional<Order> findById(Long id) {
+        log.info("findById {}", id);
         if (id == null || id <= 0)
             return Optional.empty();
         return orderRepository.findById(id);
@@ -34,6 +36,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Optional<Order> findByOrderNumber(Long orderNumber) {
+        log.info("findByOrderNumber {}", orderNumber);
         if (orderNumber == null)
             return Optional.empty();
         return orderRepository.findByOrderNumber(orderNumber);
@@ -41,6 +44,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<Order> findAllByAddressCity(String city) {
+        log.info("findAllByAddressCity {}", city);
         if (!StringUtils.hasLength(city))
             return new ArrayList<>();
         return orderRepository.findAllByAddressCity(city);
@@ -48,6 +52,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Order save(Order order) {
+        log.info("save {}", order);
         if(order == null)
             throw new IllegalArgumentException("Pedido nulo.");
 
@@ -65,6 +70,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Order update(Order order) {
+        log.info("update {}", order);
         if(order == null)
             throw new IllegalArgumentException("Pedido nulo.");
 
@@ -91,6 +97,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public void deleteById(Long id) {
+        log.info("deleteById {}", id);
         try {
             orderRepository.deleteById(id);
             return;
