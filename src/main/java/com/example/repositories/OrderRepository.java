@@ -8,5 +8,5 @@ import java.util.Optional;
 
 public interface OrderRepository extends JpaRepository<Order, Long> {
     Optional<Order> findByOrderNumber(Long orderNumber);
-    List<Order> findByAddressCity(String city);
+    List<Order> findAllByAddressCity(String city);
 }

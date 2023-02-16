@@ -40,10 +40,10 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<Order> findByAddressCity(String city) {
+    public List<Order> findAllByAddressCity(String city) {
         if (!StringUtils.hasLength(city))
             return new ArrayList<>();
-        return orderRepository.findByAddressCity(city);
+        return orderRepository.findAllByAddressCity(city);
     }
 
     @Override
