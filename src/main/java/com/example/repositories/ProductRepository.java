@@ -10,12 +10,16 @@ import java.util.Optional;
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
 
-    Optional<Product> findByName(String name);
+    // Optional<Product> findByName(String name);
+    List<Product> findAllByNameContainsIgnoreCase(String name);
     boolean existsById(Long id);
-    List<Product> findByAvailableTrue();
-    List<Product> findByPriceBetween(Double priceMin, Double priceMax);
-    List<Product> findByStockLeftLessThan(Long amount);
-    List<Product> findByCategories_Name(String name);
-    List<Product> findByManufacturer_Cif(String cif);
+    List<Product> findAllByAvailableTrue();
+    List<Product> findAllByPriceBetween(Double priceMin, Double priceMax);
+    List<Product> findAllByPriceGreaterThan(Double price);
+    List<Product> findAllByPriceLessThan(Double price);
+    List<Product> findAllByStockLeftLessThan(Long amount);
+    List<Product> findAllByCategories_Name(String name);
+    List<Product> findAllByManufacturer_Cif(String cif);
+
 
 }
