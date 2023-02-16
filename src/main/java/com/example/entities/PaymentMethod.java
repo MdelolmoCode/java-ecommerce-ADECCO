@@ -2,26 +2,27 @@ package com.example.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.extern.slf4j.Slf4j;
 
-@NoArgsConstructor
+@Slf4j
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 @ToString
 @Builder
-
 @Entity
-@Table(name = "category")
-public class Category {
+@Table(name = "payment_method")
+public class PaymentMethod
+{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
-    private String name;
-    private Boolean mature;
 
-    public Category(String name, Boolean mature) {
-        this.name = name;
-        this.mature = mature;
-    }
+    private String name;
+
+    @ManyToOne
+    private Order order;
+
 }
