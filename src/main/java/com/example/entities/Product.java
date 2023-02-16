@@ -10,7 +10,7 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
-@ToString
+// @ToString
 @Builder
 
 @Entity
@@ -47,5 +47,17 @@ public class Product {
         this.price = price;
         this.stockLeft = stockLeft;
         this.available = available;
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", price=" + price +
+                ", stockLeft=" + stockLeft +
+                ", available=" + available +
+                '}';
     }
 }
