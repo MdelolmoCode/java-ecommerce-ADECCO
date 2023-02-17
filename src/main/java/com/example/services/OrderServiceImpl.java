@@ -103,6 +103,7 @@ public class OrderServiceImpl implements OrderService {
 
         Order orderFromDB = orderOpt.get();
         orderFromDB.setOrderNumber(order.getOrderNumber());
+        orderFromDB.setShoppingCart(order.getShoppingCart());
         orderFromDB.setAddress(order.getAddress());
 
         try {
