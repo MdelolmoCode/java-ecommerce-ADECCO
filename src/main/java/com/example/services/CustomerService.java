@@ -13,7 +13,8 @@ public interface CustomerService {
     List<Customer> findAll();
     Optional<Customer> findById(Long id);
     Optional <Customer> findBySurname(String surname);
-    Customer findByEmail(String email);
+    Optional <Customer> findByEmail(String email);
+    Optional <Customer> findByPhone(String phone);
 
     public Customer save(Customer customer);
     public void update(Customer customer);
