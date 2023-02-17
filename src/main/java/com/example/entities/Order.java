@@ -19,7 +19,6 @@ public class Order {
 
     @Column(unique = true)
     private Long orderNumber;
-
     @OneToOne
     private ShoppingCart shoppingCart;
     @ManyToOne

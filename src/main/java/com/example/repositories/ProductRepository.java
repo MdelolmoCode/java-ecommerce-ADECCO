@@ -5,7 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Optional;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
@@ -17,7 +16,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     List<Product> findAllByPriceBetween(Double priceMin, Double priceMax);
     List<Product> findAllByPriceGreaterThan(Double price);
     List<Product> findAllByPriceLessThan(Double price);
-    List<Product> findAllByStockLeftLessThan(Long amount);
+    List<Product> findAllByStockLessThan(Long amount);
     List<Product> findAllByCategories_Name(String name);
     List<Product> findAllByManufacturer_Cif(String cif);
     List<Product> findAllByCategories_MatureFalse();
