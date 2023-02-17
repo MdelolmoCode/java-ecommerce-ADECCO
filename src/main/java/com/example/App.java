@@ -133,9 +133,9 @@ public class App {
 		addressRepo.saveAll(List.of(address1, address2));
 
 		OrderService orderService = context.getBean(OrderService.class);
-		Order order1 = new Order(null, 1000L, address1);
-		Order order2 = new Order(null, 2000L, address2);
-		Order order3 = new Order(null, 3000L, address2);
+		Order order1 = new Order(null, 1000L, null, address1);
+		Order order2 = new Order(null, 2000L, null, address2);
+		Order order3 = new Order(null, 3000L, null, address2);
 		orderService.save(order1);
 		orderService.save(order2);
 		orderService.save(order3);

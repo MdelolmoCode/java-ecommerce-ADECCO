@@ -19,9 +19,8 @@ public class Order {
 
     @Column(unique = true)
     private Long orderNumber;
-    /* Descomentar tras crear clase Cart
     @OneToOne
-    private ShoppingCart shoppingCart;*/
+    private ShoppingCart shoppingCart;
     @ManyToOne
     private Address address;
 
