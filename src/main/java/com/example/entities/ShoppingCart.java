@@ -3,6 +3,9 @@ package com.example.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 @Setter
 @ToString
@@ -10,18 +13,22 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "orders") // No puede llamarse 'order' porque es una keyword en SQL
-public class Order {
+
+@Table(name= "shoppingCart")
+public class ShoppingCart {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true)
-    private Long orderNumber;
     @OneToOne
-    private ShoppingCart shoppingCart;
-    @ManyToOne
-    private Address address;
+    Customer customer;
+
+    Double totalPrice;
+
+    @OneToMany
+    private List<CartItem> cartItems = new ArrayList<>();
+
+
 
 }

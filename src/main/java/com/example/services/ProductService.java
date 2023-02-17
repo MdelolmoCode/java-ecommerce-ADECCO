@@ -11,18 +11,23 @@ public interface ProductService {
     List<Product> findAll();
     boolean existsById(Long id);
     Optional<Product> findById(Long id);
-    Optional<Product> findByName(String name);
-    List<Product> findByPriceBetween(Double minPrice, Double maxPrice);
-    List<Product> findByPriceGreaterThan(Double price);
-    List<Product> findByPriceLessThan(Double price);
-    List<Product> findByStockLeftLessThan(Long amount);
-    List<Product> findByAvailableTrue();
-    List<Product> findByCategories_Name(String name);
-    List<Product> findByManufacturer_Cif(String cif);
+    List<Product> findAllByNameContainsIgnoreCase(String name);
+    // Optional<Product> findByName(String name);
+    List<Product> findAllByPriceBetween(Double minPrice, Double maxPrice);
+    List<Product> findAllByPriceGreaterThan(Double price);
+    List<Product> findAllByPriceLessThan(Double price);
+    List<Product> findAllByStockLeftLessThan(Long amount);
+    List<Product> findAllByAvailableTrue();
+    List<Product> findAllByCategories_Name(String name);
+    List<Product> findAllByManufacturer_Cif(String cif);
+    List<Product> findAllByCategories_MatureFalse();
+
 
     Product save(Product product); // crear nuevo producto
     Product update(Product product);
     void deleteById (Long id);
+    void deleteAllById(List<Long> ids);
+    void saveAll(List<Product> products);
 
 
     // BUSINESS LOGIC

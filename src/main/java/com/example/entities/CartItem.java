@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -20,8 +20,8 @@ public class CartItem
     @Column(name = "cart_item_id", nullable = false)
     private Long id;
 
-    //@ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    //private ShoppingCart shoppingCart;
+    @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private ShoppingCart shoppingCart;
 
     @OneToOne
     private Product product;

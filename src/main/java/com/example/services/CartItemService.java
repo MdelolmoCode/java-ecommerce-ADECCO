@@ -12,18 +12,31 @@ public interface CartItemService
     boolean existsById(Long id);
     Optional<CartItem> findById(Long id);
 
-    List<CartItem> findByProductId(Long id);
-    List<CartItem> findByShoppinCart(Long id);
+    List<CartItem> findAllByProductId(Long id);
+    List<CartItem> findAllByShoppinCart(Long id);
 
-    List<CartItem> findByAmountIs(Long amount);
-    List<CartItem> findByAmountGreaterThanEqual(Long minAmount);
-    List<CartItem> findByAmountIsLessThanEqual(Long maxAmount);
-    List<CartItem> findByAmountIsBetween(long minAmount, Long maxAmount);
+    List<CartItem> findAllByAmountIs(Long amount);
+    List<CartItem> findAllByAmountGreaterThanEqual(Long minAmount);
+    List<CartItem> findAllByAmountIsLessThanEqual(Long maxAmount);
+    List<CartItem> findAllByAmountIsBetween(long minAmount, Long maxAmount);
 
-    List<CartItem> findByPriceIs(double price);
-    List<CartItem> findByPriceIsGreaterThanEqual(double price);
-    List<CartItem> findByPriceIsLessThanEqual(double price);
-    List<CartItem> findByPriceIsBetween(double minPrice, double maxPrice);
+    List<CartItem> findAllByPriceIs(double price);
+    List<CartItem> findAllByPriceIsGreaterThanEqual(double price);
+    List<CartItem> findAllByPriceIsLessThanEqual(double price);
+    List<CartItem> findAllByPriceIsBetween(double minPrice, double maxPrice);
+
+
+    CartItem save(CartItem cartItem);
+
+    CartItem update(CartItem cartItem);
+
+    CartItem delete(CartItem cartItem);
+
+    //=====================  BUSINESS LOGIC  ========================
+
+    void addAmountById(Long cartItem, Long amount);
+
+    void removeAmountById(Long cartItem, Long amount);
 
 
 }

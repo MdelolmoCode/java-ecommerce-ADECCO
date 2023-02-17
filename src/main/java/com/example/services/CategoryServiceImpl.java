@@ -2,6 +2,8 @@ package com.example.services;
 
 import com.example.entities.Address;
 import com.example.entities.Category;
+import com.example.entities.Product;
+import com.example.exception.EntitySavingException;
 import com.example.repositories.CategoryRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
@@ -32,15 +34,15 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public List<Category> findByName(String name) {
-        log.info("findByName {}", name);
-        return categoryRepo.findByName(name);
+    public List<Category> findAllByName(String name) {
+        log.info("findAllByName {}", name);
+        return categoryRepo.findAllByName(name);
     }
 
     @Override
-    public List<Category> findByMatureFalse() {
-        log.info("findByMatureFalse");
-        return categoryRepo.findByMatureFalse();
+    public List<Category> findAllByMatureFalse() {
+        log.info("findAllByMatureFalse");
+        return categoryRepo.findAllByMatureFalse();
     }
 
     @Override
@@ -49,27 +51,38 @@ public class CategoryServiceImpl implements CategoryService {
         if(category == null) {
             throw new IllegalArgumentException("Category can't be null");
         }
-        if(category != null)
+        if(category.getId() != null)
             update(category);
-        return categoryRepo.save(category);
+
+        try {
+            this.categoryRepo.save(category);
+        } catch (Exception e) {
+            log.error("Error saving Category", e);
+        }
+        throw new EntitySavingException("Error saving Category");
     }
 
     @Override
     public Category update(Category category) {
         if(category == null)
-            throw new IllegalArgumentException("Category can't be null");
+            throw new IllegalArgumentException("Category cannot be null");
 
         if(category.getId() == null)
-            throw new IllegalArgumentException("Category ID can't null");
+            throw new IllegalArgumentException("Category ID cannot be null");
 
         if(!categoryRepo.existsById(category.getId()))
             throw new EntityNotFoundException("Category does not exist");
 
-        Address categoryFromDB = categoryRepo.findById(category.getId()).get();
+        Category categoryFromDB = categoryRepo.findById(category.getId()).get();
         categoryFromDB.setName(category.getName());
-        categoryFromDB.setCity(category.getMature());
+        categoryFromDB.setMature(category.getMature());
 
-        return categoryRepo.save(categoryFromDB);
+        try{
+            return categoryRepo.save(categoryFromDB);
+        } catch(Exception e){
+            log.error("Error saving Category", e);
+        }
+        throw new EntitySavingException("Error saving Category");
     }
 
     @Override
@@ -79,11 +92,31 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
+    public void deleteAllById(List<Long> ids) {
+        log.info("deleteAllById");
+        categoryRepo.deleteAllById(ids);
+    }
+
+    @Override
+    public void saveAll(List<Category> categories) {
+        log.info("saveAll");
+        categoryRepo.saveAll(categories);
+    }
+
+    @Override
     public void changeMature(Category category) {
         log.info("changeMature {}", category);
-        if(category.getMature() == true) {
-            category.setMature(false);
-        }
-        category.setMature(true);
+
+        if(category == null)
+            throw new IllegalArgumentException("Category cannot be null");
+
+        if(category.getId() == null)
+            throw new IllegalArgumentException("Category ID cannot be null");
+
+        Category categoryFromDB = categoryRepo.findById(category.getId()).get();
+
+        if(categoryFromDB.getMature() == true)
+            categoryFromDB.setMature(false);
+        else categoryFromDB.setMature(true);
     }
 }
