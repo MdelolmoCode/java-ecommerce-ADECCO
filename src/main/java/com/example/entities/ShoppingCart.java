@@ -27,6 +27,7 @@ public class ShoppingCart {
     Double totalPrice;
 
     @OneToMany
+    @ToString.Exclude
     private List<CartItem> cartItems = new ArrayList<>();
 
 
