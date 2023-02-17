@@ -45,7 +45,7 @@ public class App {
 		Category category7 = new Category("ropa",false);
 		Category category8 = new Category("bisutería",false);
 
-		categoryRepo.saveAll(category1,category2,category3,category4,category5,category6,category7,category8);
+		categoryRepo.saveAll(List.of(category1, category2, category3,category4,category5,category6,category7,category8));
 
 		// product
 		// productos sin ID ni Manufacturer
