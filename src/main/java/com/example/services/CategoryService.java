@@ -17,7 +17,7 @@ public interface CategoryService {
     Category update(Category category);
     void deleteById(Long id);
     void deleteAllById(List<Long> ids);
-    void saveAll(List<Category> categories);
+    //void saveAll(List<Category> categories);
 
     void changeMature(Category category);
 
