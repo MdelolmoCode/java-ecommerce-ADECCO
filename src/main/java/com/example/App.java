@@ -23,9 +23,11 @@ public class App {
 
 		CustomerRepository customerRepository = context.getBean(CustomerRepository.class);
 
-		Customer customer1 = new Customer(null, "Alex", "Bustamante", "alex@gmail.com", null, "667672627");
+		Customer customer1 = new Customer(1L, "Alex", "Bustamante", "alex@gmail.com", null, "667672627");
 
 		customerRepository.save(customer1);
+
+		System.out.println(customerRepository.count());
 
 
 	}

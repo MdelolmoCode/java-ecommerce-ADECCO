@@ -13,8 +13,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Entity
 
+@Entity
 @Table(name = "customer")
 public class Customer {
 
@@ -29,6 +29,7 @@ public class Customer {
     private String email;
 
     @OneToMany
+    @ToString.Exclude
     private List<Address> addresses = new ArrayList<>();
 
     private String phone;
