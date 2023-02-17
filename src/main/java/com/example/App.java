@@ -1,17 +1,8 @@
 package com.example;
 
-import com.example.entities.Address;
-import com.example.entities.Category;
-import com.example.entities.Manufacturer;
-import com.example.entities.Order;
-import com.example.entities.Product;
-import com.example.repositories.AddressRepository;
-import com.example.repositories.CategoryRepository;
-import com.example.repositories.ManufacturerRepository;
-import com.example.repositories.ProductRepository;
-import com.example.services.CategoryService;
-import com.example.services.ProductService;
-import com.example.services.OrderService;
+import com.example.entities.*;
+import com.example.repositories.*;
+import com.example.services.*;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
@@ -79,7 +70,8 @@ public class App {
 		for(Product product : productService.findAllByPriceBetween(18.00,88.0))
 			System.out.println(product);
 
-
+		testOrder(context);
+		testManufacturer(context);
 	}
 
 	private static void createDemoData() {
@@ -123,25 +115,34 @@ public class App {
 
 
 
-		// testOrder(context);
 	}
 
 	private static void testOrder(ApplicationContext context) {
+		System.out.println("===== Test Order =====");
+
 		Address address1 = new Address(null, "street1","name1","city1","state1","country1","zipcode1");
 		Address address2 = new Address(null, "street2","name2","city2","state2","country1","zipcode2");
 		AddressRepository addressRepo = context.getBean(AddressRepository.class);
 		addressRepo.saveAll(List.of(address1, address2));
 
+		Customer customer1 = new Customer(null, "Name1", "Surname1", "email@email", new ArrayList<>(), "12345678");
+		CustomerRepository customerRepo = context.getBean(CustomerRepository.class);
+		customerRepo.save(customer1);
+
+		ShoppingCart shoppingCart1 = new ShoppingCart(null, customer1, 10.0, null);
+		ShoppingCartRepository shoppingCartRepo = context.getBean(ShoppingCartRepository.class);
+		shoppingCartRepo.save(shoppingCart1);
+
 		OrderService orderService = context.getBean(OrderService.class);
 		Order order1 = new Order(null, 1000L, null, address1);
 		Order order2 = new Order(null, 2000L, null, address2);
-		Order order3 = new Order(null, 3000L, null, address2);
+		Order order3 = new Order(null, 3000L, shoppingCart1, address2);
 		orderService.save(order1);
 		orderService.save(order2);
 		orderService.save(order3);
 		orderService.findAll().forEach(System.out::println);
 
-		orderService.findByAddressCity("city2").forEach(System.out::println);
+		orderService.findAllByAddressCity("city2").forEach(System.out::println);
 
 		orderService.deleteById(2L);
 		orderService.findAll().forEach(System.out::println);
@@ -149,6 +150,32 @@ public class App {
 		order3.setOrderNumber(4000L);
 		orderService.update(order3);
 		System.out.println(orderService.findById(3L).get().getOrderNumber());
+
+		System.out.println(orderService.findByShoppingCart(shoppingCart1));
+		System.out.println(orderService.findByCustomer(customer1));
+	}
+
+	private static void testManufacturer(ApplicationContext context) {
+		System.out.println("===== Test Manufacturer =====");
+
+		Address address1 = new Address(null, "street1","name1","city1","state1","country1","zipcode1");
+		Address address2 = new Address(null, "street2","name2","city2","state2","country2","zipcode2");
+		Address address3 = new Address(null, "street3","name3","city1","state3","country3","zipcode3");
+		AddressRepository addressRepo = context.getBean(AddressRepository.class);
+		addressRepo.saveAll(List.of(address1, address2, address3));
+
+		ManufacturerService manufacturerService = context.getBean(ManufacturerService.class);
+		Manufacturer manufacturer1 = new Manufacturer(null, "1111", "Manu1", address1, "12345678");
+		Manufacturer manufacturer2 = new Manufacturer(null, "2222", "Manu2", address2, "22222222");
+		Manufacturer manufacturer3 = new Manufacturer(null, "3333", "Manu3", address3, "33333333");
+		manufacturerService.save(manufacturer1);
+		manufacturerService.save(manufacturer2);
+		manufacturerService.save(manufacturer3);
+		manufacturerService.findAll().forEach(System.out::println);
+
+		System.out.println(manufacturerService.findByCif("2222"));
+
+		manufacturerService.findAllByAddressCity("city1").forEach(System.out::println);
 	}
 
 }
