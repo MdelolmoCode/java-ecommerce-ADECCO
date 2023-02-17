@@ -81,7 +81,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<Product> findAllByStockLeftLessThan(Long amount) {
         log.info("findByStockLeftLessThan {}", amount);
-        return productRepo.findAllByStockLeftLessThan(amount);
+        return productRepo.findAllByStockLessThan(amount);
     }
 
     @Override
