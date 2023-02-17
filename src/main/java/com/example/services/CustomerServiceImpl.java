@@ -21,7 +21,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public List<Customer> findAll() {
-        log.info("Ejecutando FindAll()");
+        log.info("Ejecutandoo FindAll()");
         return customerRepository.findAll();
     }
 
