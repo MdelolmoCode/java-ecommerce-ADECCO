@@ -1,9 +1,12 @@
 package com.example.services;
 
+import com.example.entities.Customer;
 import com.example.entities.Order;
+import com.example.entities.ShoppingCart;
 import com.example.exception.EntityDeleteException;
 import com.example.exception.EntitySavingException;
 import com.example.repositories.OrderRepository;
+import com.example.repositories.ShoppingCartRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,6 +21,7 @@ import java.util.Optional;
 @AllArgsConstructor
 @Service
 public class OrderServiceImpl implements OrderService {
+    private final ShoppingCartRepository shoppingCartRepository;
     private final OrderRepository orderRepository;
 
     @Override
@@ -43,11 +47,27 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public Optional<Order> findByShoppingCart(ShoppingCart shoppingCart) {
+        log.info("findByShoppingCart {}", shoppingCart);
+        if (shoppingCart == null)
+            return Optional.empty();
+        return orderRepository.findByShoppingCart(shoppingCart);
+    }
+
+    @Override
     public List<Order> findAllByAddressCity(String city) {
         log.info("findAllByAddressCity {}", city);
         if (!StringUtils.hasLength(city))
             return new ArrayList<>();
         return orderRepository.findAllByAddressCity(city);
+    }
+
+    @Override
+    public Optional<Order> findByCustomer(Customer customer) {
+        log.info("findByCustomer {}", customer);
+        if (customer == null)
+            return Optional.empty();
+        return orderRepository.findByShoppingCartCustomer(customer);
     }
 
     @Override
