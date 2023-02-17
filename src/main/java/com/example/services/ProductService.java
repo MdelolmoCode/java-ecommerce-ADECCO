@@ -20,6 +20,8 @@ public interface ProductService {
     List<Product> findAllByAvailableTrue();
     List<Product> findAllByCategories_Name(String name);
     List<Product> findAllByManufacturer_Cif(String cif);
+    List<Product> findAllByCategories_MatureFalse();
+
 
     Product save(Product product); // crear nuevo producto
     Product update(Product product);

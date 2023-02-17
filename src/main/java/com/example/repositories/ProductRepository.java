@@ -20,6 +20,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     List<Product> findAllByStockLeftLessThan(Long amount);
     List<Product> findAllByCategories_Name(String name);
     List<Product> findAllByManufacturer_Cif(String cif);
+    List<Product> findAllByCategories_MatureFalse();
 
 
 }

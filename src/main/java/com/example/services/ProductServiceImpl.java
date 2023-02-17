@@ -103,6 +103,12 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public List<Product> findAllByCategories_MatureFalse() {
+        log.info("findAllByCategories_MatureFalse");
+        return productRepo.findAllByCategories_MatureFalse();
+    }
+
+    @Override
     public Product save(Product product) {
         log.info("save Product {}", product);
 
@@ -115,9 +121,9 @@ public class ProductServiceImpl implements ProductService {
         try {
             this.productRepo.save(product);
         } catch (Exception e) {
-            log.error("Error al guardar Product", e);
+            log.error("Error saving Product", e);
         }
-        throw new EntitySavingException("Error guardando usuario");
+        throw new EntitySavingException("Error saving Product");
     }
 
     @Override
@@ -171,8 +177,8 @@ public class ProductServiceImpl implements ProductService {
 
         Product productFromDB = productRepo.findById(product.getId()).get();
 
-        Long finalAmount = productFromDB.getStockLeft() + amount;
-        productFromDB.setStockLeft(finalAmount);
+        Long finalAmount = productFromDB.getStock() + amount;
+        productFromDB.setStock(finalAmount);
 
         productRepo.save(productFromDB);
     }
@@ -184,16 +190,16 @@ public class ProductServiceImpl implements ProductService {
         if(isAvailable(product) != true)
             throw new IllegalArgumentException("Product not available");
 
-        if (product.getStockLeft() < amount)
+        if (product.getStock() < amount)
             throw new IllegalArgumentException("Error. Not enough stock left to remove");
 
         Product productFromDB = productRepo.findById(product.getId()).get();
 
-        if(productFromDB.getStockLeft() == amount)
+        if(productFromDB.getStock() == amount)
             changeAvailability(productFromDB);
 
-        Long newAmount = productFromDB.getStockLeft() - amount;
-        productFromDB.setStockLeft(newAmount);
+        Long newAmount = productFromDB.getStock() - amount;
+        productFromDB.setStock(newAmount);
 
         productRepo.save(productFromDB);
     }
