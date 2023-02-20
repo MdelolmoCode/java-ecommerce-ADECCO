@@ -22,6 +22,11 @@ public class AddressServiceImpl implements AddressService {
         return addressRepo.findAll();
     }
 
+    public boolean existsById(Long id) throws IllegalArgumentException
+    {
+        return addressRepo.existsById(id);
+    }
+
     @Override
     public Optional<Address> findById(Long id) {
         log.info("findById {}", id);
@@ -54,7 +59,7 @@ public class AddressServiceImpl implements AddressService {
         if(address == null) {
             throw new IllegalArgumentException("Address can't be null");
         }
-        if(address != null)
+        if(address.getId() != null)
             update(address);
         return addressRepo.save(address);
     }

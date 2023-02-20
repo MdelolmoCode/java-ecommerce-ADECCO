@@ -7,10 +7,23 @@ import java.util.Optional;
 
 public interface CartItemService
 {
+    //===============================  CRUD  =========================================
+
     List<CartItem> findAll();
 
     boolean existsById(Long id);
+
     Optional<CartItem> findById(Long id);
+
+    CartItem save(CartItem cartItem);
+
+    void saveAll(List<CartItem> cartItemList);
+
+    CartItem update(CartItem cartItem);
+
+    Boolean deleteById(Long id);
+
+    //===============================  FILTERS  =========================================
 
     List<CartItem> findAllByProductId(Long id);
     List<CartItem> findAllByShoppinCart(Long id);
@@ -24,13 +37,6 @@ public interface CartItemService
     List<CartItem> findAllByPriceIsGreaterThanEqual(double price);
     List<CartItem> findAllByPriceIsLessThanEqual(double price);
     List<CartItem> findAllByPriceIsBetween(double minPrice, double maxPrice);
-
-
-    CartItem save(CartItem cartItem);
-
-    CartItem update(CartItem cartItem);
-
-    CartItem delete(CartItem cartItem);
 
     //=====================  BUSINESS LOGIC  ========================
 

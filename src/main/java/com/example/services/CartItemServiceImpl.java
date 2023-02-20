@@ -1,7 +1,9 @@
 package com.example.services;
 
 import com.example.entities.CartItem;
+import com.example.exception.EntitySavingException;
 import com.example.repositories.CartItemRepository;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -63,7 +65,7 @@ public class CartItemServiceImpl implements CartItemService
         if(! idAmountPriceValido(id))
             return null;
 
-        return cartItemRepo.findAllByShoppingCart(id);
+        return cartItemRepo.findAllByShoppingCartId(id);
     }
 
     //================================================================================================
@@ -153,20 +155,38 @@ public class CartItemServiceImpl implements CartItemService
     @Override
     public CartItem save(CartItem cartItem)
     {
-        log.info("Saving {}", cartItem);
+        log.info("Guardando cartItem {}", cartItem);
+
 
         if(cartItem == null) {
             log.info("Error: cartItem nulo");
-            return null;
+            throw new IllegalArgumentException("Error: cartItem nulo");
         }
 
         if(cartItem.getId() != null){
             log.info("Error: la clave debe ser nula");
-            return null;
+            throw new IllegalArgumentException("La clave debe ser nula");
         }
 
-        cartItemRepo.save(cartItem);
-        return cartItem;
+        try {
+            return cartItemRepo.save(cartItem);
+        }catch (Exception e){
+            log.info("Error al guardar cartItem" + e.getMessage());
+        }
+
+        throw new EntitySavingException("Error al guardar cartItem");
+    }
+
+    public void saveAll(List<CartItem> cartItemList)
+    {
+        for (CartItem c : cartItemList)
+        {
+            try {
+                save(c);
+            }catch (Exception e){
+                log.info("Error al guardar lista de cartItems: " + e.getMessage());
+            }
+        }
     }
 
     /*
@@ -180,17 +200,19 @@ public class CartItemServiceImpl implements CartItemService
 
         if(cartItem == null){
             log.info("Error: cartItem nulo");
-            return null;
+            throw new IllegalArgumentException("Error: cartItem nulo");
         }
 
         Optional<CartItem> cartItemToUpdateOptional = findById(cartItem.getId());
         if(cartItemToUpdateOptional.isEmpty()){
             log.info("Error: cartItem inexistente");
+            throw new EntityNotFoundException("Error: cartItem inexistente");
         }else {
-            CartItem cartItemAlmacenada = cartItemToUpdateOptional.get();
-            cartItemAlmacenada.setAmount(cartItem.getAmount());
-            cartItemAlmacenada.setPrice(cartItem.getPrice());
-            cartItemAlmacenada.setProduct(cartItem.getProduct());
+            cartItemRepo.save(cartItem);
+//            CartItem cartItemAlmacenada = cartItemToUpdateOptional.get();
+//            cartItemAlmacenada.setAmount(cartItem.getAmount());
+//            cartItemAlmacenada.setPrice(cartItem.getPrice());
+//            cartItemAlmacenada.setProduct(cartItem.getProduct());
         }
 
         return cartItem;
@@ -200,22 +222,22 @@ public class CartItemServiceImpl implements CartItemService
     Si el cartItem parametro no es nulo y  existe en la BB.DD, lo borra.
      */
     @Override
-    public CartItem delete(CartItem cartItem)
+    public Boolean deleteById(Long id)
     {
-        log.info("Delete {}", cartItem);
+        log.info("Borrando cartItem {}", id);
 
-        if(cartItem == null) {
-            log.info("Error: cartItem nulo");
-            return null;
+        if(id == null) {
+            log.info("Error: id nulo");
+            throw new IllegalArgumentException("Error: id nulo");
         }
 
-        if(! existsById(cartItem.getId())) {
+        if(! existsById(id)) {
             log.info("Error: cartItem inexistente");
-            return null;
+            throw new EntitySavingException("Error: cartItem inexistente");
         }
 
-        cartItemRepo.delete(cartItem);
-        return cartItem;
+        cartItemRepo.deleteById(id);
+        return true;
     }
 
     //============================  BUSINESS LOGIC  ===================================
