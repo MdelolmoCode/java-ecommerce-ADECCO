@@ -23,7 +23,7 @@ public class OrderController {
     public String findAll(Model model) {
         List<Order> orders = orderService.findAll();
         model.addAttribute("orders", orders);
-        return "order-list";
+        return "order/order-list";
     }
 
     @GetMapping("orders/{id}")
@@ -34,13 +34,13 @@ public class OrderController {
         else
             model.addAttribute("error", "Order not found");
 
-        return "order-detail";
+        return "order/order-detail";
     }
 
     @GetMapping("orders/create")
     public String createForm(Model model) {
         model.addAttribute("order", new Order());
-        return "order-form";
+        return "order/order-form";
     }
 
     @GetMapping("orders/{id}/edit")
@@ -52,7 +52,7 @@ public class OrderController {
             model.addAttribute("error", "Order not found");
         }
 
-        return "order-form";
+        return "order/order-form";
     }
 
     @PostMapping("orders")
