@@ -37,7 +37,12 @@
               <li class="list-group-item"><b>CIF:</b> <span th:text="${manufacturer.cif}"></span></li>
           </ul>
           <ul class="list-group list-group-flush">
-              <li class="list-group-item"><b>Dirección:</b> <span th:text="${manufacturer.address}"></span></li>
+              <li class="list-group-item"><b>Dirección:</b>
+                  <a class="btn btn-link btn-sm"
+                     th:text="${manufacturer.address}"
+                     th:href="@{/addresses/{id}(id=${manufacturer.address.id})}">
+                  </a>
+              </li>
           </ul>
           <ul class="list-group list-group-flush">
               <li class="list-group-item"><b>Nº teléfono:</b> <span th:text="${manufacturer.phoneNumber}"></span></li>

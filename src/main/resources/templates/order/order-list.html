@@ -33,8 +33,18 @@
                     <tr th:each="order : ${orders}">
                         <td th:text="${order.id}"></td>
                         <td th:text="${order.orderNumber}"></td>
-                        <td th:text="${order.shoppingCart}"></td>
-                        <td th:text="${order.address}">></td>
+                        <td>
+                            <a class="btn btn-link btn-sm"
+                               th:if="${order.shoppingCart}"
+                               th:text="${order.shoppingCart}"
+                               th:href="@{/shopping-carts/{id}(id=${order.shoppingCart.id})}"></a>
+                        </td>
+                        <td>
+                            <a class="btn btn-link btn-sm"
+                               th:if="${order.address}"
+                               th:text="${order.address}"
+                               th:href="@{/addresses/{id}(id=${order.address.id})}"></a>
+                        </td>
                         <td>
                             <a class="btn btn-primary" th:href="@{/orders/{id}(id=${order.id})}">Ver</a>
                             <a class="btn btn-success" th:href="@{/orders/{id}/edit(id=${order.id})}">Editar</a>

@@ -34,7 +34,12 @@
                         <td th:text="${manufacturer.id}"></td>
                         <td th:text="${manufacturer.cif}"></td>
                         <td th:text="${manufacturer.name}"></td>
-                        <td th:text="${manufacturer.address}">></td>
+                        <td>
+                            <a class="btn btn-link btn-sm"
+                               th:if="${manufacturer.address}"
+                               th:text="${manufacturer.address}"
+                               th:href="@{/addresses/{id}(id=${manufacturer.address.id})}"></a>
+                        </td>
                         <td th:text="${manufacturer.phoneNumber}">></td>
                         <td>
                             <a class="btn btn-primary" th:href="@{/manufacturers/{id}(id=${manufacturer.id})}">Ver</a>
