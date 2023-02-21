@@ -27,5 +27,4 @@ public class CartItem
     private Product product;
 
     private Long amount;
-    private Double price;
 }

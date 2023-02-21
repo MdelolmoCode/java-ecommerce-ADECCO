@@ -18,5 +18,5 @@ public interface ShoppingCartService {
 
     //Lógica negocio
 
-    Double calculateShoppingCartPrice(ShoppingCart shoppingCart);
+    double calculateShoppingCartPrice(ShoppingCart shoppingCart);
 }

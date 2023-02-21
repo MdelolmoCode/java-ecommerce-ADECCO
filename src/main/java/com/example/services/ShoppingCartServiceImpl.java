@@ -1,5 +1,6 @@
 package com.example.services;
 
+import com.example.entities.CartItem;
 import com.example.entities.Customer;
 import com.example.entities.ShoppingCart;
 import com.example.repositories.CustomerRepository;
@@ -66,8 +67,17 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     }
 
     @Override
-    public Double calculateShoppingCartPrice(ShoppingCart shoppingCart) {
+    public double calculateShoppingCartPrice(ShoppingCart shoppingCart) {
         log.info("Calcula precio carrito");
-        return shoppingCart.getTotalPrice();
+
+        List<CartItem> list = shoppingCart.getCartItems();
+
+        double totalPrice = 0.0;
+
+        for(CartItem c: list){
+            totalPrice = totalPrice + (c.getProduct().getPrice() * c.getAmount());
+
+        }
+        return totalPrice;
     }
 }
