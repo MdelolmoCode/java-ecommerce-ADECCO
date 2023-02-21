@@ -7,6 +7,8 @@ import java.util.Optional;
 
 public interface ProductService {
 
+    Optional<Product> findByIdWithCategories(Long id);
+
     // CRUD
     List<Product> findAll();
     boolean existsById(Long id);
