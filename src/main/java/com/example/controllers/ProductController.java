@@ -1,6 +1,7 @@
 package com.example.controllers;
 
 import com.example.entities.Product;
+import com.example.repositories.ManufacturerRepository;
 import com.example.services.ProductService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -16,23 +17,31 @@ import java.util.Optional;
 public class ProductController {
 
     private final ProductService productService;
+    private final ManufacturerRepository manufacturerRepository;
 
     // http://localhost:8080/products
     @GetMapping("products")
     public String findAll(Model model){
         List<Product> products = productService.findAll();
         model.addAttribute("products", products);
-        return "product-list";
+        return "product/product-list";
     }
 
-    @GetMapping("foods/{id}")
+    @GetMapping("products/{id}")
     public String findById(Model model, @PathVariable Long id){
-        Optional<Product> productOpt = productService.findById(id);
+        Optional<Product> productOpt = productService.findByIdWithCategories(id);
         if(productOpt.isPresent())
-            model.addAttribute("products", productOpt.get());
+            model.addAttribute("product", productOpt.get());
         else
             model.addAttribute("error","Product not found");
-        return "product-detail";
+        return "product/product-detail";
+    }
+
+    @GetMapping("products/create")
+    public String createForm(Model model) {
+        model.addAttribute("product", new Product()); // objeto vacío para rellenar desde el formulario
+        model.addAttribute("manufacturer", manufacturerRepository.findAll());
+        return "product/product-form";
     }
 
 }

@@ -18,6 +18,12 @@ import java.util.Optional;
 public class ProductServiceImpl implements ProductService {
 
     private ProductRepository productRepo;
+
+    @Override
+    public Optional<Product> findByIdWithCategories(Long id) {
+        return productRepo.findByIdWithCategories(id);
+    }
+
     @Override
     public List<Product> findAll() {
         log.info("findAll");
