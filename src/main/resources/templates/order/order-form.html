@@ -35,14 +35,12 @@
                 <input type="number" class="form-control" id="orderNumber" th:field="*{orderNumber}">
             </div>
 
-            <!--
             <div class="mb-3">
-                <select aria-label="Supermarkets" class="form-select" th:field="*{supermarket}">
-                    <option th:if="${food.id} == null" selected value="0">Seleccionar supermercado</option>
-                    <option th:each="supermarket : ${supermarkets}" th:value="${supermarket.id}" th:text="${supermarket.name}"></option>
+                <select aria-label="Addresses" class="form-select" th:field="*{address}">
+                    <option th:if="${order.id} == null" selected value="0">Seleccionar dirección</option>
+                    <option th:each="address : ${addresses}" th:value="${address.id}" th:text="${address.name}"></option>
                 </select>
             </div>
-            -->
 
             <a class="btn btn-danger" th:href="@{/orders}">Cancelar</a>
             <button type="submit" class="btn btn-success">Guardar</button>

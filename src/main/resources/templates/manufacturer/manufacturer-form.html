@@ -2,7 +2,7 @@
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>Order Form</title>
+  <title>Manufacturer Form</title>
 
   <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
 </head>
@@ -39,14 +39,12 @@
                 <input type="text" class="form-control" id="name" th:field="*{name}">
             </div>
 
-            <!--
             <div class="mb-3">
-                <select aria-label="Supermarkets" class="form-select" th:field="*{supermarket}">
-                    <option th:if="${food.id} == null" selected value="0">Seleccionar supermercado</option>
-                    <option th:each="supermarket : ${supermarkets}" th:value="${supermarket.id}" th:text="${supermarket.name}"></option>
+                <select aria-label="Addresses" class="form-select" th:field="*{address}">
+                    <option th:if="${manufacturer.id} == null" selected value="0">Seleccionar dirección</option>
+                    <option th:each="address : ${addresses}" th:value="${address.id}" th:text="${address.name}"></option>
                 </select>
             </div>
-            -->
 
             <div class="mb-3">
                 <label for="phoneNumber" class="form-label">Nº teléfono</label>

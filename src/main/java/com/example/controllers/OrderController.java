@@ -1,6 +1,7 @@
 package com.example.controllers;
 
 import com.example.entities.Order;
+import com.example.services.AddressService;
 import com.example.services.OrderService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -18,6 +19,7 @@ import java.util.Optional;
 public class OrderController {
 
     private final OrderService orderService;
+    private final AddressService addressService;
 
     @GetMapping("orders")
     public String findAll(Model model) {
@@ -40,6 +42,7 @@ public class OrderController {
     @GetMapping("orders/create")
     public String createForm(Model model) {
         model.addAttribute("order", new Order());
+        model.addAttribute("addresses", addressService.findAll());
         return "order/order-form";
     }
 
@@ -48,6 +51,7 @@ public class OrderController {
         Optional<Order> orderOpt = orderService.findById(id);
         if (orderOpt.isPresent()) {
             model.addAttribute("order", orderOpt.get());
+            model.addAttribute("addresses", addressService.findAll());
         } else {
             model.addAttribute("error", "Order not found");
         }

@@ -1,6 +1,7 @@
 package com.example.controllers;
 
 import com.example.entities.Manufacturer;
+import com.example.services.AddressService;
 import com.example.services.ManufacturerService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,6 +20,7 @@ import java.util.Optional;
 public class ManufacturerController {
 
     private final ManufacturerService manufacturerService;
+    private final AddressService addressService;
 
     @GetMapping("manufacturers")
     public String findAll(Model model) {
@@ -40,6 +43,7 @@ public class ManufacturerController {
     @GetMapping("manufacturers/create")
     public String createForm(Model model) {
         model.addAttribute("manufacturer", new Manufacturer());
+        model.addAttribute("addresses", addressService.findAll());
         return "manufacturer/manufacturer-form";
     }
 
@@ -48,6 +52,7 @@ public class ManufacturerController {
         Optional<Manufacturer> manufacturerOpt = manufacturerService.findById(id);
         if (manufacturerOpt.isPresent()) {
             model.addAttribute("manufacturer", manufacturerOpt.get());
+            model.addAttribute("addresses", addressService.findAll());
         } else {
             model.addAttribute("error", "Manufacturer not found");
         }
