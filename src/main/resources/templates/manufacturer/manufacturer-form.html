@@ -12,8 +12,10 @@
 <div class="container text-center">
   <div class="row">
 
-    <h1 th:if="${manufacturer.id}">Modificar Manufacturer <span th:text="${manufacturer.id}"></span></h1>
-    <h1 th:if="${manufacturer.id} == null">Crear nuevo Manufacturer</h1>
+    <div th:unless="${error}">
+        <h1 th:if="${manufacturer.id}">Modificar Manufacturer <span th:text="${manufacturer.id}"></span></h1>
+        <h1 th:if="${manufacturer.id} == null">Crear nuevo Manufacturer</h1>
+    </div>
 
     <div class="col"></div>
 
