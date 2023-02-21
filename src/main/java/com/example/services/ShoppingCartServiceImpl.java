@@ -61,9 +61,14 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     }
 
     @Override
-    public ShoppingCart update(ShoppingCart shoppingCart) {
+    public void update(ShoppingCart shoppingCart) {
         log.info("update ShoppingCart {}", shoppingCart);
-        return shoppingCart;
+
+        ShoppingCart shoppingCartFromDB = shoppingCartRepository.findById(shoppingCart.getId()).get();
+        shoppingCartFromDB.setCustomer(shoppingCart.getCustomer());
+        shoppingCartFromDB.setCartItems(shoppingCart.getCartItems());
+
+        shoppingCartRepository.save(shoppingCartFromDB);
     }
 
     @Override
@@ -80,4 +85,6 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         }
         return totalPrice;
     }
+
+
 }

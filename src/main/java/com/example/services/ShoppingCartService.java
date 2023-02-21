@@ -13,7 +13,7 @@ public interface ShoppingCartService {
     Optional<ShoppingCart> findByCustomer(Customer customer);
     void deleteById(Long id);
     ShoppingCart save (ShoppingCart shoppingCart);
-    ShoppingCart update(ShoppingCart shoppingCart);
+    void update(ShoppingCart shoppingCart);
 
 
     //Lógica negocio
