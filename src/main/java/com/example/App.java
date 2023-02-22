@@ -10,6 +10,7 @@ import com.example.repositories.CartItemRepository;
 import com.example.repositories.CustomerRepository;
 import com.example.repositories.ProductRepository;
 import com.example.repositories.ShoppingCartRepository;
+import com.example.services.CartItemService;
 import com.example.services.CustomerService;
 import com.example.services.ShoppingCartService;
 import com.example.services.ShoppingCartServiceImpl;
@@ -31,17 +32,21 @@ public class App {
 		ApplicationContext context = SpringApplication.run(App.class, args);
 
 		CustomerRepository customerRepository = context.getBean(CustomerRepository.class);
-		CustomerService customerService = context.getBean(CustomerService.class);
+
+		Customer customer1 = new Customer(1L, "Pedro", "Rodriguez", "pedrorod@gmail.com", null, "665167676");
+		Customer customer2 = new Customer(2L, "Angela", "Diaz", "angeladiaz@gmail.com", null, "665453323");
+
+		customerRepository.saveAll(List.of(customer1,customer2));
+
 
 		ShoppingCartRepository shoppingCartRepository = context.getBean(ShoppingCartRepository.class);
 		ShoppingCartService shoppingCartService = context.getBean(ShoppingCartService.class);
 
-		ShoppingCart shoppingCart1 = new ShoppingCart();
+		ShoppingCart shoppingCart1 = new ShoppingCart(1L, customer1, null);
+		ShoppingCart shoppingCart2 = new ShoppingCart(2L,customer2, null);
 
-		Customer customer1 = new Customer(null, "Pedro", "Rodriguez", "pedrorod@gmail.com", null, "665167676");
-		Customer customer2 = new Customer(null, "Angela", "Diaz", "angeladiaz@gmail.com", null, "665453323");
+		shoppingCartRepository.saveAll(List.of(shoppingCart1,shoppingCart2));
 
-		customerRepository.saveAll(List.of(customer1,customer2));
 
 		ProductRepository productRepository = context.getBean(ProductRepository.class);
 
@@ -51,26 +56,22 @@ public class App {
 		productRepository.saveAll(List.of(product1,product2));
 
 		CartItemRepository cartItemRepository = context.getBean(CartItemRepository.class);
+		CartItemService cartItemService = context.getBean(CartItemService.class);
 
-		CartItem cartItem1 = new CartItem(null, shoppingCart1, product1, 3L);
-		CartItem cartItem2 = new CartItem(null, shoppingCart1, product2, 3L);
+		CartItem cartItem1 = new CartItem(1L, shoppingCart1, product1, 3L);
+		CartItem cartItem2 = new CartItem(2L, shoppingCart1, product2, 3L);
+		CartItem cartItem3 = new CartItem(3L, shoppingCart1, product2, 5L);
+		CartItem cartItem4 = new CartItem(4L, shoppingCart2, product2, 5L);
 
-		cartItemRepository.saveAll(List.of(cartItem1,cartItem2));
+		cartItemRepository.saveAll(List.of(cartItem1,cartItem2,cartItem3,cartItem4));
 
-		List<CartItem> lista = cartItemRepository.findAll();
+		List<CartItem> lista = shoppingCart2.getCartItems();
 
-		shoppingCart1.setCustomer(customer1);
-		shoppingCart1.setCartItems(lista);
+		System.out.println(lista);
 
-	shoppingCartService.update(shoppingCart1);
 
-	System.out.println(shoppingCartRepository.findAll());
 
-		//ShoppingCart sp1 = shoppingCartRepository.findByCustomer(); devuelve un optional
 
-	double price = shoppingCartService.calculateShoppingCartPrice(shoppingCart1);
-
-	System.out.println(price);
 
 
 

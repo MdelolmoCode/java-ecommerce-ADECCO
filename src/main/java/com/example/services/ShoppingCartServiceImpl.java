@@ -17,7 +17,7 @@ import java.util.Optional;
 @Slf4j
 
 public class ShoppingCartServiceImpl implements ShoppingCartService {
-    private final CustomerRepository customerRepository;
+
     private final ShoppingCartRepository shoppingCartRepository;
 
     @Override
@@ -81,10 +81,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 
         for(CartItem c: list){
             totalPrice = totalPrice + (c.getProduct().getPrice() * c.getAmount());
-
         }
         return totalPrice;
     }
-
-
 }

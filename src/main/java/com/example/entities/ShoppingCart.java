@@ -22,12 +22,12 @@ public class ShoppingCart {
     private Long id;
 
     @OneToOne
+    @JoinColumn(name = "customer_id")
     Customer customer;
 
     @OneToMany
     @ToString.Exclude
     private List<CartItem> cartItems = new ArrayList<>();
-
 
 
 }
