@@ -20,7 +20,7 @@ public class Manufacturer {
     @Column(unique = true)
     private String cif;
     private String name;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id", unique = true)
     private Address address;
     private String phoneNumber;

@@ -161,8 +161,6 @@ public class App {
 		Address address1 = new Address(null, "street1","name1","city1","state1","country1","zipcode1");
 		Address address2 = new Address(null, "street2","name2","city2","state2","country2","zipcode2");
 		Address address3 = new Address(null, "street3","name3","city1","state3","country3","zipcode3");
-		AddressRepository addressRepo = context.getBean(AddressRepository.class);
-		addressRepo.saveAll(List.of(address1, address2, address3));
 
 		ManufacturerService manufacturerService = context.getBean(ManufacturerService.class);
 		Manufacturer manufacturer1 = new Manufacturer(null, "1111", "Manu1", address1, "12345678");
