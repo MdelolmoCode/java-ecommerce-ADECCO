@@ -1,6 +1,7 @@
 package com.example;
 
 import com.example.entities.*;
+import com.example.entities.enums.PaymentMethod;
 import com.example.repositories.*;
 import com.example.services.*;
 import org.springframework.boot.SpringApplication;
@@ -134,9 +135,9 @@ public class App {
 		shoppingCartRepo.save(shoppingCart1);
 
 		OrderService orderService = context.getBean(OrderService.class);
-		Order order1 = new Order(null, 1000L, null, address1);
-		Order order2 = new Order(null, 2000L, null, address2);
-		Order order3 = new Order(null, 3000L, shoppingCart1, address2);
+		Order order1 = new Order(null, 1000L, null, address1, PaymentMethod.CREDIT_CARD);
+		Order order2 = new Order(null, 2000L, null, address2, PaymentMethod.CREDIT_CARD);
+		Order order3 = new Order(null, 3000L, shoppingCart1, address2, PaymentMethod.PAYPAL);
 		orderService.save(order1);
 		orderService.save(order2);
 		orderService.save(order3);

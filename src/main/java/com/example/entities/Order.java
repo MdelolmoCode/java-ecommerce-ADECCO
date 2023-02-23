@@ -1,5 +1,6 @@
 package com.example.entities;
 
+import com.example.entities.enums.PaymentMethod;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -23,5 +24,6 @@ public class Order {
     private ShoppingCart shoppingCart;
     @ManyToOne
     private Address address;
+    private PaymentMethod paymentMethod;
 
 }

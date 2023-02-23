@@ -105,6 +105,7 @@ public class OrderServiceImpl implements OrderService {
         orderFromDB.setOrderNumber(order.getOrderNumber());
         orderFromDB.setShoppingCart(order.getShoppingCart());
         orderFromDB.setAddress(order.getAddress());
+        orderFromDB.setPaymentMethod(order.getPaymentMethod());
 
         try {
             return orderRepository.save(orderFromDB);
