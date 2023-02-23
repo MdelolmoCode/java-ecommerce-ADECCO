@@ -126,8 +126,8 @@ public class App {
 	private static void testOrder(ApplicationContext context) {
 		System.out.println("===== Test Order =====");
 
-		Address address1 = new Address(null, "street1","name1","city1","state1","country1","zipcode1");
-		Address address2 = new Address(null, "street2","name2","city2","state2","country1","zipcode2");
+		Address address1 = new Address(null, "street O1","name O1","city O1","state O1","country O1","zipcode O1");
+		Address address2 = new Address(null, "street O2","name O2","city O2","state O2","country O1","zipcode O2");
 		AddressRepository addressRepo = context.getBean(AddressRepository.class);
 		addressRepo.saveAll(List.of(address1, address2));
 
@@ -148,7 +148,7 @@ public class App {
 		orderService.save(order3);
 		orderService.findAll().forEach(System.out::println);
 
-		orderService.findAllByAddressCity("city2").forEach(System.out::println);
+		orderService.findAllByAddressCity("city O2").forEach(System.out::println);
 
 		orderService.deleteById(2L);
 		orderService.findAll().forEach(System.out::println);
@@ -164,9 +164,11 @@ public class App {
 	private static void testManufacturer(ApplicationContext context) {
 		System.out.println("===== Test Manufacturer =====");
 
-		Address address1 = new Address(null, "street1","name1","city1","state1","country1","zipcode1");
-		Address address2 = new Address(null, "street2","name2","city2","state2","country2","zipcode2");
-		Address address3 = new Address(null, "street3","name3","city1","state3","country3","zipcode3");
+		Address address1 = new Address(null, "street M1","name M1","city M1","state M1","country M1","zipcode M1");
+		Address address2 = new Address(null, "street M2","name M2","city M2","state M2","country M2","zipcode M2");
+		Address address3 = new Address(null, "street M3","name M3","city M1","state M3","country M3","zipcode M3");
+		AddressRepository addressRepo = context.getBean(AddressRepository.class);
+		addressRepo.saveAll(List.of(address1, address2, address3));
 
 		ManufacturerService manufacturerService = context.getBean(ManufacturerService.class);
 		Manufacturer manufacturer1 = new Manufacturer(null, "1111", "Manu1", address1, "12345678");
@@ -179,7 +181,7 @@ public class App {
 
 		System.out.println(manufacturerService.findByCif("2222"));
 
-		manufacturerService.findAllByAddressCity("city1").forEach(System.out::println);
+		manufacturerService.findAllByAddressCity("city M1").forEach(System.out::println);
 	}
 
 }

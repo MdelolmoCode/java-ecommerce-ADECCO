@@ -46,45 +46,12 @@
                 <input type="text" class="form-control" id="phoneNumber" th:field="*{phoneNumber}">
             </div>
 
-            <ul class="list-group mb-3">
-                <h2>Address</h2>
-                <li class="list-group-item">
-                    <div class="mb-3">
-                        <label for="streetType" class="form-label">Tipo de calle</label>
-                        <input type="text" class="form-control" id="streetType" th:field="*{address.streetType}">
-                    </div>
-                </li>
-                <li class="list-group-item">
-                    <div class="mb-3">
-                        <label for="name" class="form-label">Nombre</label>
-                        <input type="text" class="form-control" id="name" th:field="*{address.name}">
-                    </div>
-                </li>
-                <li class="list-group-item">
-                    <div class="mb-3">
-                        <label for="city" class="form-label">Ciudad</label>
-                        <input type="text" class="form-control" id="city" th:field="*{address.city}">
-                    </div>
-                </li>
-                <li class="list-group-item">
-                    <div class="mb-3">
-                        <label for="state" class="form-label">Provincia</label>
-                        <input type="text" class="form-control" id="state" th:field="*{address.state}">
-                    </div>
-                </li>
-                <li class="list-group-item">
-                    <div class="mb-3">
-                        <label for="country" class="form-label">País</label>
-                        <input type="text" class="form-control" id="country" th:field="*{address.country}">
-                    </div>
-                </li>
-                <li class="list-group-item">
-                    <div class="mb-3">
-                        <label for="zipcode" class="form-label">Código Postal</label>
-                        <input type="text" class="form-control" id="zipcode" th:field="*{address.zipcode}">
-                    </div>
-                </li>
-            </ul>
+            <div class="mb-3">
+                <select aria-label="Addresses" class="form-select" th:field="*{address}">
+                    <option th:if="${manufacturer.id} == null" selected value="0">Seleccionar dirección</option>
+                    <option th:each="address : ${addresses}" th:value="${address.id}" th:text="${address.name}"></option>
+                </select>
+            </div>
 
             <a class="btn btn-danger" th:href="@{/manufacturers}">Cancelar</a>
             <button type="submit" class="btn btn-success">Guardar</button>
