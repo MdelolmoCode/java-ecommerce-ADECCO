@@ -26,7 +26,7 @@ public class Customer {
     private String surname;
 
 
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String email;
 
     @OneToMany

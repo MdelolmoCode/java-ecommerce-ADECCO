@@ -10,5 +10,7 @@ public interface CartItemService
 {
     List<CartItem> findAll();
 
+    List<CartItem> findByShoppingCart (ShoppingCart shoppingCart);
+
 
 }

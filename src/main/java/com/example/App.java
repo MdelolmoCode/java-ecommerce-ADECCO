@@ -18,6 +18,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -61,13 +63,23 @@ public class App {
 		CartItem cartItem1 = new CartItem(1L, shoppingCart1, product1, 3L);
 		CartItem cartItem2 = new CartItem(2L, shoppingCart1, product2, 3L);
 		CartItem cartItem3 = new CartItem(3L, shoppingCart1, product2, 5L);
-		CartItem cartItem4 = new CartItem(4L, shoppingCart2, product2, 5L);
+		CartItem cartItem4 = new CartItem(4L, shoppingCart1, product2, 5L);
+		CartItem cartItem5 = new CartItem(5L, shoppingCart2, product1, 50L);
 
-		cartItemRepository.saveAll(List.of(cartItem1,cartItem2,cartItem3,cartItem4));
+		cartItemRepository.saveAll(List.of(cartItem1,cartItem2,cartItem3,cartItem4,cartItem5));
 
-		List<CartItem> lista = shoppingCart2.getCartItems();
+		shoppingCart1.setCartItems(cartItemService.findByShoppingCart(shoppingCart1));
+		shoppingCartService.update(shoppingCart1);
 
-		System.out.println(lista);
+		shoppingCart2.setCartItems(cartItemService.findByShoppingCart(shoppingCart2));
+		shoppingCartService.update(shoppingCart2);
+
+		System.out.println(shoppingCartService.calculateShoppingCartPrice(shoppingCart1));
+		System.out.println(shoppingCartService.calculateShoppingCartPrice(shoppingCart2));
+
+		System.out.println(shoppingCart1.getCartItems());
+
+
 
 
 

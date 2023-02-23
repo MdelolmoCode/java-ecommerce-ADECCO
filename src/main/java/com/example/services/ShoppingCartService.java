@@ -1,5 +1,6 @@
 package com.example.services;
 
+import com.example.entities.CartItem;
 import com.example.entities.Customer;
 import com.example.entities.ShoppingCart;
 
@@ -19,4 +20,5 @@ public interface ShoppingCartService {
     //Lógica negocio
 
     double calculateShoppingCartPrice(ShoppingCart shoppingCart);
+
 }
