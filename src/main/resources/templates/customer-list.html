@@ -7,20 +7,36 @@
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
 </head>
 <body>
-<h1>Listado de customers</h1>
 
-<p th:text="${message}"></p>
-<ul>
 
-    <li th:each="customer: ${customers}">
-        <span><strong>Nombre: </strong></span>
-        <span th:text="${customer.getName()}"></span>
-        <span th:text="${customer.getSurname()}"></span>
-        <span><strong>Email: </strong></span>
-        <span th:text="${customer.getEmail()}"></span>
+<div class="container text-center">
+    <div class="row">
+        <h1>Listado de customers</h1>
+        <div class="col">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Apellido</th>
+                    <th scope="col">Email</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="customer: ${customers}">
 
-    </li>
+                    <td th:text="${customer.getId()}"></td>
+                    <td th:text="${customer.getName()}"></td>
+                    <td th:text="${customer.getSurname()}"></td>
+                    <td th:text="${customer.getEmail()}"></td>
+                </tr>
 
-</ul>
+                </tbody>
+            </table>
+
+    </div>
+</div>
+
+
 </body>
 </html>
