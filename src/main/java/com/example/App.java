@@ -92,6 +92,7 @@ public class App {
 		if(shoppingCartOptional.isPresent()) {
 			ShoppingCart shoppingCartFromDB = shoppingCartOptional.get();
 			System.out.println(shoppingCartFromDB.getCartItems().size());
+			System.out.println("Holaa!");
 
 		}
 
