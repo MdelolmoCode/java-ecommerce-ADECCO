@@ -141,16 +141,19 @@ public class App {
 		customerRepo.save(customer1);
 
 		ShoppingCart shoppingCart1 = new ShoppingCart(null, customer1, 10.0, null);
+		ShoppingCart shoppingCart2 = new ShoppingCart(null, customer1, 10.0, null);
 		CartItem cartItem1 = new CartItem(null, shoppingCart1, productService.findById(1L).get(), 3L, 5.0);
 		CartItem cartItem2 = new CartItem(null, shoppingCart1, productService.findById(2L).get(), 5L, 15.0);
 		CartItem cartItem3 = new CartItem(null, shoppingCart1, productService.findById(3L).get(), 1L, 2.5);
+		CartItem cartItem4 = new CartItem(null, shoppingCart2, productService.findById(4L).get(), 2L, 0.5);
 		List<CartItem> cartItems = List.of(cartItem1, cartItem2, cartItem3);
-		cartItemRepo.saveAll(cartItems);
+		cartItemRepo.saveAll(List.of(cartItem1, cartItem2, cartItem3, cartItem4));
 
 		shoppingCart1.setCartItems(cartItems);
-		shoppingCartRepo.save(shoppingCart1);
+		shoppingCart2.setCartItems(List.of(cartItem4));
+		shoppingCartRepo.saveAll(List.of(shoppingCart1, shoppingCart2));
 
-		Order order1 = new Order(null, 1000L, null, address1, PaymentMethod.CREDIT_CARD);
+		Order order1 = new Order(null, 1000L, shoppingCart2, address1, PaymentMethod.CREDIT_CARD);
 		Order order2 = new Order(null, 2000L, null, address2, PaymentMethod.CREDIT_CARD);
 		Order order3 = new Order(null, 3000L, shoppingCart1, address2, PaymentMethod.PAYPAL);
 		orderService.save(order1);
