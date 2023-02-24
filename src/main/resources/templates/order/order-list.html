@@ -44,28 +44,7 @@
                         </td>
 
                         <td>
-                            <table class="table table-hover mt-1" th:if="${order.shoppingCart}">
-                                <thead class="table-light">
-                                <tr>
-                                    <th scope="col">Producto</th>
-                                    <th scope="col">Cantidad</th>
-                                    <th scope="col">Precio</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr th:each="cartItem : ${order.getCartItems()}">
-                                    <td>
-                                        <a class="btn btn-link btn-sm"
-                                           th:text="${cartItem.product.name}"
-                                           th:href="@{/products/{id}(id=${cartItem.product.id})}">
-                                        </a>
-                                    </td>
-                                    <td th:text="|x${cartItem.amount}|"></td>
-                                    <td th:text="|${cartItem.product.price} €|"></td>
-                                </tr>
-                                </tbody>
-                            </table>
-                            <span th:unless="${order.shoppingCart}">Vacío</span>
+                            <div th:replace="~{item-list-fragment :: item-list(shoppingCart=${order.shoppingCart})}"></div>
                         </td>
 
                         <td>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="item-list (shoppingCart)">
+  <table class="table table-hover mt-1" th:if="${shoppingCart} AND ${#lists.size(shoppingCart.cartItems) > 0}">
+    <thead class="table-light">
+    <tr>
+      <th scope="col">Producto</th>
+      <th scope="col">Cantidad</th>
+      <th scope="col">Precio</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="cartItem : ${shoppingCart.cartItems}">
+      <td>
+        <a class="btn btn-link btn-sm"
+           th:text="${cartItem.product.name}"
+           th:href="@{/products/{id}(id=${cartItem.product.id})}">
+        </a>
+      </td>
+      <td th:text="|x${cartItem.amount}|"></td>
+      <td th:text="|${cartItem.product.price} €|"></td>
+    </tr>
+    </tbody>
+  </table>
+  <span th:if="${shoppingCart} == null OR ${#lists.size(shoppingCart.cartItems) == 0}">Vacío</span>
+</div>
+</body>
+</html>
