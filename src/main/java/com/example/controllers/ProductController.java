@@ -22,6 +22,7 @@ public class ProductController {
     public String findAll(Model model){
         List<Product> products = productService.findAll();
         model.addAttribute("products", products);
+        model.addAttribute("message", "Esto es un mensaje con el metodo addAttribute");
         return "product-list";
     }
 

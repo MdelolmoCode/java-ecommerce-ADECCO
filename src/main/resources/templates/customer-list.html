@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Customer List</title>
+</head>
+<body>
+<h1>Listado de customers</h1>
+
+<p th:text="${message}"></p>
+<ul>
+
+    <li th:each="customer: ${customers}">
+        <span><strong>Nombre: </strong></span>
+        <span th:text="${customer.getName()}"></span>
+        <span th:text="${customer.getSurname()}"></span>
+        <span><strong>Email: </strong></span>
+        <span th:text="${customer.getEmail()}"></span>
+
+    </li>
+
+</ul>
+</body>
+</html>

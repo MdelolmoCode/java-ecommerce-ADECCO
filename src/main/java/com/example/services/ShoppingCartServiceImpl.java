@@ -52,6 +52,9 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     @Override
     public ShoppingCart save(ShoppingCart shoppingCart) {
         log.info("save ShoppingCart {}", shoppingCart);
+        if(shoppingCart == null){
+            throw new IllegalArgumentException("ShoppingCart can´t be null");
+        }
         try {
             this.shoppingCartRepository.save(shoppingCart);
         } catch (Exception e) {
@@ -63,6 +66,9 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     @Override
     public void update(ShoppingCart shoppingCart) {
         log.info("update ShoppingCart {}", shoppingCart);
+        if(shoppingCart == null){
+            throw  new IllegalArgumentException("ShoppingCart can´t be null");
+        }
 
         ShoppingCart shoppingCartFromDB = shoppingCartRepository.findById(shoppingCart.getId()).get();
         shoppingCartFromDB.setCustomer(shoppingCart.getCustomer());

@@ -68,24 +68,32 @@ public class App {
 
 		cartItemRepository.saveAll(List.of(cartItem1,cartItem2,cartItem3,cartItem4,cartItem5));
 
-		shoppingCart1.setCartItems(cartItemService.findByShoppingCart(shoppingCart1));
-		shoppingCartService.update(shoppingCart1);
+//		shoppingCart1.setCartItems(cartItemService.findByShoppingCart(shoppingCart1));
+//		shoppingCartService.update(shoppingCart1);
+//
+//		shoppingCart2.setCartItems(cartItemService.findByShoppingCart(shoppingCart2));
+//		shoppingCartService.update(shoppingCart2);
+//
+//		System.out.println(shoppingCartService.calculateShoppingCartPrice(shoppingCart1));
+//		System.out.println(shoppingCartService.calculateShoppingCartPrice(shoppingCart2));
+//
+		CartItem cartItem6 = new CartItem(6L, shoppingCart2, product2, 1L);
+		cartItemRepository.save(cartItem6);
+//
+//		shoppingCart2.setCartItems(cartItemService.findByShoppingCart(shoppingCart2));
+//		shoppingCartService.update(shoppingCart2);
+//
+//
+//
+//		System.out.println(shoppingCart2.getCartItems().size());
 
-		shoppingCart2.setCartItems(cartItemService.findByShoppingCart(shoppingCart2));
-		shoppingCartService.update(shoppingCart2);
+		Optional <ShoppingCart> shoppingCartOptional =  shoppingCartRepository.findById(2L);
 
-		System.out.println(shoppingCartService.calculateShoppingCartPrice(shoppingCart1));
-		System.out.println(shoppingCartService.calculateShoppingCartPrice(shoppingCart2));
+		if(shoppingCartOptional.isPresent()) {
+			ShoppingCart shoppingCartFromDB = shoppingCartOptional.get();
+			System.out.println(shoppingCartFromDB.getCartItems().size());
 
-		System.out.println(shoppingCart1.getCartItems());
-
-
-
-
-
-
-
-
+		}
 
 
 

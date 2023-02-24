@@ -27,19 +27,16 @@ public class CartItemServiceImpl implements CartItemService
 
     @Override
     public List<CartItem> findByShoppingCart(ShoppingCart shoppingCart) {
+        log.info("findByShoppingCart");
         List<CartItem> listFromDB = cartItemRepo.findAll();
 
         List<CartItem> aux = new ArrayList<>();
 
         for (CartItem cartItem : listFromDB) {
             if(cartItem.getShoppingCart().getId().equals(shoppingCart.getId())) {
-
                 aux.add(cartItem);
             }
-
         }
         return aux;
     }
-
-
 }

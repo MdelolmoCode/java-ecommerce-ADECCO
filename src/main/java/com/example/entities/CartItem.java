@@ -20,7 +20,7 @@ public class CartItem
     @Column(name = "cart_item_id", nullable = false)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private ShoppingCart shoppingCart;
 
     @OneToOne
