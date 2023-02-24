@@ -6,8 +6,7 @@ VALUES  ("arte",false),
 		("armas blancas",true),
 		("armas",true),
 		("ropa",false),
-		("bisutería",false)
-;
+		("bisutería",false);
 
 INSERT INTO product (name, description, price, stock, available, manufacturer_id)
 VALUES  ('pincel','desc pincel',10.99,10L,true,null),

@@ -11,6 +11,7 @@ public interface ManufacturerService {
     Optional<Manufacturer> findById(Long id);
     Optional<Manufacturer> findByCif(String cif);
     Optional<Manufacturer> findByName(String name);
+    List<Manufacturer> findAllByAddressCity(String city);
     Optional<Manufacturer> findByPhoneNumber(String phoneNumber);
 
     Manufacturer save(Manufacturer manufacturer);
