@@ -20,8 +20,7 @@ public class Manufacturer {
     @Column(unique = true)
     private String cif;
     private String name;
-    @OneToOne
-    @JoinColumn(name = "address_id", unique = true)
+    @ManyToOne
     private Address address;
     private String phoneNumber;
 

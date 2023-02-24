@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Order List</title>
+
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+</head>
+<body>
+<div th:replace="~{navbar :: nav1}"></div>
+<div class="container text-center">
+    <div class="row">
+        <div class="col-1">
+
+        </div>
+        <div class="col-10">
+
+            <div>
+                <a class="btn btn-info" th:href="@{/orders/create}">Crear nuevo pedido</a>
+            </div>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Número de pedido</th>
+                        <th scope="col">Método de pago</th>
+                        <th scope="col">Carrito</th>
+                        <th scope="col">Dirección</th>
+                        <th scope="col">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="order : ${orders}">
+                        <td th:text="${order.id}"></td>
+                        <td th:text="${order.orderNumber}"></td>
+                        <td th:text="${order.paymentMethod.getDisplayName()}"></td>
+                        <td>
+                            <a class="btn btn-link btn-sm"
+                               th:if="${order.shoppingCart}"
+                               th:text="${order.shoppingCart}"
+                               th:href="@{/shopping-carts/{id}(id=${order.shoppingCart.id})}"></a>
+                        </td>
+                        <td>
+                            <a class="btn btn-link btn-sm"
+                               th:if="${order.address}"
+                               th:text="${order.address}"
+                               th:href="@{/addresses/{id}(id=${order.address.id})}"></a>
+                        </td>
+                        <td>
+                            <a class="btn btn-primary" th:href="@{/orders/{id}(id=${order.id})}">Ver</a>
+                            <a class="btn btn-success" th:href="@{/orders/{id}/edit(id=${order.id})}">Editar</a>
+                            <a class="btn btn-danger" th:href="@{/orders/{id}/delete(id=${order.id})}">Borrar</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="alert alert-info" role="alert" th:if="${#lists.isEmpty(orders)}">
+                No hay elementos actualmente.
+            </div>
+            <div class="text-center" th:if="${#lists.size(orders) > 0}">
+                Hay <span th:text="${#lists.size(orders)}"></span> resultados.
+            </div>
+
+
+        </div>
+        <div class="col-1">
+
+        </div>
+    </div>
+</div>
+
+<div th:replace="~{footer :: footer1}"></div>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+</body>
+</html>
