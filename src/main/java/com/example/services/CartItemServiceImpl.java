@@ -57,16 +57,6 @@ public class CartItemServiceImpl implements CartItemService
         return cartItemRepo.findAllByProductId(id);
     }
 
-    @Override
-    public List<CartItem> findAllByShoppinCart(Long id)
-    {
-        log.info("FindByShoppingCart{}", id);
-
-        if(! idAmountPriceValido(id))
-            return null;
-
-        return cartItemRepo.findAllByShoppingCartId(id);
-    }
 
     //================================================================================================
 
@@ -116,33 +106,33 @@ public class CartItemServiceImpl implements CartItemService
 
     //================================================================================================
 
-    @Override
-    public List<CartItem> findAllByPriceIs(double price)
-    {
-        log.info("FindByPriceIs{}", price);
-        return cartItemRepo.findAllByPriceIs(price);
-    }
-
-    @Override
-    public List<CartItem> findAllByPriceIsGreaterThanEqual(double price)
-    {
-        log.info("FindByPriceIsGreaterThanEqual {}", price);
-        return cartItemRepo.findAllByPriceIsGreaterThanEqual(price);
-    }
-
-    @Override
-    public List<CartItem> findAllByPriceIsLessThanEqual(double price)
-    {
-        log.info("FindByPriceIsLessThanEqual {}", price);
-        return cartItemRepo.findAllByPriceIsLessThanEqual(price);
-    }
-
-    @Override
-    public List<CartItem> findAllByPriceIsBetween(double minPrice, double maxPrice)
-    {
-        log.info("FindByPriceIsBetween {} and {}", minPrice, maxPrice);
-        return cartItemRepo.findAllByPriceIsBetween(minPrice, maxPrice);
-    }
+//    @Override
+//    public List<CartItem> findAllByPriceIs(double price)
+//    {
+//        log.info("FindByPriceIs{}", price);
+//        return cartItemRepo.findAllByPriceIs(price);
+//    }
+//
+//    @Override
+//    public List<CartItem> findAllByPriceIsGreaterThanEqual(double price)
+//    {
+//        log.info("FindByPriceIsGreaterThanEqual {}", price);
+//        return cartItemRepo.findAllByPriceIsGreaterThanEqual(price);
+//    }
+//
+//    @Override
+//    public List<CartItem> findAllByPriceIsLessThanEqual(double price)
+//    {
+//        log.info("FindByPriceIsLessThanEqual {}", price);
+//        return cartItemRepo.findAllByPriceIsLessThanEqual(price);
+//    }
+//
+//    @Override
+//    public List<CartItem> findAllByPriceIsBetween(double minPrice, double maxPrice)
+//    {
+//        log.info("FindByPriceIsBetween {} and {}", minPrice, maxPrice);
+//        return cartItemRepo.findAllByPriceIsBetween(minPrice, maxPrice);
+//    }
 
     //================================================================================================
 

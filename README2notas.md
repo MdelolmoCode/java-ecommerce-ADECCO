@@ -10,6 +10,9 @@
 
 ## Entidades:
 
+![magpieLogo](EcommerceUMLColorFinal.vpd.png)
+
+
 ### Product
 - id: Long. PRIMARY KEY
 - name: String

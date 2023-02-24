@@ -26,8 +26,9 @@ public class ShoppingCart {
 
     Double totalPrice;
 
-    @OneToMany
-    @ToString.Exclude
+
+    @OneToMany(mappedBy = "shoppingCart")
+    //@ToString.Exclude
     private List<CartItem> cartItems = new ArrayList<>();
 
 
