@@ -126,26 +126,37 @@ public class App {
 	private static void testOrder(ApplicationContext context) {
 		System.out.println("===== Test Order =====");
 
+		AddressRepository addressRepo = context.getBean(AddressRepository.class);
+		CustomerRepository customerRepo = context.getBean(CustomerRepository.class);
+		CartItemRepository cartItemRepo = context.getBean(CartItemRepository.class);
+		ShoppingCartRepository shoppingCartRepo = context.getBean(ShoppingCartRepository.class);
+		ProductService productService = context.getBean(ProductService.class);
+		OrderService orderService = context.getBean(OrderService.class);
+
 		Address address1 = new Address(null, "street O1","name O1","city O1","state O1","country O1","zipcode O1");
 		Address address2 = new Address(null, "street O2","name O2","city O2","state O2","country O1","zipcode O2");
-		AddressRepository addressRepo = context.getBean(AddressRepository.class);
 		addressRepo.saveAll(List.of(address1, address2));
 
 		Customer customer1 = new Customer(null, "Name1", "Surname1", "email@email", new ArrayList<>(), "12345678");
-		CustomerRepository customerRepo = context.getBean(CustomerRepository.class);
 		customerRepo.save(customer1);
 
 		ShoppingCart shoppingCart1 = new ShoppingCart(null, customer1, 10.0, null);
-		ShoppingCartRepository shoppingCartRepo = context.getBean(ShoppingCartRepository.class);
+		CartItem cartItem1 = new CartItem(null, shoppingCart1, productService.findById(1L).get(), 3L, 5.0);
+		CartItem cartItem2 = new CartItem(null, shoppingCart1, productService.findById(2L).get(), 5L, 15.0);
+		CartItem cartItem3 = new CartItem(null, shoppingCart1, productService.findById(3L).get(), 1L, 2.5);
+		List<CartItem> cartItems = List.of(cartItem1, cartItem2, cartItem3);
+		cartItemRepo.saveAll(cartItems);
+
+		shoppingCart1.setCartItems(cartItems);
 		shoppingCartRepo.save(shoppingCart1);
 
-		OrderService orderService = context.getBean(OrderService.class);
 		Order order1 = new Order(null, 1000L, null, address1, PaymentMethod.CREDIT_CARD);
 		Order order2 = new Order(null, 2000L, null, address2, PaymentMethod.CREDIT_CARD);
 		Order order3 = new Order(null, 3000L, shoppingCart1, address2, PaymentMethod.PAYPAL);
 		orderService.save(order1);
 		orderService.save(order2);
 		orderService.save(order3);
+		/* Tests
 		orderService.findAll().forEach(System.out::println);
 
 		orderService.findAllByAddressCity("city O2").forEach(System.out::println);
@@ -158,7 +169,7 @@ public class App {
 		System.out.println(orderService.findById(3L).get().getOrderNumber());
 
 		System.out.println(orderService.findByShoppingCart(shoppingCart1));
-		System.out.println(orderService.findByCustomer(customer1));
+		System.out.println(orderService.findByCustomer(customer1));*/
 	}
 
 	private static void testManufacturer(ApplicationContext context) {
@@ -177,11 +188,13 @@ public class App {
 		manufacturerService.save(manufacturer1);
 		manufacturerService.save(manufacturer2);
 		manufacturerService.save(manufacturer3);
+		/* Test
 		manufacturerService.findAll().forEach(System.out::println);
 
 		System.out.println(manufacturerService.findByCif("2222"));
 
 		manufacturerService.findAllByAddressCity("city M1").forEach(System.out::println);
+		*/
 	}
 
 }

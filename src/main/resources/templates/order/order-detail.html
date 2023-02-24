@@ -26,22 +26,41 @@
 
 
       <div class="card" th:unless="${error}">
-        <img src="https://dummyimage.com/300" class="card-img-top" alt="Order Image">
           <div class="card-body">
               <h5 class="card-title" th:text="|Pedido nº: ${order.orderNumber}|"></h5>
           </div>
           <ul class="list-group list-group-flush">
-              <span class="card-title" th:text="|Método de pago: ${order.paymentMethod.getDisplayName()}|"></span>
-          </ul>
-          <ul class="list-group list-group-flush">
-              <li class="list-group-item"><b>Carrito:</b>
-                  <a class="btn btn-link btn-sm"
-                     th:if="${order.shoppingCart}"
-                     th:text="${order.shoppingCart}"
-                     th:href="@{/shopping-carts/{id}(id=${order.shoppingCart.id})}">
-                  </a>
+              <li class="list-group-item">
+                  <b>Método de pago:</b> <span th:text="${order.paymentMethod.getDisplayName()}"></span>
               </li>
           </ul>
+
+          <div class="my-2 mx-2">
+              <b>Carrito:</b>
+              <table class="table table-hover mt-1" th:if="${order.shoppingCart}">
+                  <thead class="table-light">
+                      <tr>
+                          <th scope="col">Producto</th>
+                          <th scope="col">Cantidad</th>
+                          <th scope="col">Precio</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr th:each="cartItem : ${order.getCartItems()}">
+                          <td>
+                              <a class="btn btn-link btn-sm"
+                                 th:text="${cartItem.product.name}"
+                                 th:href="@{/products/{id}(id=${cartItem.product.id})}">
+                              </a>
+                          </td>
+                          <td th:text="|x${cartItem.amount}|"></td>
+                          <td th:text="|${cartItem.product.price} €|"></td>
+                      </tr>
+                  </tbody>
+              </table>
+              <span th:unless="${order.shoppingCart}">Vacío</span>
+          </div>
+
           <ul class="list-group list-group-flush">
               <li class="list-group-item"><b>Dirección:</b>
                   <a class="btn btn-link btn-sm"
