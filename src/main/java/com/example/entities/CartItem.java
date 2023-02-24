@@ -11,7 +11,7 @@ import lombok.*;
 @Builder
 
 @Entity
-@Table(name = "Cart_item")
+@Table(name = "cart_item")
 public class CartItem
 {
     @Id
@@ -27,5 +27,10 @@ public class CartItem
     private Product product;
 
     private Long amount;
-    private Double price;
+    //private Double price;
+
+    public double getPrice()
+    {
+        return product.getPrice() * amount;
+    }
 }

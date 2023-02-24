@@ -24,13 +24,4 @@ public class Address {
     private String state;
     private String country;
     private String zipcode; // Código postal
-//
-//    public Address(String streetType, String name, String city, String state, String country, String zipcode) {
-//        this.streetType = streetType;
-//        this.name = name;
-//        this.city = city;
-//        this.state = state;
-//        this.country = country;
-//        this.zipcode = zipcode;
-//    }
 }
