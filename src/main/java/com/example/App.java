@@ -142,10 +142,10 @@ public class App {
 
 		ShoppingCart shoppingCart1 = new ShoppingCart(null, customer1, 10.0, null);
 		ShoppingCart shoppingCart2 = new ShoppingCart(null, customer1, 10.0, null);
-		CartItem cartItem1 = new CartItem(null, shoppingCart1, productService.findById(1L).get(), 3L, 5.0);
-		CartItem cartItem2 = new CartItem(null, shoppingCart1, productService.findById(2L).get(), 5L, 15.0);
-		CartItem cartItem3 = new CartItem(null, shoppingCart1, productService.findById(3L).get(), 1L, 2.5);
-		CartItem cartItem4 = new CartItem(null, shoppingCart2, productService.findById(4L).get(), 2L, 0.5);
+		CartItem cartItem1 = new CartItem(null, shoppingCart1, productService.findById(1L).get(), 3L);
+		CartItem cartItem2 = new CartItem(null, shoppingCart1, productService.findById(2L).get(), 5L);
+		CartItem cartItem3 = new CartItem(null, shoppingCart1, productService.findById(3L).get(), 1L);
+		CartItem cartItem4 = new CartItem(null, shoppingCart2, productService.findById(4L).get(), 2L);
 		List<CartItem> cartItems = List.of(cartItem1, cartItem2, cartItem3);
 		cartItemRepo.saveAll(List.of(cartItem1, cartItem2, cartItem3, cartItem4));
 
