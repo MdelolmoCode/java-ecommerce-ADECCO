@@ -4,19 +4,6 @@ import com.example.entities.*;
 import com.example.entities.enums.PaymentMethod;
 import com.example.repositories.*;
 import com.example.services.*;
-import com.example.entities.Address;
-import com.example.entities.Category;
-import com.example.entities.Manufacturer;
-import com.example.entities.Order;
-import com.example.entities.Product;
-import com.example.repositories.AddressRepository;
-import com.example.repositories.CategoryRepository;
-import com.example.repositories.ManufacturerRepository;
-import com.example.repositories.ProductRepository;
-import com.example.services.CategoryService;
-import com.example.services.ManufacturerService;
-import com.example.services.ProductService;
-import com.example.services.OrderService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
@@ -34,7 +21,7 @@ public class App {
 
 		// AddressService addressService = context.getBean(AddressService.class);
 		CategoryService categoryService = context.getBean(CategoryService.class);
-		ManufacturerService manufacturerService = context.getBean(ManufacturerService.class);
+		// ManufacturerService manufacturerService = context.getBean(ManufacturerService.class);
 		ProductService productService = context.getBean(ProductService.class);
 
 		createDemoData();
@@ -64,15 +51,13 @@ public class App {
 		ManufacturerRepository manufacturerRepo = context.getBean(ManufacturerRepository.class);
 		Manufacturer manufacturer1 = new Manufacturer(null,"cif1","name1",address1,"1234phone");
 		Manufacturer manufacturer2 = new Manufacturer(null,"cif2","name2",address2,"5678phone");
-		// Manufacturer manufacturer3 = new Manufacturer(null,"cif3","name3",address2,"9991phone");
-		// manufacturerRepo.saveAll(List.of(manufacturer1, manufacturer2, manufacturer3));
+		// manufacturerRepo.saveAll(manufacturer1, manufacturer2);
 		manufacturerRepo.save(manufacturer1);
 		manufacturerRepo.save(manufacturer2);
-		// manufacturerRepo.save(manufacturer3);
 
 
 		// product
-		// productos sin ID
+		// productos sin ID ni Manufacturer
 		ProductRepository productRepo = context.getBean(ProductRepository.class);
 		Product product1 = new Product(null,"pincel", "desc pincel", 10.99, 10L,true,
 				new ArrayList<>(List.of(category1,category2)),manufacturer1);
@@ -100,8 +85,8 @@ public class App {
 				product6,product7,product8, product9, product10));
 
 		System.out.println("------============ AQUI EMPIEZA ============-------------");
-        System.out.println("------**************************************-------------");
-        System.out.println("------======================================-------------");
+		for(Product product : productService.findAllByPriceBetween(18.00,88.0))
+			System.out.println(product);
 
 		testOrder(context);
 		testManufacturer(context);
@@ -136,35 +121,48 @@ public class App {
 
 
 
-		// testOrder(context);
 	}
 
 	private static void testOrder(ApplicationContext context) {
 		System.out.println("===== Test Order =====");
 
+		AddressRepository addressRepo = context.getBean(AddressRepository.class);
+		CustomerRepository customerRepo = context.getBean(CustomerRepository.class);
+		CartItemRepository cartItemRepo = context.getBean(CartItemRepository.class);
+		ShoppingCartRepository shoppingCartRepo = context.getBean(ShoppingCartRepository.class);
+		ProductService productService = context.getBean(ProductService.class);
+		OrderService orderService = context.getBean(OrderService.class);
+
 		Address address1 = new Address(null, "street O1","name O1","city O1","state O1","country O1","zipcode O1");
 		Address address2 = new Address(null, "street O2","name O2","city O2","state O2","country O1","zipcode O2");
-		AddressRepository addressRepo = context.getBean(AddressRepository.class);
 		addressRepo.saveAll(List.of(address1, address2));
 
 		Customer customer1 = new Customer(null, "Name1", "Surname1", "email@email", new ArrayList<>(), "12345678");
-		CustomerRepository customerRepo = context.getBean(CustomerRepository.class);
 		customerRepo.save(customer1);
 
 		ShoppingCart shoppingCart1 = new ShoppingCart(null, customer1, 10.0, null);
-		ShoppingCartRepository shoppingCartRepo = context.getBean(ShoppingCartRepository.class);
-		shoppingCartRepo.save(shoppingCart1);
+		ShoppingCart shoppingCart2 = new ShoppingCart(null, customer1, 10.0, null);
+		CartItem cartItem1 = new CartItem(null, shoppingCart1, productService.findById(1L).get(), 3L, 5.0);
+		CartItem cartItem2 = new CartItem(null, shoppingCart1, productService.findById(2L).get(), 5L, 15.0);
+		CartItem cartItem3 = new CartItem(null, shoppingCart1, productService.findById(3L).get(), 1L, 2.5);
+		CartItem cartItem4 = new CartItem(null, shoppingCart2, productService.findById(4L).get(), 2L, 0.5);
+		List<CartItem> cartItems = List.of(cartItem1, cartItem2, cartItem3);
+		cartItemRepo.saveAll(List.of(cartItem1, cartItem2, cartItem3, cartItem4));
 
-		OrderService orderService = context.getBean(OrderService.class);
-		Order order1 = new Order(null, 1000L, null, address1);
-		Order order2 = new Order(null, 2000L, null, address2);
-		Order order3 = new Order(null, 3000L, null, address2);
+		shoppingCart1.setCartItems(cartItems);
+		shoppingCart2.setCartItems(List.of(cartItem4));
+		shoppingCartRepo.saveAll(List.of(shoppingCart1, shoppingCart2));
+
+		Order order1 = new Order(null, 1000L, shoppingCart2, address1, PaymentMethod.CREDIT_CARD);
+		Order order2 = new Order(null, 2000L, null, address2, PaymentMethod.CREDIT_CARD);
+		Order order3 = new Order(null, 3000L, shoppingCart1, address2, PaymentMethod.PAYPAL);
 		orderService.save(order1);
 		orderService.save(order2);
 		orderService.save(order3);
+		/* Tests
 		orderService.findAll().forEach(System.out::println);
 
-		orderService.findByAddressCity("city2").forEach(System.out::println);
+		orderService.findAllByAddressCity("city O2").forEach(System.out::println);
 
 		orderService.deleteById(2L);
 		orderService.findAll().forEach(System.out::println);
@@ -174,7 +172,7 @@ public class App {
 		System.out.println(orderService.findById(3L).get().getOrderNumber());
 
 		System.out.println(orderService.findByShoppingCart(shoppingCart1));
-		System.out.println(orderService.findByCustomer(customer1));
+		System.out.println(orderService.findByCustomer(customer1));*/
 	}
 
 	private static void testManufacturer(ApplicationContext context) {
@@ -193,11 +191,13 @@ public class App {
 		manufacturerService.save(manufacturer1);
 		manufacturerService.save(manufacturer2);
 		manufacturerService.save(manufacturer3);
+		/* Test
 		manufacturerService.findAll().forEach(System.out::println);
 
 		System.out.println(manufacturerService.findByCif("2222"));
 
 		manufacturerService.findAllByAddressCity("city M1").forEach(System.out::println);
+		*/
 	}
 
 }
