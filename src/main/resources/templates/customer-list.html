@@ -1,47 +1,50 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Customer List</title>
+  <meta charset="UTF-8">
+  <title>Customer List</title>
 
-    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+  <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
 </head>
 <body>
+<div th:replace="~{navbar :: nav1}"></div>
 
 
 <div class="container text-center">
-    <div class="row">
-        <h1>Listado de customers</h1>
-        <div class="col">
-            <table class="table">
-                <thead>
-                <tr>
-                    <th scope="col">Id</th>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Apellido</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Actions</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="customer: ${customers}">
+  <div class="row">
+    <h1>Listado de customers</h1>
+    <div class="col">
+      <button type="button" class="btn btn-info">Crear nuevo customer</button>
+      <table class="table">
+        <thead>
+        <tr>
+          <th scope="col">Id</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Apellido</th>
+          <th scope="col">Email</th>
+          <th scope="col">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="customer: ${customers}">
 
-                    <td th:text="${customer.getId()}"></td>
-                    <td th:text="${customer.getName()}"></td>
-                    <td th:text="${customer.getSurname()}"></td>
-                    <td th:text="${customer.getEmail()}"></td>
-                    <td>
-                        <button type="button" class="btn btn-primary">Ver</button>
-                        <button type="button" class="btn btn-success">Editar</button>
-                        <button type="button" class="btn btn-danger">Borrar</button>
+          <td th:text="${customer.getId()}"></td>
+          <td th:text="${customer.getName()}"></td>
+          <td th:text="${customer.getSurname()}"></td>
+          <td th:text="${customer.getEmail()}"></td>
+          <td>
+            <button type="button" class="btn btn-primary">Ver</button>
+            <button type="button" class="btn btn-success">Editar</button>
+            <button type="button" class="btn btn-danger">Borrar</button>
 
-                    </td>
-                </tr>
+          </td>
+        </tr>
 
-                </tbody>
-            </table>
+        </tbody>
+      </table>
 
     </div>
+  </div>
 </div>
 
 

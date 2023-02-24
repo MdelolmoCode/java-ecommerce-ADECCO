@@ -52,8 +52,8 @@ public class App {
 
 		ProductRepository productRepository = context.getBean(ProductRepository.class);
 
-		Product product1 = new Product(null, "Cuchillo", "Cuchillo para cortar jamón", 2.04, 100L, true, null, null);
-		Product product2 = new Product(null, "tenedor", "tenedor para ensalada", 1.40, 200L, true, null, null);
+		Product product1 = new Product(null, "Cuchillo", "Cuchillo jamonero", 2.04, 100L, true, null, null);
+		Product product2 = new Product(null, "Cuchillo", "Cuchillo panadero", 1.40, 200L, true, null, null);
 
 		productRepository.saveAll(List.of(product1,product2));
 
