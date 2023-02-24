@@ -64,7 +64,9 @@
 
                 <div class="card-body">
                     <button type="button" class="btn btn-primary">Volver</button>
-                    <button type="button" class="btn btn-success">Comprar</button>
+                    <a class="btn btn-success" th:href="@{/products/{id}/edit(id=${product.id})}">Editar</a>
+                    <a class="btn btn-danger" th:href="@{/products/{id}/delete(id=${product.id})}">Borrar</a>
+                    <button type="button" class="btn btn-warning">Comprar</button>
                 </div>
             </div>
         </div>

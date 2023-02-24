@@ -38,6 +38,7 @@
           <th scope="col">Description</th>
           <th scope="col">Price (€)</th>
           <th scope="col">Stock</th>
+          <th scope="col">Manufacturer</th>
           <th scope="col">Actions</th>
         </tr>
         </thead>
@@ -48,6 +49,12 @@
           <td th:text="${product.description}"></td>
           <td th:text="${#numbers.formatDecimal(product.price,1,2)}"></td>
           <td th:class="${product.stock} ? 'text-success' : 'text-danger'" th:text="${product.stock}"></td>
+          <td>
+            <a class="btn btn-link btn-sm"
+               th:if="${product.manufacturer != null}"
+               th:text="${product.manufacturer.name}"
+               th:href="@{/products/manufacturer/{id}(id=${product.manufacturer.id})}"></a>
+          </td>
           <td>
             <a class="btn btn-primary" th:href="@{/products/{id}(id=${product.id})}">Ver</a>
             <a class="btn btn-success" th:href="@{/products/{id}/edit(id=${product.id})}">Editar</a>

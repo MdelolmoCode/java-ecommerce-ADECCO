@@ -37,7 +37,7 @@ public class App {
 		ManufacturerService manufacturerService = context.getBean(ManufacturerService.class);
 		ProductService productService = context.getBean(ProductService.class);
 
-		createDemoData();
+		// createDemoData();
 
 		// categories
 		CategoryRepository categoryRepo = context.getBean(CategoryRepository.class);
@@ -103,8 +103,8 @@ public class App {
         System.out.println("------**************************************-------------");
         System.out.println("------======================================-------------");
 
-		testOrder(context);
-		testManufacturer(context);
+		// testOrder(context);
+		// testManufacturer(context);
 	}
 
 	private static void createDemoData() {
@@ -139,7 +139,7 @@ public class App {
 		// testOrder(context);
 	}
 
-	private static void testOrder(ApplicationContext context) {
+	/*private static void testOrder(ApplicationContext context) {
 		System.out.println("===== Test Order =====");
 
 		Address address1 = new Address(null, "street O1","name O1","city O1","state O1","country O1","zipcode O1");
@@ -164,7 +164,7 @@ public class App {
 		orderService.save(order3);
 		orderService.findAll().forEach(System.out::println);
 
-		orderService.findByAddressCity("city2").forEach(System.out::println);
+		// orderService.findByAddressCity("city2").forEach(System.out::println);
 
 		orderService.deleteById(2L);
 		orderService.findAll().forEach(System.out::println);
@@ -199,5 +199,5 @@ public class App {
 
 		manufacturerService.findAllByAddressCity("city M1").forEach(System.out::println);
 	}
-
+*/
 }

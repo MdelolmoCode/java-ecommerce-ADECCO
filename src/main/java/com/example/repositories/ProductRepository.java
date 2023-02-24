@@ -24,6 +24,8 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     List<Product> findAllByCategories_Name(String name);
     List<Product> findAllByManufacturer_Cif(String cif);
     List<Product> findAllByCategories_MatureFalse();
+    List<Product> findByCategories_Id(Long id);
+
 
 
 }
