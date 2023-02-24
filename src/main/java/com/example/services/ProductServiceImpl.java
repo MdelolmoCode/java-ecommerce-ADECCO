@@ -124,12 +124,14 @@ public class ProductServiceImpl implements ProductService {
         if(product.getId() != null)
             update(product);
 
-        try {
+        return productRepo.save(product);
+
+        /*try {
             this.productRepo.save(product);
         } catch (Exception e) {
             log.error("Error saving Product", e);
         }
-        throw new EntitySavingException("Error saving Product");
+        throw new EntitySavingException("Error saving Product");*/
     }
 
     @Override

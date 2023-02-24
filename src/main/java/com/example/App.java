@@ -10,6 +10,7 @@ import com.example.repositories.CategoryRepository;
 import com.example.repositories.ManufacturerRepository;
 import com.example.repositories.ProductRepository;
 import com.example.services.CategoryService;
+import com.example.services.ManufacturerService;
 import com.example.services.ProductService;
 import com.example.services.OrderService;
 import org.springframework.boot.SpringApplication;
@@ -29,7 +30,7 @@ public class App {
 
 		// AddressService addressService = context.getBean(AddressService.class);
 		CategoryService categoryService = context.getBean(CategoryService.class);
-		// ManufacturerService manufacturerService = context.getBean(ManufacturerService.class);
+		ManufacturerService manufacturerService = context.getBean(ManufacturerService.class);
 		ProductService productService = context.getBean(ProductService.class);
 
 		createDemoData();
@@ -59,13 +60,15 @@ public class App {
 		ManufacturerRepository manufacturerRepo = context.getBean(ManufacturerRepository.class);
 		Manufacturer manufacturer1 = new Manufacturer(null,"cif1","name1",address1,"1234phone");
 		Manufacturer manufacturer2 = new Manufacturer(null,"cif2","name2",address2,"5678phone");
-		// manufacturerRepo.saveAll(manufacturer1, manufacturer2);
+		// Manufacturer manufacturer3 = new Manufacturer(null,"cif3","name3",address2,"9991phone");
+		// manufacturerRepo.saveAll(List.of(manufacturer1, manufacturer2, manufacturer3));
 		manufacturerRepo.save(manufacturer1);
 		manufacturerRepo.save(manufacturer2);
+		// manufacturerRepo.save(manufacturer3);
 
 
 		// product
-		// productos sin ID ni Manufacturer
+		// productos sin ID
 		ProductRepository productRepo = context.getBean(ProductRepository.class);
 		Product product1 = new Product(null,"pincel", "desc pincel", 10.99, 10L,true,
 				new ArrayList<>(List.of(category1,category2)),manufacturer1);
@@ -93,8 +96,8 @@ public class App {
 				product6,product7,product8, product9, product10));
 
 		System.out.println("------============ AQUI EMPIEZA ============-------------");
-		for(Product product : productService.findAllByPriceBetween(18.00,88.0))
-			System.out.println(product);
+        System.out.println("------**************************************-------------");
+        System.out.println("------======================================-------------");
 
 
 	}
