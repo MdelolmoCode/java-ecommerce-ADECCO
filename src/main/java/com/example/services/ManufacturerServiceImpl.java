@@ -1,13 +1,16 @@
 package com.example.services;
 
-import com.example.entities.Address;
 import com.example.entities.Manufacturer;
+import com.example.exception.EntityDeleteException;
+import com.example.exception.EntitySavingException;
 import com.example.repositories.ManufacturerRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,12 +18,12 @@ import java.util.Optional;
 @AllArgsConstructor
 @Service
 public class ManufacturerServiceImpl implements ManufacturerService {
-    private ManufacturerRepository ManufacturerRepo;
+    private ManufacturerRepository manufacturerRepo;
 
     @Override
     public List<Manufacturer> findAll() {
         log.info("findAll");
-        return ManufacturerRepo.findAll();
+        return manufacturerRepo.findAll();
     }
 
     @Override
@@ -28,66 +31,97 @@ public class ManufacturerServiceImpl implements ManufacturerService {
         log.info("findById {}", id);
         if (id == null || id <= 0)
             return Optional.empty();
-        return ManufacturerRepo.findById(id);
+        return manufacturerRepo.findById(id);
     }
 
     @Override
     public Optional<Manufacturer> findByCif(String cif) {
         log.info("findByCif {}", cif);
-        if (cif == null)
+        if (!StringUtils.hasLength(cif))
             return Optional.empty();
-        return ManufacturerRepo.findByCif(cif);
+        return manufacturerRepo.findByCif(cif);
     }
 
     @Override
     public Optional<Manufacturer> findByName(String name) {
         log.info("findById {}", name);
-        if (name == null)
+        if (!StringUtils.hasLength(name))
             return Optional.empty();
-        return ManufacturerRepo.findByName(name);
+        return manufacturerRepo.findByName(name);
+    }
+
+    @Override
+    public List<Manufacturer> findAllByAddressCity(String city) {
+        log.info("findAllByAddressCity {}", city);
+        if (!StringUtils.hasLength(city))
+            return new ArrayList<>();
+        return manufacturerRepo.findAllByAddressCity(city);
     }
 
     @Override
     public Optional<Manufacturer> findByPhoneNumber(String phoneNumber) {
         log.info("findById {}", phoneNumber);
-        if (phoneNumber == null)
+        if (!StringUtils.hasLength(phoneNumber))
             return Optional.empty();
-        return ManufacturerRepo.findByPhoneNumber(phoneNumber);
+        return manufacturerRepo.findByPhoneNumber(phoneNumber);
     }
 
     @Override
     public Manufacturer save(Manufacturer manufacturer) {
         log.info("save {}", manufacturer);
-        if(manufacturer == null) {
-            throw new IllegalArgumentException("Manufacturer can't be null");
+        if(manufacturer == null)
+            throw new IllegalArgumentException("Manufacturer nulo.");
+
+        if(manufacturer.getId() != null)
+            return update(manufacturer);
+
+        try {
+            return manufacturerRepo.save(manufacturer);
+        } catch (Exception e) {
+            log.error("Error al guardar manufacturer.", e);
         }
-        if(manufacturer != null)
-            update(manufacturer);
-        return ManufacturerRepo.save(manufacturer);
+
+        throw new EntitySavingException("Error al guardar manufacturer.");
     }
 
     @Override
     public Manufacturer update(Manufacturer manufacturer) {
+        log.info("update {}", manufacturer);
         if(manufacturer == null)
-            throw new IllegalArgumentException("Manufacturer can't be null");
+            throw new IllegalArgumentException("Manufacturer nulo.");
 
         if(manufacturer.getId() == null)
-            throw new IllegalArgumentException("Manufacturer ID can't null");
+            throw new IllegalArgumentException("Manufacturer con ID nulo.");
 
-        if(!ManufacturerRepo.existsById(manufacturer.getId()))
-            throw new EntityNotFoundException("Category does not exist");
+        Optional<Manufacturer> manufacturerOpt = manufacturerRepo.findById(manufacturer.getId());
+        if (manufacturerOpt.isEmpty())
+            throw new EntityNotFoundException("No existe un manufacturer con ese ID.");
 
-        Manufacturer manufacturerFromDB = ManufacturerRepo.findById(manufacturer.getId()).get();
+        Manufacturer manufacturerFromDB = manufacturerOpt.get();
         manufacturerFromDB.setCif(manufacturer.getCif());
         manufacturerFromDB.setName(manufacturer.getName());
+        manufacturerFromDB.setAddress(manufacturer.getAddress());
         manufacturerFromDB.setPhoneNumber(manufacturer.getPhoneNumber());
 
-        return ManufacturerRepo.save(manufacturerFromDB);
+        try {
+            return manufacturerRepo.save(manufacturerFromDB);
+        } catch (Exception e) {
+            log.error("Error al guardar manufacturer.", e);
+        }
+
+        throw new EntitySavingException("Error al guardar manufacturer.");
     }
 
     @Override
     public void deleteById(Long id) {
-        log.info("DeleteById {}", id);
-        ManufacturerRepo.deleteById(id);
+        log.info("deleteById {}", id);
+        try {
+            manufacturerRepo.deleteById(id);
+            return;
+        } catch (Exception e) {
+            log.error("Error al borrar manufacturer.", e);
+        }
+
+        throw new EntityDeleteException("Error al borrar manufacturer.");
     }
 }
