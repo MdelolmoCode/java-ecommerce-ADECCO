@@ -7,6 +7,7 @@ import com.example.repositories.CustomerRepository;
 import com.example.repositories.ShoppingCartRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -90,6 +91,8 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         }
         return totalPrice;
     }
+
+
 
 
 }

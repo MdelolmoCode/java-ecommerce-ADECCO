@@ -27,10 +27,5 @@ public class CartItem
     private Product product;
 
     private Long amount;
-    //private Double price;
 
-    public double getPrice()
-    {
-        return product.getPrice() * amount;
-    }
 }

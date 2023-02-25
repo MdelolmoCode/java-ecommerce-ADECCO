@@ -29,5 +29,4 @@ public class ShoppingCart {
     @ToString.Exclude
     private List<CartItem> cartItems = new ArrayList<>();
 
-
 }
