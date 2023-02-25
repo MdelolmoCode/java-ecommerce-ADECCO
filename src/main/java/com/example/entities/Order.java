@@ -4,6 +4,9 @@ import com.example.entities.enums.PaymentMethod;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 @Setter
 @ToString
@@ -25,5 +28,12 @@ public class Order {
     @ManyToOne
     private Address address;
     private PaymentMethod paymentMethod;
+
+    public List<CartItem> getCartItems() {
+        if (getShoppingCart() == null || getShoppingCart().getCartItems() == null) {
+            return new ArrayList<>();
+        }
+        return getShoppingCart().getCartItems();
+    }
 
 }

@@ -2,8 +2,6 @@ package com.example.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
-import lombok.extern.slf4j.Slf4j;
-
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -11,8 +9,9 @@ import lombok.extern.slf4j.Slf4j;
 @Setter
 @ToString
 @Builder
+
 @Entity
-@Table(name = "Cart_item")
+@Table(name = "cart_item")
 public class CartItem
 {
     @Id
@@ -21,10 +20,17 @@ public class CartItem
     private Long id;
 
     @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ToString.Exclude
     private ShoppingCart shoppingCart;
 
     @OneToOne
     private Product product;
 
     private Long amount;
+    //private Double price;
+
+    public double getPrice()
+    {
+        return product.getPrice() * amount;
+    }
 }

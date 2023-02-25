@@ -1,6 +1,7 @@
 package com.example.services;
 
 import com.example.entities.Address;
+import com.example.exception.*;
 import com.example.repositories.AddressRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
@@ -20,6 +21,11 @@ public class AddressServiceImpl implements AddressService {
     public List<Address> findAll() {
         log.info("findAll");
         return addressRepo.findAll();
+    }
+
+    public boolean existsById(Long id) throws IllegalArgumentException
+    {
+        return addressRepo.existsById(id);
     }
 
     @Override
@@ -52,9 +58,9 @@ public class AddressServiceImpl implements AddressService {
     public Address save(Address address) {
         log.info("save {}", address);
         if(address == null) {
-            throw new IllegalArgumentException("Address can't be null");
+            throw new EntitySavingException("Address can't be null");
         }
-        if(address != null)
+        if(address.getId() != null)
             update(address);
         return addressRepo.save(address);
     }
@@ -62,10 +68,10 @@ public class AddressServiceImpl implements AddressService {
     @Override
     public Address update(Address address) {
         if(address == null)
-            throw new IllegalArgumentException("Address can't be null");
+            throw new EntitySavingException("Address can't be null");
 
         if(address.getId() == null)
-            throw new IllegalArgumentException("Address ID can't null");
+            throw new EntitySavingException("Address ID can't null");
 
         if(!addressRepo.existsById(address.getId()))
             throw new EntityNotFoundException("Address does not exist");

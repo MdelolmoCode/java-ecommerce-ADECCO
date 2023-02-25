@@ -54,12 +54,13 @@ public class CategoryServiceImpl implements CategoryService {
         if(category.getId() != null)
             update(category);
 
-        try {
+        return categoryRepo.save(category);
+        /*try {
             this.categoryRepo.save(category);
         } catch (Exception e) {
             log.error("Error saving Category", e);
         }
-        throw new EntitySavingException("Error saving Category");
+        throw new EntitySavingException("Error saving Category");*/
     }
 
     @Override
