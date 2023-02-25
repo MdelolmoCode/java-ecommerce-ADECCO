@@ -156,21 +156,21 @@ public class App {
 		shoppingCartRepo.save(shoppingCart1);
 
 		OrderService orderService = context.getBean(OrderService.class);
-		Order order1 = new Order(null, 1000L, null, address1);
-		Order order2 = new Order(null, 2000L, null, address2);
-		Order order3 = new Order(null, 3000L, null, address2);
-		orderService.save(order1);
-		orderService.save(order2);
-		orderService.save(order3);
+//		Order order1 = new Order(null, 1000L, null, address1);
+//		Order order2 = new Order(null, 2000L, null, address2);
+//		Order order3 = new Order(null, 3000L, null, address2);
+//		orderService.save(order1);
+//		orderService.save(order2);
+//		orderService.save(order3);
 		orderService.findAll().forEach(System.out::println);
 
-		orderService.findByAddressCity("city2").forEach(System.out::println);
+//		orderService.findByAddressCity("city2").forEach(System.out::println);
 
 		orderService.deleteById(2L);
 		orderService.findAll().forEach(System.out::println);
 
-		order3.setOrderNumber(4000L);
-		orderService.update(order3);
+//		order3.setOrderNumber(4000L);
+//		orderService.update(order3);
 		System.out.println(orderService.findById(3L).get().getOrderNumber());
 
 		System.out.println(orderService.findByShoppingCart(shoppingCart1));

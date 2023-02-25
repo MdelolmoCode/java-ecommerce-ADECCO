@@ -30,7 +30,7 @@ public class CartItemRepoTest
         assertEquals(9, cartItemList.size());
 
         CartItem cartItem1 = cartItemList.get(0);
-        cartItem1.getPrice()
+        //cartItem1.getPrice()
 
     }
 
@@ -39,7 +39,7 @@ public class CartItemRepoTest
     @Test
     void findByIdTest()
     {
-        Optional<CartItem> opt
+        //Optional<CartItem> opt
     }
 
     @Sql("CartItem.sql")
