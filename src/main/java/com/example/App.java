@@ -35,8 +35,8 @@ public class App {
 
 		CustomerRepository customerRepository = context.getBean(CustomerRepository.class);
 
-		Customer customer1 = new Customer(1L, "Pedro", "Rodriguez", "pedrorod@gmail.com", null, "665167676");
-		Customer customer2 = new Customer(2L, "Angela", "Diaz", "angeladiaz@gmail.com", null, "665453323");
+		Customer customer1 = new Customer(1L, "Edgar", "Ruiz", "edgarruiz@gmail.com", null, "665167676");
+		Customer customer2 = new Customer(2L, "Rosa", "Sellés", "rosaperez@gmail.com", null, "665453323");
 
 		customerRepository.saveAll(List.of(customer1,customer2));
 

@@ -1,6 +1,7 @@
 package com.example.services;
 
 import com.example.entities.Customer;
+import com.example.entities.Product;
 import com.example.repositories.CustomerRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -26,9 +27,12 @@ public class CustomerServiceImpl implements CustomerService {
         return customerRepository.findAll();
     }
 
+
     @Override
-    public Optional<Customer> findById(Long id) { //tested
+    public Optional<Customer> findById(Long id) {
         log.info("Ejecutando método findById() from CustomerService {}", id);
+        if (id == null || id <= 0)
+            return Optional.empty();
         return customerRepository.findById(id);
     }
 
