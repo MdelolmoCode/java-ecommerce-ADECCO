@@ -25,19 +25,19 @@ VALUES (1L, 'mdelpilar@correo.com', 'Maria', 123456789, 'Del Pilar'),
 ;
 
 
-ALTER TABLE customer_addresses
-    ADD PRIMARY KEY (customer_id, addresses_id);
-
-INSERT INTO customer_addresses (customer_id, addresses_id)
-VALUES (1L, 1L),
-       (1L, 2L),
-       (1L, 3L),
-       (2L, 2L),
-       (2L, 5L),
-       (2L, 6L),
-       (3L, 2L),
-       (3L, 4L)
-;
+-- ALTER TABLE customer_addresses
+--     ADD PRIMARY KEY (customer_id, addresses_id);
+--
+-- INSERT INTO customer_addresses (customer_id, addresses_id)
+-- VALUES (1L, 1L),
+--        (1L, 2L),
+--        (1L, 3L),
+--        (2L, 2L),
+--        (2L, 5L),
+--        (2L, 6L),
+--        (3L, 2L),
+--        (3L, 4L)
+-- ;
 
 INSERT INTO manufacturer (id, cif, name, address_id, phone_number)
 VALUES  (1L, 'L16516165', 'Pinturas Jaime', 1L, '570278613'),
@@ -117,7 +117,7 @@ VALUES (1L, 1L, 1, 1L),
        (24L, 6L, 8, 10L)
 ;
 
-INSERT INTO order (id, order_number, address_id, shopping_cart_id)
+INSERT INTO orders (id, order_number, address_id, shopping_cart_id)
 VALUES (1L, 1L, 1L, 1L),
        (2L, 2L, 2L, 2L),
        (3L, 3L, 3L, 3L),

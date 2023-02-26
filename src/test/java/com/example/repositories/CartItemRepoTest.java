@@ -9,7 +9,6 @@ import org.springframework.test.context.jdbc.Sql;
 
 
 import java.util.List;
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -19,7 +18,7 @@ public class CartItemRepoTest
     @Autowired
     private CartItemRepository cartItemRepo;
 
-    @Sql("CartItem.sql")
+    @Sql("DataInsertions.sql")
     @DisplayName("Buscar todos")
     @Test
     void findAllTest()
@@ -27,28 +26,29 @@ public class CartItemRepoTest
         List<CartItem> cartItemList = cartItemRepo.findAll();
 
         assertNotNull(cartItemList);
-        assertEquals(9, cartItemList.size());
+        assertEquals(24, cartItemList.size());
 
         CartItem cartItem1 = cartItemList.get(0);
-        //cartItem1.getPrice()
-
+        assertEquals(10.99, cartItem1.getPrice());
+        assertEquals(1, cartItem1.getAmount());
     }
 
-    @Sql("CartItem.sql")
+    @Sql("DataInsertions.sql")
     @DisplayName("Buscar por id")
     @Test
     void findByIdTest()
     {
-        //Optional<CartItem> opt
+        Long id = cartItemRepo.findAll().get(0).getId();
+        assertTrue(cartItemRepo.findById(id).isPresent() );
     }
 
-    @Sql("CartItem.sql")
+    @Sql("DataInsertions.sql")
     @DisplayName("GetPrice")
     @Test
     void getPriceTest()
     {
-        CartItem cartItem1 = cartItemRepo.findById(0L).get();
-        assertEquals(1.0, cartItem1.getPrice());
+        CartItem cartItem1 = cartItemRepo.findById(1L).get();
+        assertEquals(10.99, cartItem1.getPrice());
     }
 
 }
