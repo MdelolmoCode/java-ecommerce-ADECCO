@@ -34,21 +34,36 @@ public class CartItemRepoTest
     }
 
     @Sql("DataInsertions.sql")
-    @DisplayName("Buscar por id")
+    @DisplayName("Buscar por id y SI existe")
     @Test
-    void findByIdTest()
+    void findByIdTestTrue()
     {
         Long id = cartItemRepo.findAll().get(0).getId();
         assertTrue(cartItemRepo.findById(id).isPresent() );
     }
 
     @Sql("DataInsertions.sql")
-    @DisplayName("GetPrice")
+    @DisplayName("Buscar por id y SI existe")
     @Test
-    void getPriceTest()
+    void findByIdTestFalse()
     {
-        CartItem cartItem1 = cartItemRepo.findById(1L).get();
-        assertEquals(10.99, cartItem1.getPrice());
+        assertTrue(cartItemRepo.findById(999L).isEmpty() );
     }
 
+    @Sql("DataInsertions.sql")
+    @DisplayName("Buscar todos por producto")
+    @Test
+    void findAllByProductIdTest()
+    {
+        assertEquals(3, cartItemRepo.findAllByProductId(1L).size());
+
+    }
+
+    @Sql("DataInsertions.sql")
+    @DisplayName("Buscar todos por cantidad")
+    @Test
+    void findAllByAmountTest()
+    {
+        assertEquals(15, cartItemRepo.findAllByAmountIsBetween(3L, 7L).size());
+    }
 }

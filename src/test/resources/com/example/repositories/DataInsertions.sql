@@ -1,5 +1,5 @@
 INSERT INTO address (id, city, country, name, state, street_type, zipcode)
-VALUES (1L, 'London','England','Deninton','Big London','Road','98230'),
+VALUES (1, 'London','England','Deninton','Big London','Road','98230'),
        (2L, 'Madrid','Spain','Recoletos','Comunidad de Madrid','Paseo','68249'),
        (3L, 'Pamplona','Spain','San Nicolas','Navarra','Calle','31000'),
        (4L, 'Zaragoza','Spain','Cristobal Colon','Zaragoza','Plaza','58423'),
