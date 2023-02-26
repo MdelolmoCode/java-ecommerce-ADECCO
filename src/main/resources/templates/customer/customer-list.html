@@ -21,7 +21,6 @@
           <th scope="col">Id</th>
           <th scope="col">Nombre</th>
           <th scope="col">Apellido</th>
-          <th scope="col">Email</th>
           <th scope="col">Actions</th>
         </tr>
         </thead>
@@ -31,12 +30,8 @@
           <td th:text="${customer.getId()}"></td>
           <td th:text="${customer.getName()}"></td>
           <td th:text="${customer.getSurname()}"></td>
-          <td th:text="${customer.getEmail()}"></td>
           <td>
-            <button type="button" class="btn btn-primary">Ver</button>
-            <button type="button" class="btn btn-success">Editar</button>
-            <button type="button" class="btn btn-danger">Borrar</button>
-
+            <a class="btn btn-primary" th:href="@{/customers/{id}(id=${customer.id})}">Ver</a>
           </td>
         </tr>
 

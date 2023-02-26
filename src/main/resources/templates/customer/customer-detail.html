@@ -20,11 +20,10 @@
       <div th:if="${customer !=null}">
 
         <div class="card mx-auto" style="width: 18rem;">
-          <img src="..." class="card-img-top" alt="...">
           <div class="card-body">
-            <h5 class th:text="${customer.getName() + ' ' +customer.getSurname()}">Card title</h5>
-            <p class="card-text" th:text="'Email: ' + ${customer.getEmail()}"></p>
-            <p class="card-text" th:text="'Teléfono: ' + ${customer.getPhone()}"></p>
+            <h5 class th:text="${customer.getName() + ' ' +customer.getSurname()}"></h5>
+            <p class="card-text"><strong>Email: </strong> [[${customer.getEmail()}]]</p>
+            <p class="card-text"><strong>Teléfono: </strong> [[${customer.getPhone()}]]</p>
 
           </div>
           <ul class="list-group list-group-flush">
@@ -33,15 +32,12 @@
             <li class="list-group-item">Pagos</li>
           </ul>
           <div class="card-body">
-            <a href="#" class="card-link">Card link</a>
-            <a href="#" class="card-link">Another link</a>
+            <button type="button" class="btn btn-success">Editar</button>
+            <a class="btn btn-danger" th:href="@{/customers/{id}/borrar(id=${customer.id})}">Borrar</a>
+            <a class="btn btn-secondary" th:href="@{/customers}">Volver</a>
           </div>
         </div>
-
       </div>
-
-
-
     </div>
   </div>
 </div>

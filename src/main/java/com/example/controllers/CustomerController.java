@@ -42,7 +42,14 @@ public class CustomerController {
         }else{
             model.addAttribute("error", "customer not found");
         }
-
         return "customer/customer-detail";
     }
+
+    @GetMapping("/customers/{id}/borrar")
+    public String deleteById(@PathVariable Long id) {
+        customerRepository.deleteById(id);
+
+        return "redirect:/customers";
+    }
 }
+
