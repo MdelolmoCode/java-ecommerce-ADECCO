@@ -21,7 +21,6 @@ import java.util.Optional;
 @AllArgsConstructor
 @Service
 public class OrderServiceImpl implements OrderService {
-    private final ShoppingCartRepository shoppingCartRepository;
     private final OrderRepository orderRepository;
 
     @Override

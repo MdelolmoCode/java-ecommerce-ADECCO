@@ -32,6 +32,13 @@ class OrderRepositoryTest {
 
     @Sql("Orders.sql")
     @Test
+    void findById() {
+        assertTrue(orderRepository.findById(1L).isPresent());
+        assertTrue(orderRepository.findById(999L).isEmpty());
+    }
+
+    @Sql("Orders.sql")
+    @Test
     void findByOrderNumber() {
         Optional<Order> orderOpt = orderRepository.findByOrderNumber(2000L);
         assertTrue(orderOpt.isPresent());
