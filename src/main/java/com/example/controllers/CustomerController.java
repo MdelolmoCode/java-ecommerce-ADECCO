@@ -51,5 +51,13 @@ public class CustomerController {
 
         return "redirect:/customers";
     }
+
+    @GetMapping("/customers/{id}/editar")
+    public String editForm(Model model, @PathVariable Long id){
+        Optional<Customer> optionalCustomer = customerRepository.findById(id);
+
+
+        return "customer/customer-form";
+    }
 }
 

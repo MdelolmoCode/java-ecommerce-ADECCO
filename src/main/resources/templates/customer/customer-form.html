@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Detalle Customer</title>
+
+  <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+</head>
+<body>
+<div th:replace="~{navbar :: nav1}"></div>
+
+<div class="text-center">
+  <h2>Modificar datos cliente</h2>
+</div>
+
+<div class="card mx-auto mt-5" style="width: 18rem;">
+
+  <div class="card-body">
+
+
+    <div class="mb-2 ">
+      <label for="formGroupExampleInput" class="form-label">nombre</label>
+      <input type="text" class="form-control" id="formGroupExampleInput" placeholder="editar nombre">
+    </div>
+    <div class="mb-2 ">
+      <label for="formGroupExampleInput2" class="form-label">apellido</label>
+      <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="editar apellido">
+    </div>
+    <div class="mb-2">
+      <label for="formGroupExampleInput3" class="form-label">telefono</label>
+      <input type="text" class="form-control" id="formGroupExampleInput3" placeholder="editar telefono">
+    </div>
+    <div class="mb-2">
+      <label for="formGroupExampleInput4" class="form-label">email</label>
+      <input type="text" class="form-control" id="formGroupExampleInput4" placeholder="editar email">
+    </div>
+
+  </div>
+</div>
+
+
+<div th:replace="~{footer :: footer1}"></div>
+
+</body>
+</html>

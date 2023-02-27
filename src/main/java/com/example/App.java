@@ -137,10 +137,12 @@ public class App {
 		Address address2 = new Address(null, "street O2","name O2","city O2","state O2","country O1","zipcode O2");
 		addressRepo.saveAll(List.of(address1, address2));
 
-		Customer customer1 = new Customer(null, "Name1", "Surname1", "email@email", new ArrayList<>(), "12345678");
-		Customer customer2 = new Customer(null, "Name2", "Surname2", "emaisdddl@email", new ArrayList<>(), "12345678");
-		customerRepo.save(customer1);
-		customerRepo.save(customer2);
+		Customer customer1 = new Customer(null, "Roberto", "Leal", "robertoleal@email", new ArrayList<>(), "667878987");
+		Customer customer2 = new Customer(null, "Zinedine", "Zidane", "ziouu@email", new ArrayList<>(), "667876765");
+		Customer customer3 = new Customer(null, "Ronaldinho", "Gaucho", "guacho10@email", new ArrayList<>(), "667876765");
+		Customer customer4 = new Customer(null, "Roberto", "Sedinho", "sedinho@email", new ArrayList<>(), "665654543");
+		Customer customer5 = new Customer(null, "Mario", "Diaz", "diaz23432@email", new ArrayList<>(), "667876567");
+		customerRepo.saveAll(List.of(customer1,customer2,customer3,customer4,customer5));
 
 		ShoppingCart shoppingCart1 = new ShoppingCart(null, customer1,null);
 		ShoppingCart shoppingCart2 = new ShoppingCart(null, customer2,null);

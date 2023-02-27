@@ -32,8 +32,8 @@
             <li class="list-group-item">Pagos</li>
           </ul>
           <div class="card-body">
-            <button type="button" class="btn btn-success">Editar</button>
-            <a class="btn btn-danger" th:href="@{/customers/{id}/borrar(id=${customer.id})}">Borrar</a>
+            <a class="btn btn-success" th:href="@{/customers/{id}/editar(id=${customer.id})}">Editar</a>
+            <a class="btn btn-danger" th:href="@{/customers{id}/borrar(id=${customer.id})}">Borrar</a>
             <a class="btn btn-secondary" th:href="@{/customers}">Volver</a>
           </div>
         </div>
