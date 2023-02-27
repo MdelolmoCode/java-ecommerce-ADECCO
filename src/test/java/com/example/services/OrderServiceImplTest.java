@@ -5,6 +5,7 @@ import com.example.entities.Order;
 import com.example.entities.ShoppingCart;
 import com.example.entities.enums.PaymentMethod;
 import com.example.repositories.OrderRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -108,16 +109,83 @@ class OrderServiceImplTest {
 
     @Test
     void save() {
-        fail();
+        Order orderInput = new Order(null, 1000L, null, null, PaymentMethod.PAYPAL);
+        Order orderOutput = new Order(1L, 1000L, null, null, PaymentMethod.PAYPAL);
+        when(orderRepo.save(orderInput)).thenReturn(orderOutput);
+
+        Order orderDB = orderService.save(orderInput);
+
+        assertNotNull(orderDB);
+        assertEquals(1L, orderDB.getId());
+
+        verify(orderRepo).save(orderInput);
+        verify(orderRepo, never()).findById(any());
+    }
+
+    @Test
+    void saveWithId() {
+        Order orderDB = new Order(1L, 1000L, null, null, PaymentMethod.PAYPAL);
+        when(orderRepo.save(orderDB)).thenReturn(orderDB);
+        when(orderRepo.findById(1L)).thenReturn(Optional.of(orderDB));
+
+        Order orderReturned = orderService.save(orderDB);
+
+        assertNotNull(orderReturned);
+        assertEquals(1L, orderReturned.getId());
+
+        verify(orderRepo).save(orderDB);
+        verify(orderRepo).findById(1L);
+    }
+
+    @Test
+    void saveNull() {
+        assertThrows(IllegalArgumentException.class, () -> orderService.save(null));
     }
 
     @Test
     void update() {
-        fail();
+        Order orderOld = new Order(1L, 1000L, null, null, PaymentMethod.PAYPAL);
+        Order orderNew = new Order(1L, 2000L, null, null, PaymentMethod.PAYPAL);
+        when(orderRepo.findById(1L)).thenReturn(Optional.of(orderOld));
+        when(orderRepo.save(any())).thenReturn(orderNew);
+
+        Order orderDB = orderService.update(orderNew);
+
+        assertNotNull(orderDB);
+        assertEquals(1L, orderDB.getId());
+        assertEquals(2000L, orderDB.getOrderNumber());
+    }
+
+    @Test
+    void updateNull() {
+        assertThrows(IllegalArgumentException.class, () -> orderService.update(null));
+    }
+
+    @Test
+    void updateIdNull() {
+        Order order = new Order(null, 1000L, null, null, PaymentMethod.PAYPAL);
+        assertThrows(IllegalArgumentException.class, () -> orderService.update(order));
+    }
+
+    @Test
+    void updateNotInDB() {
+        Order order = new Order(1L, 2000L, null, null, PaymentMethod.PAYPAL);
+        when(orderRepo.findById(1L)).thenReturn(Optional.empty());
+
+        assertThrows(EntityNotFoundException.class, () -> orderService.update(order));
     }
 
     @Test
     void deleteById() {
-        fail();
+        orderService.deleteById(1L);
+
+        verify(orderRepo).deleteById(1L);
+    }
+
+    @Test
+    void deleteByIdNull() {
+        doThrow(IllegalArgumentException.class).when(orderRepo).deleteById(null);
+
+        assertThrows(IllegalArgumentException.class, () -> orderService.deleteById(null));
     }
 }

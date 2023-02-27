@@ -6,7 +6,6 @@ import com.example.entities.ShoppingCart;
 import com.example.exception.EntityDeleteException;
 import com.example.exception.EntitySavingException;
 import com.example.repositories.OrderRepository;
-import com.example.repositories.ShoppingCartRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -119,6 +118,8 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public void deleteById(Long id) {
         log.info("deleteById {}", id);
+        if (id == null || id <= 0)
+            throw new IllegalArgumentException("ID inválido");
         try {
             orderRepository.deleteById(id);
             return;
