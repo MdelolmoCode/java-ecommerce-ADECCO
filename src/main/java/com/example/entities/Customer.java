@@ -28,7 +28,10 @@ public class Customer {
     @Column(unique = true)
     private String email;
 
-    @OneToMany
+    @ManyToMany
+    @JoinTable(name = "customer_addresses",
+               joinColumns = @JoinColumn(name = "customer_id", referencedColumnName = "id", nullable = true),
+        inverseJoinColumns = @JoinColumn(name = "address_id", referencedColumnName = "id", nullable = true))
     @ToString.Exclude
     private List<Address> addresses = new ArrayList<>();
 
