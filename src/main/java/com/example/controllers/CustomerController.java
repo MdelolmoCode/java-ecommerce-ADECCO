@@ -48,8 +48,7 @@ public class CustomerController {
 
     @GetMapping("/customers/{id}/borrar")
     public String deleteById(@PathVariable Long id) {
-        customerRepository.deleteById(id);
-
+        customerService.deleteById(id);
         return "redirect:/customers";
     }
 
