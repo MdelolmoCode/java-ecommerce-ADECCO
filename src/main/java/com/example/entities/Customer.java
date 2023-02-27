@@ -29,7 +29,7 @@ public class Customer {
     private String email;
 
     @ManyToMany
-    @JoinTable(name = "customer_addresses",
+    @JoinTable(name = "customer_address",
                joinColumns = @JoinColumn(name = "customer_id", referencedColumnName = "id", nullable = true),
         inverseJoinColumns = @JoinColumn(name = "address_id", referencedColumnName = "id", nullable = true))
     @ToString.Exclude

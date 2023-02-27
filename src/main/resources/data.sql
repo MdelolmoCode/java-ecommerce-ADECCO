@@ -36,17 +36,17 @@ VALUES (1, 'mdelpilar@correo.com', 'Maria', 123456789, 'Del Pilar'),
 ;
 
 
-ALTER TABLE customer_addresses
+ALTER TABLE customer_address
     ADD PRIMARY KEY (customer_id, address_id);
 
-ALTER TABLE customer_addresses
-    ADD FOREIGN KEY (address_id) REFERENCES address(id);
+ALTER TABLE customer_address
+    ADD FOREIGN KEY (address_id) REFERENCES addresses(id);
 
-ALTER TABLE customer_addresses
+ALTER TABLE customer_address
     ADD FOREIGN KEY (customer_id) REFERENCES customer(id);
 
-TRUNCATE TABLE customer_addresses;
-INSERT INTO customer_addresses (customer_id, address_id)
+TRUNCATE TABLE customer_address;
+INSERT INTO customer_address (customer_id, address_id)
 VALUES (1, 1),
        (1, 2),
        (1, 3),
