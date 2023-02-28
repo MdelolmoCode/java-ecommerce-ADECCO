@@ -60,6 +60,9 @@ public class CustomerController {
         if(optionalCustomer.isPresent()){
             model.addAttribute("customer", optionalCustomer.get());
         }
+        else {
+        model.addAttribute("error", "Product not found");
+    }
         return "customer/customer-form";
     }
 
