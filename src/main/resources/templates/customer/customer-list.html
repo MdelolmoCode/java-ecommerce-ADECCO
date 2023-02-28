@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Customer List</title>
+
+  <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+</head>
+<body>
+<div th:replace="~{navbar :: nav1}"></div>
+
+
+<div class="container text-center">
+  <div class="row">
+    <h1>Listado de clientes</h1>
+    <div class="col mt-3">
+      <a type="button" class="btn btn-info"  th:href="@{customers/newForm}">Crear nuevo cliente</a>
+      <table class="table">
+        <thead>
+        <tr>
+          <th scope="col">Id</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Apellido</th>
+          <th scope="col">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="customer: ${customers}">
+
+          <td th:text="${customer.getId()}"></td>
+          <td th:text="${customer.getName()}"></td>
+          <td th:text="${customer.getSurname()}"></td>
+          <td>
+            <a class="btn btn-primary" th:href="@{/customers/{id}(id=${customer.id})}">Ver</a>
+          </td>
+        </tr>
+
+        </tbody>
+      </table>
+
+      <div class="alert alert-info" role="alert" th:if="${#lists.isEmpty(customers)}">
+        No hay clientes actualmente.
+      </div>
+      <div class="text-center" th:if="${#lists.size(customers) > 0}">
+        Hay <span th:text="${#lists.size(customers)}"></span> resultados.
+      </div>
+
+    </div>
+  </div>
+</div>
+<div th:replace="~{footer :: footer1}"></div>
+
+</body>
+</html>

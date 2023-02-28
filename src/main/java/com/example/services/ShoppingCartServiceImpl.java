@@ -1,11 +1,13 @@
 package com.example.services;
 
+import com.example.entities.CartItem;
 import com.example.entities.Customer;
 import com.example.entities.ShoppingCart;
 import com.example.repositories.CustomerRepository;
 import com.example.repositories.ShoppingCartRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,7 +18,7 @@ import java.util.Optional;
 @Slf4j
 
 public class ShoppingCartServiceImpl implements ShoppingCartService {
-    private final CustomerRepository customerRepository;
+
     private final ShoppingCartRepository shoppingCartRepository;
 
     @Override
@@ -51,6 +53,9 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     @Override
     public ShoppingCart save(ShoppingCart shoppingCart) {
         log.info("save ShoppingCart {}", shoppingCart);
+        if(shoppingCart == null){
+            throw new IllegalArgumentException("ShoppingCart can´t be null");
+        }
         try {
             this.shoppingCartRepository.save(shoppingCart);
         } catch (Exception e) {
@@ -60,14 +65,34 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     }
 
     @Override
-    public ShoppingCart update(ShoppingCart shoppingCart) {
+    public void update(ShoppingCart shoppingCart) {
         log.info("update ShoppingCart {}", shoppingCart);
-        return shoppingCart;
+        if(shoppingCart == null){
+            throw  new IllegalArgumentException("ShoppingCart can´t be null");
+        }
+
+        ShoppingCart shoppingCartFromDB = shoppingCartRepository.findById(shoppingCart.getId()).get();
+        shoppingCartFromDB.setCustomer(shoppingCart.getCustomer());
+        shoppingCartFromDB.setCartItems(shoppingCart.getCartItems());
+
+        shoppingCartRepository.save(shoppingCartFromDB);
     }
 
     @Override
-    public Double calculateShoppingCartPrice(ShoppingCart shoppingCart) {
+    public double calculateShoppingCartPrice(ShoppingCart shoppingCart) {
         log.info("Calcula precio carrito");
-        return shoppingCart.getTotalPrice();
+
+        List<CartItem> list = shoppingCart.getCartItems();
+
+        double totalPrice = 0.0;
+
+        for(CartItem c: list){
+            totalPrice = totalPrice + (c.getProduct().getPrice() * c.getAmount());
+        }
+        return totalPrice;
     }
+
+
+
+
 }

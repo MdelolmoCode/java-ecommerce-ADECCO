@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Detalle Customer</title>
+
+  <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+</head>
+<body>
+<div th:replace="~{navbar :: nav1}"></div>
+
+
+<div class="container text-center">
+  <div class="row">
+    <h1>Cuenta cliente</h1>
+
+    <p th:text="${error}"></p>
+    <div class="col mt-3">
+
+      <div th:if="${customer !=null}">
+
+        <div class="card mx-auto" style="width: 18rem;">
+          <div class="card-body">
+            <h5 class th:text="${customer.getName() + ' ' +customer.getSurname()}"></h5>
+            <p class="card-text"><strong>Email: </strong> [[${customer.getEmail()}]]</p>
+            <p class="card-text"><strong>Teléfono: </strong> [[${customer.getPhone()}]]</p>
+
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Historial pedidos</li>
+            <li class="list-group-item">Direcciones</li>
+            <li class="list-group-item">Pagos</li>
+          </ul>
+          <div class="card-body">
+            <a class="btn btn-success" th:href="@{/customers/{id}/editar(id=${customer.id})}">Editar</a>
+            <a class="btn btn-danger" th:href="@{/customers/{id}/borrar(id=${customer.id})}">Borrar</a>
+            <a class="btn btn-secondary" th:href="@{/customers}">Volver</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div th:replace="~{footer :: footer1}"></div>
+
+</body>
+</html>

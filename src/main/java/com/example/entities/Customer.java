@@ -13,9 +13,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Entity
 
-@Table(name = "customer")
+@Entity
 public class Customer {
 
     @Id
@@ -25,10 +24,14 @@ public class Customer {
     private String name;
     private String surname;
 
-    @Column(unique = true)
+
+   @Column(unique = true, nullable = false)
     private String email;
 
-    @OneToMany
+    @ManyToMany
+    @JoinTable(name = "customer_address",
+               joinColumns = @JoinColumn(name = "customer_id", referencedColumnName = "id", nullable = true),
+        inverseJoinColumns = @JoinColumn(name = "address_id", referencedColumnName = "id", nullable = true))
     @ToString.Exclude
     private List<Address> addresses = new ArrayList<>();
 

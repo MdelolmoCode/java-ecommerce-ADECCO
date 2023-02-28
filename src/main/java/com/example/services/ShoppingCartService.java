@@ -1,5 +1,6 @@
 package com.example.services;
 
+import com.example.entities.CartItem;
 import com.example.entities.Customer;
 import com.example.entities.ShoppingCart;
 
@@ -13,10 +14,11 @@ public interface ShoppingCartService {
     Optional<ShoppingCart> findByCustomer(Customer customer);
     void deleteById(Long id);
     ShoppingCart save (ShoppingCart shoppingCart);
-    ShoppingCart update(ShoppingCart shoppingCart);
+    void update(ShoppingCart shoppingCart);
 
 
     //Lógica negocio
 
-    Double calculateShoppingCartPrice(ShoppingCart shoppingCart);
+    double calculateShoppingCartPrice(ShoppingCart shoppingCart);
+
 }

@@ -1,6 +1,7 @@
 package com.example.services;
 
 import com.example.entities.Customer;
+import com.example.entities.Product;
 import com.example.repositories.CustomerRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -9,9 +10,10 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-@Service
+
 @Slf4j
 @AllArgsConstructor
+@Service
 public class CustomerServiceImpl implements CustomerService {
 
     private final CustomerRepository customerRepository;
@@ -20,27 +22,30 @@ public class CustomerServiceImpl implements CustomerService {
     //métodos
 
     @Override
-    public List<Customer> findAll() {
-        log.info("Ejecutandoo FindAll()");
+    public List<Customer> findAll() { //tested
+        log.info("Ejecutando método findAll() from CustomerService");
         return customerRepository.findAll();
     }
 
+
     @Override
     public Optional<Customer> findById(Long id) {
-        log.info("findById {}", id);
+        log.info("Ejecutando método findById() from CustomerService {}", id);
+        if (id == null || id <= 0)
+            return Optional.empty();
         return customerRepository.findById(id);
     }
 
 
     @Override
-    public Optional <Customer> findBySurname(String surname) {
-        log.info("findBySurname {}", surname);
+    public Optional <Customer> findBySurname(String surname) { //tested
+        log.info("Ejecutando método findBySurname() from CustomerService {}", surname);
         return customerRepository.findBySurname(surname);
     }
 
     @Override
-    public Customer findByEmail(String email) {
-        log.info("findByEmail {}", email);
+    public Optional <Customer> findByEmail(String email) { // tested
+        log.info("Ejecutando método findByEmail() from CustomerService {}", email);
         return customerRepository.findByEmail(email);
     }
 
@@ -51,18 +56,25 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public Customer save(Customer customer) {
+    public Optional<Customer> findByPhone(String phone) {
+        log.info("Ejecutando método findByPhone() from CustomerService {}", phone);
+        return customerRepository.findByPhone(phone);
+    }
+
+
+    @Override
+    public Customer save(Customer customer) { // tested
 
         if(customer == null){
             throw new IllegalArgumentException("Customer no puede ser null");
         }
-        if(customer != null)
+        if(customer.getId() != null)
             update(customer);
          return customerRepository.save(customer);
 
     }
     @Override
-    public void update(Customer customer) {
+    public void update(Customer customer) { //tested
 
         Customer customerFromDB = customerRepository.findById(customer.getId()).get();
         customerFromDB.setName(customer.getName());
@@ -75,7 +87,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public void deleteById(Long id) {
+    public void deleteById(Long id) { // tested
 
         customerRepository.deleteById(id);
 

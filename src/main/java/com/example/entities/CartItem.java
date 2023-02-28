@@ -27,10 +27,12 @@ public class CartItem
     private Product product;
 
     private Long amount;
-    //private Double price;
 
     public double getPrice()
     {
+        if(product == null)
+            return 0;
+
         return product.getPrice() * amount;
     }
 }

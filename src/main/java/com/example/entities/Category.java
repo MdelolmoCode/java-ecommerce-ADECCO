@@ -3,6 +3,7 @@ package com.example.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
+@Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -10,7 +11,7 @@ import lombok.*;
 @ToString
 @Builder
 
-@Entity
+
 @Table(name = "category")
 public class Category {
     @Id
