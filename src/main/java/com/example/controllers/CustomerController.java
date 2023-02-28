@@ -7,7 +7,9 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 import java.util.Optional;
@@ -42,7 +44,37 @@ public class CustomerController {
         }else{
             model.addAttribute("error", "customer not found");
         }
-
         return "customer/customer-detail";
     }
+
+    @GetMapping("/customers/{id}/borrar")
+    public String deleteById(@PathVariable Long id) {
+        customerService.deleteById(id);
+        return "redirect:/customers";
+    }
+
+    @GetMapping("/customers/{id}/editar")
+    public String editForm(Model model, @PathVariable Long id){
+        Optional<Customer> optionalCustomer = customerService.findById(id);
+
+        if(optionalCustomer.isPresent()){
+            model.addAttribute("customer", optionalCustomer.get());
+        }
+        return "customer/customer-form";
+    }
+
+    @GetMapping("/customers/newForm")
+    public String newForm(Model model){
+
+        model.addAttribute("customer", new Customer());
+
+        return "customer/customer-form";
+    }
+
+    @PostMapping("/customers")
+    public String save(@ModelAttribute Customer customer){
+            customerService.save(customer);
+        return "redirect:/customers";
+    }
 }
+

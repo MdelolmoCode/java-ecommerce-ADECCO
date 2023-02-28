@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalle Customer</title>
+
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+</head>
+<body>
+<div th:replace="~{navbar :: nav1}"></div>
+
+<div class="text-center">
+    <h2 th:if="${customer.id}">Modificar datos cliente</h2>
+    <h2 th:if="${customer.id == null}">Crear cliente</h2>
+</div>
+
+<form th:action="@{/customers}" method="POST" th:object="${customer}">
+
+    <div class="card mx-auto mt-4" style="width: 18rem;">
+
+        <div class="card-body">
+
+            <input type="hidden" id="id" name="id" th:field="*{id}" />
+
+            <div class="mb-2 ">
+                <strong><label for="name" class="form-label">Nombre: </label></strong>
+                <input type="text" class="form-control" id="name" placeholder="editar nombre" th:field="*{name}">
+            </div>
+            <div class="mb-2 ">
+                <strong><label for="apellido" class="form-label">Apellido: </label></strong>
+                <input type="text" class="form-control" id="apellido" placeholder="editar apellido" th:field="*{surname}">
+            </div>
+            <div class="mb-2">
+                <strong><label for="telefono" class="form-label">Teléfono: </label></strong>
+                <input type="text" class="form-control" id="telefono" placeholder="editar telefono" th:field="*{phone}">
+            </div>
+            <div class="mb-2">
+                <strong><label for="email" class="form-label">Email: </label></strong>
+                <input type="text" class="form-control" id="email" placeholder="editar email" th:field="*{email}">
+            </div>
+
+        </div>
+        <div class="card-body text-center">
+            <button type="submit" class="btn btn-success" >Guardar</button>
+            <a class="btn btn-danger" th:href="@{/customers}">Cancelar</a>
+
+        </div>
+
+    </div>
+
+</form>
+
+
+<div th:replace="~{footer :: footer1}"></div>
+
+</body>
+</html>

@@ -62,7 +62,7 @@ public class CustomerServiceImpl implements CustomerService {
         if(customer == null){
             throw new IllegalArgumentException("Customer no puede ser null");
         }
-        if(customer != null)
+        if(customer.getId() != null)
             update(customer);
          return customerRepository.save(customer);
 
