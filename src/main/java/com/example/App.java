@@ -216,10 +216,9 @@ public class App {
 		var passwordEncoder = context.getBean(PasswordEncoder.class);
 
 		CustomerRepository customerRepository = context.getBean(CustomerRepository.class);
-		Customer customer1 = new Customer(null, "name1", "sur1", "mail1@mail", new ArrayList<>(), "1111");
-		Customer customer2 = new Customer(null, "name2", "sur2", "mail2@mail", new ArrayList<>(), "2222");
-		Customer customer3 = new Customer(null, "name3", "sur3", "mail3@mail", new ArrayList<>(), "3333");
-		customerRepository.saveAll(List.of(customer1, customer2, customer3));
+		Customer customer1 = customerRepository.findById(1L).get();
+		Customer customer2 = customerRepository.findById(2L).get();
+		Customer customer3 = customerRepository.findById(3L).get();
 
 		UserEntity user1 = new UserEntity(null, "user1", passwordEncoder.encode("pass1"), customer1);
 		UserEntity user2 = new UserEntity(null, "user2", passwordEncoder.encode("pass2"), customer2);
