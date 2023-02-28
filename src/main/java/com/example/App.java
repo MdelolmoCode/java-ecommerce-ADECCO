@@ -137,7 +137,7 @@ public class App {
 		Address address2 = new Address(null, "street O2","name O2","city O2","state O2","country O1","zipcode O2");
 		addressRepo.saveAll(List.of(address1, address2));
 
-		Customer customer1 = new Customer(null, "Roberto", "Leal", "robertoleal@email", new ArrayList<>(), "667878987");
+		Customer customer1 = new Customer(null, "Roberto", "Diaz", "robertoleal@email", new ArrayList<>(), "667878987");
 		Customer customer2 = new Customer(null, "Zinedine", "Zidane", "ziouu@email", new ArrayList<>(), "667876765");
 		Customer customer3 = new Customer(null, "Ronaldinho", "Gaucho", "guacho10@email", new ArrayList<>(), "667876765");
 		Customer customer4 = new Customer(null, "Roberto", "Sedinho", "sedinho@email", new ArrayList<>(), "665654543");
