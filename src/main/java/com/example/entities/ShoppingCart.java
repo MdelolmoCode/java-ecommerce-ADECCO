@@ -14,7 +14,7 @@ import java.util.List;
 @Builder
 @Entity
 
-@Table(name= "shoppingCart")
+@Table(name = "shoppingCart")
 public class ShoppingCart {
 
     @Id
@@ -22,14 +22,11 @@ public class ShoppingCart {
     private Long id;
 
     @OneToOne
+    @JoinColumn(unique = true)
     Customer customer;
 
-    Double totalPrice;
-
-    @OneToMany(mappedBy = "shoppingCart")
+    @OneToMany(mappedBy = "shoppingCart", fetch = FetchType.EAGER)
     @ToString.Exclude
     private List<CartItem> cartItems = new ArrayList<>();
-
-
 
 }

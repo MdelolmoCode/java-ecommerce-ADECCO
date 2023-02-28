@@ -13,9 +13,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Entity
 
-@Table(name = "customer")
+@Entity
 public class Customer {
 
     @Id
@@ -25,7 +24,8 @@ public class Customer {
     private String name;
     private String surname;
 
-    @Column(unique = true)
+
+   @Column(unique = true, nullable = false)
     private String email;
 
     @ManyToMany

@@ -98,11 +98,7 @@ public class CategoryServiceImpl implements CategoryService {
         categoryRepo.deleteAllById(ids);
     }
 
-    @Override
-    public void saveAll(List<Category> categories) {
-        log.info("saveAll");
-        categoryRepo.saveAll(categories);
-    }
+
 
     @Override
     public void changeMature(Category category) {
