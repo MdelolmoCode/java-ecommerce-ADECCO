@@ -67,6 +67,7 @@ public class CustomerController {
     public String newForm(Model model){
 
         model.addAttribute("customer", new Customer());
+
         return "customer/customer-form";
     }
 
