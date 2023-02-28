@@ -11,6 +11,7 @@
     </tr>
     </thead>
     <tbody>
+    <!-- Productos -->
     <tr th:each="cartItem : ${shoppingCart.cartItems}">
       <td>
         <a class="btn btn-link btn-sm"
@@ -20,6 +21,12 @@
       </td>
       <td th:text="|x${cartItem.amount}|"></td>
       <td th:text="|${cartItem.product.price} €|"></td>
+    </tr>
+    <!-- Precio total -->
+    <tr>
+      <td></td>
+      <td><b>Total:</b></td>
+      <td class="text-success" th:text="|${@shoppingCartServiceImpl.calculateShoppingCartPrice(shoppingCart)} €|"></td>
     </tr>
     </tbody>
   </table>
