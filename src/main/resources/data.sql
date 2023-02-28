@@ -103,13 +103,10 @@ VALUES (1, 1),
 ;
 
 TRUNCATE TABLE shopping_cart;
-INSERT INTO shopping_cart (id, customer_id, total_price)
-VALUES (1, 1, 0.0),
-       (2, 1, 0.0),
-       (3, 2, 0.0),
-       (4, 2, 0.0),
-       (5, 2, 0.0),
-       (6, 3, 0.0)
+INSERT INTO shopping_cart (id, customer_id)
+VALUES (1, 1),
+       (2, 2),
+       (3, 3)
 ;
 
 TRUNCATE TABLE cart_item;
