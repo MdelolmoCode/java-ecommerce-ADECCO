@@ -30,18 +30,29 @@
                 <input type="hidden" id="id" name="id" th:field="*{id}"/>
 
                 <div class="mb-3">
-                    <label for="username" class="form-label">Username</label>
+                    <strong><label for="username" class="form-label">Username</label></strong>
                     <input type="text" class="form-control" id="username" th:field="*{username}">
                 </div>
-
                 <div class="mb-3">
-                    <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="email" th:field="*{email}">
+                    <strong><label for="password" class="form-label">Password</label></strong>
+                    <input type="password" class="form-control" id="password" th:field="*{password}">
                 </div>
 
-                <div class="mb-3">
-                    <label for="password" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="password" th:field="*{password}">
+                <div class="mb-2">
+                    <strong><label for="email" class="form-label">Email: </label></strong>
+                    <input type="text" class="form-control" id="email" th:field="*{customer.email}">
+                </div>
+                <div class="mb-2 ">
+                    <label for="name" class="form-label">Nombre: </label>
+                    <input type="text" class="form-control" id="name" th:field="*{customer.name}">
+                </div>
+                <div class="mb-2 ">
+                    <label for="apellido" class="form-label">Apellido: </label>
+                    <input type="text" class="form-control" id="apellido" th:field="*{customer.surname}">
+                </div>
+                <div class="mb-2">
+                    <label for="telefono" class="form-label">Teléfono: </label>
+                    <input type="text" class="form-control" id="telefono" th:field="*{customer.phone}">
                 </div>
 
                 <a class="btn btn-danger" th:href="@{/foods}">Cancelar</a>

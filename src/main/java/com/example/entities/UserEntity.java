@@ -19,8 +19,6 @@ import java.util.Collection;
 @Table(name = "users")
 public class UserEntity implements UserDetails {
 
-    // TODO Asociar OneToOne con Customer
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -28,10 +26,10 @@ public class UserEntity implements UserDetails {
     @Column(unique = true)
     private String username;
 
-    @Column(unique = true)
-    private String email;
-
     private String password;
+
+    @OneToOne
+    private Customer customer;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -66,6 +64,12 @@ public class UserEntity implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public String getEmail() {
+        if (customer == null)
+            return null;
+        return customer.getEmail();
     }
 
     public void encodePassword(PasswordEncoder passwordEncoder) {

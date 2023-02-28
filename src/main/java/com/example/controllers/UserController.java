@@ -1,11 +1,13 @@
 package com.example.controllers;
 
+import com.example.entities.Customer;
 import com.example.entities.UserEntity;
 import com.example.services.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,22 +21,29 @@ public class UserController {
 
     @GetMapping("user/sign-in")
     public String getSignInForm(Model model) {
-        model.addAttribute("user", new UserEntity());
+        UserEntity userEntity = new UserEntity();
+        userEntity.setCustomer(new Customer());
+        model.addAttribute("user", userEntity);
         return "user/sign-in";
     }
 
     @PostMapping("user/sign-in")
     public String saveSignInForm(@ModelAttribute UserEntity user, Model model) {
 
-        if (userService.existsByUsername(user.getUsername())) {
-            model.addAttribute("error", "Nombre de usuario no disponible.");
-            return getSignInForm(model);
-        }
+        if (!StringUtils.hasLength(user.getUsername()))
+            return sendToSignInFormWithErrorMessage(model, "Nombre de usuario vacío.");
 
-        if (userService.existsByEmail(user.getEmail())) {
-            model.addAttribute("error", "e-mail no disponible.");
-            return getSignInForm(model);
-        }
+        if (!StringUtils.hasLength(user.getPassword()))
+            return sendToSignInFormWithErrorMessage(model, "Password vacío.");
+
+        if (!StringUtils.hasLength(user.getEmail()))
+            return sendToSignInFormWithErrorMessage(model, "Email vacío.");
+
+        if (userService.existsByUsername(user.getUsername()))
+            return sendToSignInFormWithErrorMessage(model, "Nombre de usuario no disponible.");
+
+        if (userService.existsByEmail(user.getEmail()))
+            return sendToSignInFormWithErrorMessage(model, "Email no disponible.");
 
         user.encodePassword(passwordEncoder);
 
@@ -42,8 +51,12 @@ public class UserController {
             userService.save(user);
             return "redirect:/login";
         } catch (Exception e) {
-            model.addAttribute("error", "Error guardando usuario.");
-            return getSignInForm(model);
+            return sendToSignInFormWithErrorMessage(model, "Error guardando usuario.");
         }
+    }
+
+    private String sendToSignInFormWithErrorMessage(Model model, String errorMessage) {
+        model.addAttribute("error", errorMessage);
+        return getSignInForm(model);
     }
 }

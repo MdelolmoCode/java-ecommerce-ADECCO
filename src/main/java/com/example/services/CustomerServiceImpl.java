@@ -44,6 +44,11 @@ public class CustomerServiceImpl implements CustomerService {
         return customerRepository.findByEmail(email);
     }
 
+    @Override
+    public boolean existsByEmail(String email) {
+        log.info("existsByEmail {}", email);
+        return customerRepository.existsByEmail(email);
+    }
 
     @Override
     public Customer save(Customer customer) {
