@@ -15,7 +15,6 @@ import java.util.List;
 @Builder
 
 @Entity
-@Table(name = "customer")
 public class Customer {
 
     @Id

@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -59,10 +60,20 @@ public class CustomerController {
         if(optionalCustomer.isPresent()){
             model.addAttribute("customer", optionalCustomer.get());
         }
-
-
         return "customer/customer-form";
     }
 
+    @GetMapping("/customers/newForm")
+    public String newForm(Model model){
+
+        model.addAttribute("customer", new Customer());
+        return "customer/customer-form";
+    }
+
+    @PostMapping("/customers")
+    public String save(@ModelAttribute Customer customer){
+            customerService.save(customer);
+        return "redirect:/customers";
+    }
 }
 
