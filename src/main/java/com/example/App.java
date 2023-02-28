@@ -7,6 +7,7 @@ import com.example.services.*;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +19,7 @@ public class App {
 	public static void main(String[] args) {
 		// Inicializa spring
 		context = SpringApplication.run(App.class, args);
+		createDemoUsers(context);
 
 		// AddressService addressService = context.getBean(AddressService.class);
 		CategoryService categoryService = context.getBean(CategoryService.class);
@@ -198,6 +200,17 @@ public class App {
 
 		manufacturerService.findAllByAddressCity("city M1").forEach(System.out::println);
 		*/
+	}
+
+	private static void createDemoUsers(ApplicationContext context) {
+		var userRepo = context.getBean(UserEntityRepository.class);
+		var passwordEncoder = context.getBean(PasswordEncoder.class);
+
+		UserEntity user1 = new UserEntity(null, "user1", "user1@magpie.com", passwordEncoder.encode("pass1"));
+		UserEntity user2 = new UserEntity(null, "user2", "user2@magpie.com", passwordEncoder.encode("pass2"));
+		UserEntity user3 = new UserEntity(null, "user3", "user3@magpie.com", passwordEncoder.encode("pass3"));
+
+		userRepo.saveAll(List.of(user1, user2, user3));
 	}
 
 }
