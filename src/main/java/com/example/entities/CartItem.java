@@ -28,4 +28,11 @@ public class CartItem
 
     private Long amount;
 
+    public double getPrice()
+    {
+        if(product == null)
+            return 0;
+
+        return product.getPrice() * amount;
+    }
 }
