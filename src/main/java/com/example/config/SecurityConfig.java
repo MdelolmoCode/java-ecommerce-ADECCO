@@ -20,6 +20,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests()
+
                 .requestMatchers(HttpMethod.GET, "/products/**").permitAll()
                 .requestMatchers(HttpMethod.GET, "/cart-items/**").permitAll()
                 .requestMatchers(HttpMethod.GET, "/shopping-carts/**").permitAll()
@@ -29,12 +30,23 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.GET, "/categories/**").permitAll()
                 .requestMatchers(HttpMethod.GET, "/manufacturers/**").permitAll()
                 .requestMatchers(HttpMethod.GET, "/error/**").permitAll()
+
+                .requestMatchers(HttpMethod.POST, "/products/**").permitAll()
+                .requestMatchers(HttpMethod.POST, "/cart-items/**").permitAll()
+                .requestMatchers(HttpMethod.POST, "/shopping-carts/**").permitAll()
+                .requestMatchers(HttpMethod.POST, "/orders/**").permitAll()
+                .requestMatchers(HttpMethod.POST, "/customers/**").permitAll()
+                .requestMatchers(HttpMethod.POST, "/addresses/**").permitAll()
+                .requestMatchers(HttpMethod.POST, "/categories/**").permitAll()
+                .requestMatchers(HttpMethod.POST, "/manufacturers/**").permitAll()
+
                 .requestMatchers("/user/**").permitAll()
                 .requestMatchers("/css/**").permitAll()
                 .requestMatchers("/js/**").permitAll()
                 .requestMatchers("/img/**").permitAll()
                 .requestMatchers("/webjars/**").permitAll()
                 .requestMatchers("/product/**").permitAll()
+
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
