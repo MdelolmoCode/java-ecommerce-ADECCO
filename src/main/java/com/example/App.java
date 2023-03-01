@@ -19,7 +19,7 @@ public class App {
 	public static void main(String[] args) {
 		// Inicializa spring
 		context = SpringApplication.run(App.class, args);
-		createDemoUsers(context);
+		//createDemoUsers(context);
 
 
 //		// AddressService addressService = context.getBean(AddressService.class);
@@ -212,7 +212,7 @@ public class App {
 	}
 
 	private static void createDemoUsers(ApplicationContext context) {
-		var userRepo = context.getBean(UserEntityRepository.class);
+		/*var userRepo = context.getBean(UserEntityRepository.class);
 		var passwordEncoder = context.getBean(PasswordEncoder.class);
 
 		CustomerRepository customerRepository = context.getBean(CustomerRepository.class);
@@ -224,7 +224,7 @@ public class App {
 		UserEntity user2 = new UserEntity(null, "user2", passwordEncoder.encode("pass2"), customer2);
 		UserEntity user3 = new UserEntity(null, "user3", passwordEncoder.encode("pass3"), customer3);
 
-		userRepo.saveAll(List.of(user1, user2, user3));
+		userRepo.saveAll(List.of(user1, user2, user3));*/
 	}
 
 }
