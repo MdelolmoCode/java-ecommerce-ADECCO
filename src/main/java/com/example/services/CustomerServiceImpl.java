@@ -2,6 +2,7 @@ package com.example.services;
 
 import com.example.entities.*;
 import com.example.repositories.CustomerRepository;
+import com.example.repositories.UserEntityRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -14,11 +15,13 @@ import java.util.Optional;
 @AllArgsConstructor
 @Service
 public class CustomerServiceImpl implements CustomerService {
+    private final UserEntityRepository userEntityRepository;
 
     private final CustomerRepository customerRepository;
     private final ShoppingCartService shoppingCartService;
     private final CartItemService cartItemService;
     private final OrderService orderService;
+    private final UserService userService;
 
 
     //métodos
@@ -97,25 +100,29 @@ public class CustomerServiceImpl implements CustomerService {
         if (optionalCustomer.isEmpty())
             return;
 
-        Customer customer = optionalCustomer.get();
+        Customer customer = optionalCustomer.get(); // customer by id
 
-        Optional<ShoppingCart> optionalShoppingCart = shoppingCartService.findByCustomer(customer);
-        Optional<Order> optionalOrder = orderService.findByCustomer(customer);
+        Optional<ShoppingCart> optionalShoppingCart = shoppingCartService.findByCustomer(customer); //carrito de customer
+        Optional<Order> optionalOrder = orderService.findByCustomer(customer); // order de customer
 
         if (optionalOrder.isPresent()) {
             orderService.deleteById(optionalOrder.get().getId());
         }
         if (optionalShoppingCart.isPresent()) {
 
-            List<CartItem> cartItems = optionalShoppingCart.get().getCartItems();
+            List<CartItem> cartItems = optionalShoppingCart.get().getCartItems(); // lista items del carrito de customer
+            System.out.println("CANTIDAD CART ITEMSSS");
+            System.out.println(cartItems.size());
 
             if (!cartItems.isEmpty()) {
                 for (CartItem c : cartItems) {
+
                     cartItemService.deleteById(c.getId());
                 }
             }
             shoppingCartService.deleteById(optionalShoppingCart.get().getId());
         }
+        userEntityRepository.deleteById(id);
         customerRepository.deleteById(id);
 
     }
