@@ -1,6 +1,5 @@
 package com.example.services;
 
-import com.example.entities.CartItem;
 import com.example.entities.Customer;
 import com.example.entities.ShoppingCart;
 
@@ -11,7 +10,7 @@ public interface ShoppingCartService {
 
     List<ShoppingCart> findAll();
     Optional<ShoppingCart> findById(Long id);
-    Optional<ShoppingCart> findByCustomer(Customer customer);
+    Optional<ShoppingCart> findByCustomer(Optional<Customer> customer);
     void deleteById(Long id);
     ShoppingCart save (ShoppingCart shoppingCart);
     void update(ShoppingCart shoppingCart);
