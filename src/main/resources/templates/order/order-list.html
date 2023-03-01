@@ -39,8 +39,10 @@
                         <td>
                             <a class="btn btn-link btn-sm"
                                th:if="${order.address}"
-                               th:text="${order.address}"
-                               th:href="@{/addresses/{id}(id=${order.address.id})}"></a>
+                               th:text="${order.address.name}"
+                               th:href="@{/addresses/{id}(id=${order.address.id})}">
+                            </a>
+                            <span th:unless="${order.address}">Sin dirección</span>
                         </td>
 
                         <td>

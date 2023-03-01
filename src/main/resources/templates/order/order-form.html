@@ -33,11 +33,12 @@
             <input type="hidden" id="id" name="id" th:field="*{id}" />
 
             <div class="mb-3">
-                <label for="orderNumber" class="form-label">Número de pedido</label>
+                <strong><label for="orderNumber" class="form-label">Número de pedido</label></strong>
                 <input type="number" class="form-control" id="orderNumber" th:field="*{orderNumber}">
             </div>
 
             <div class="mb-3">
+                <strong><div class="form-label">Método de pago</div></strong>
                 <select aria-label="Método de pago" class="form-select" th:field="*{paymentMethod}">
                     <option th:each="paymentMethod: ${T(com.example.entities.enums.PaymentMethod).values()}"
                             th:value="${paymentMethod}" th:text="${paymentMethod.getDisplayName()}"></option>
@@ -45,6 +46,7 @@
             </div>
 
             <div class="mb-3">
+                <strong><div class="form-label">Dirección</div></strong>
                 <select aria-label="Addresses" class="form-select" th:field="*{address}">
                     <option th:if="${order.id} == null" selected value="0">Seleccionar dirección</option>
                     <option th:each="address : ${addresses}" th:value="${address.id}" th:text="${address.name}"></option>

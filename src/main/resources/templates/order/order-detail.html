@@ -44,9 +44,10 @@
               <li class="list-group-item"><b>Dirección:</b>
                   <a class="btn btn-link btn-sm"
                      th:if="${order.address}"
-                     th:text="${order.address}"
+                     th:text="${order.address.name}"
                      th:href="@{/addresses/{id}(id=${order.address.id})}">
                   </a>
+                  <span th:unless="${order.address}">Sin dirección</span>
               </li>
           </ul>
         <div class="card-body">

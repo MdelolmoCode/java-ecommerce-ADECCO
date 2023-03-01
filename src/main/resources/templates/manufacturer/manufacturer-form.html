@@ -39,20 +39,21 @@
             <input type="hidden" id="id" name="id" th:field="*{id}" />
 
             <div class="mb-3">
-                <label for="cif" class="form-label">CIF</label>
+                <strong><label for="cif" class="form-label">CIF</label></strong>
                 <input type="text" class="form-control" id="cif" th:field="*{cif}">
             </div>
             <div class="mb-3">
-                <label for="name" class="form-label">Nombre</label>
+                <strong><label for="name" class="form-label">Nombre</label></strong>
                 <input type="text" class="form-control" id="name" th:field="*{name}">
             </div>
 
             <div class="mb-3">
-                <label for="phoneNumber" class="form-label">Nº teléfono</label>
+                <strong><label for="phoneNumber" class="form-label">Nº teléfono</label></strong>
                 <input type="text" class="form-control" id="phoneNumber" th:field="*{phoneNumber}">
             </div>
 
             <div class="mb-3">
+                <strong><div class="form-label">Dirección</div></strong>
                 <select aria-label="Addresses" class="form-select" th:field="*{address}">
                     <option th:if="${manufacturer.id} == null" selected value="0">Seleccionar dirección</option>
                     <option th:each="address : ${addresses}" th:value="${address.id}" th:text="${address.name}"></option>
