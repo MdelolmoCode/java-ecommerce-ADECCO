@@ -21,7 +21,7 @@ public interface CartItemService
 
     CartItem update(CartItem cartItem);
 
-    Boolean deleteById(Long id);
+    void deleteById(Long id);
 
     //===============================  FILTERS  =========================================
 

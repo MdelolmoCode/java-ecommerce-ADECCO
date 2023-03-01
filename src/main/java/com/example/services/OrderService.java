@@ -14,7 +14,7 @@ public interface OrderService {
     Optional<Order> findByOrderNumber(Long orderNumber);
     Optional<Order> findByShoppingCart(ShoppingCart shoppingCart);
     List<Order> findAllByAddressCity(String city);
-    Optional<Order> findByCustomer(Customer customer);
+    Optional<Order> findByCustomer(Optional<Customer> customer);
 
     Order save(Order order);
     Order update(Order order);

@@ -212,7 +212,7 @@ public class CartItemServiceImpl implements CartItemService
     Si el cartItem parametro no es nulo y  existe en la BB.DD, lo borra.
      */
     @Override
-    public Boolean deleteById(Long id)
+    public void deleteById(Long id)
     {
         log.info("Borrando cartItem {}", id);
 
@@ -221,13 +221,8 @@ public class CartItemServiceImpl implements CartItemService
             throw new IllegalArgumentException("Error: id nulo");
         }
 
-        if(! existsById(id)) {
-            log.info("Error: cartItem inexistente");
-            throw new EntitySavingException("Error: cartItem inexistente");
-        }
 
         cartItemRepo.deleteById(id);
-        return true;
     }
 
     //============================  BUSINESS LOGIC  ===================================
