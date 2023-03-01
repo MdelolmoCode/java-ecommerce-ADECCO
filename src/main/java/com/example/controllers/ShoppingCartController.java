@@ -22,6 +22,6 @@ public class ShoppingCartController {
         model.addAttribute("shoppingcarts", shoppingCarts);
         model.addAttribute("message", "Este mensaje es un addAtribute");
 
-        return "shoppingCart/shoppingCart-list"; // devolver el nombre del archivo html
+        return "shoppingcarts-list"; // devolver el nombre del archivo html
     }
 }
