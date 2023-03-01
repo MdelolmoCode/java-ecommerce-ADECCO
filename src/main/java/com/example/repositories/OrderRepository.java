@@ -12,5 +12,5 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
     Optional<Order> findByOrderNumber(Long orderNumber);
     Optional<Order> findByShoppingCart(ShoppingCart shoppingCart);
     List<Order> findAllByAddressCity(String city);
-    Optional<Order> findByShoppingCartCustomer(Optional<Customer> customer);
+    Optional<Order> findByShoppingCartCustomer(Customer customer);
 }

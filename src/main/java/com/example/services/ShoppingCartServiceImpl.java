@@ -32,7 +32,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     }
 
     @Override
-    public Optional<ShoppingCart> findByCustomer(Optional<Customer> customer) {
+    public Optional<ShoppingCart> findByCustomer(Customer customer) {
         log.info("findByCustomer {}", customer);
         return shoppingCartRepository.findByCustomer(customer);
     }

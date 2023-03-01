@@ -93,8 +93,14 @@ public class CustomerServiceImpl implements CustomerService {
     public void deleteById(Long id) { // tested
 
         Optional<Customer> optionalCustomer = findById(id);
-        Optional<ShoppingCart> optionalShoppingCart = shoppingCartService.findByCustomer(optionalCustomer);
-        Optional<Order> optionalOrder = orderService.findByCustomer(optionalCustomer);
+
+        if (optionalCustomer.isEmpty())
+            return;
+
+        Customer customer = optionalCustomer.get();
+
+        Optional<ShoppingCart> optionalShoppingCart = shoppingCartService.findByCustomer(customer);
+        Optional<Order> optionalOrder = orderService.findByCustomer(customer);
 
         if (optionalOrder.isPresent()) {
             orderService.deleteById(optionalOrder.get().getId());

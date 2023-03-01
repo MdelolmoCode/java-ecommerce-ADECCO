@@ -61,7 +61,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Optional<Order> findByCustomer(Optional<Customer> customer) {
+    public Optional<Order> findByCustomer(Customer customer) {
         log.info("findByCustomer {}", customer);
         if (customer == null)
             return Optional.empty();
