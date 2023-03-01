@@ -17,8 +17,10 @@ public class App {
 
 	static ApplicationContext context;
 	public static void main(String[] args) {
-		// Inicializa spring
 		context = SpringApplication.run(App.class, args);
+	}
+
+		/*
 		//createDemoUsers(context);
 
 		// AddressService addressService = context.getBean(AddressService.class);
@@ -95,12 +97,9 @@ public class App {
 	}
 
 	private static void createDemoData() {
-		/*
 
 
 
-		 */
-/*
 		// product
 		// productos sin ID, Category ni Manufacturer
 		ProductRepository productRepo = context.getBean(ProductRepository.class);
@@ -113,13 +112,11 @@ public class App {
 		Product product7 = new Product("escopeta", "desc escopeta", 70.99, 70L,false);
 		Product product8 = new Product("pistola", "desc pistola", 80.99, 0L,false);
 		Product product9 = new Product("cuchillo", "desc cuchillo", 90.99, 90L,true);
-		Product product10 = new Product("machete", "desc machete", 100.99, 100L,true);*/
+		Product product10 = new Product("machete", "desc machete", 100.99, 100L,true);
 
-/*
 
 		productRepo.saveAll(List.of(product1,product2,product3,product4,product5,
 				product6,product7,product8, product9, product10));
-*/
 
 
 
@@ -165,7 +162,6 @@ public class App {
 		orderService.save(order1);
 		orderService.save(order2);
 		orderService.save(order3);
-		/* Tests
 		orderService.findAll().forEach(System.out::println);
 
 		orderService.findAllByAddressCity("city O2").forEach(System.out::println);
@@ -178,7 +174,7 @@ public class App {
 		System.out.println(orderService.findById(3L).get().getOrderNumber());
 
 		System.out.println(orderService.findByShoppingCart(shoppingCart1));
-		System.out.println(orderService.findByCustomer(customer1));*/
+		System.out.println(orderService.findByCustomer(customer1));
 	}
 
 	private static void testManufacturer(ApplicationContext context) {
@@ -197,17 +193,16 @@ public class App {
 		manufacturerService.save(manufacturer1);
 		manufacturerService.save(manufacturer2);
 		manufacturerService.save(manufacturer3);
-		/* Test
+
 		manufacturerService.findAll().forEach(System.out::println);
 
 		System.out.println(manufacturerService.findByCif("2222"));
 
 		manufacturerService.findAllByAddressCity("city M1").forEach(System.out::println);
-		*/
 	}
 
 	private static void createDemoUsers(ApplicationContext context) {
-		/*var userRepo = context.getBean(UserEntityRepository.class);
+		var userRepo = context.getBean(UserEntityRepository.class);
 		var passwordEncoder = context.getBean(PasswordEncoder.class);
 
 		CustomerRepository customerRepository = context.getBean(CustomerRepository.class);
@@ -219,7 +214,7 @@ public class App {
 		UserEntity user2 = new UserEntity(null, "user2", passwordEncoder.encode("pass2"), customer2);
 		UserEntity user3 = new UserEntity(null, "user3", passwordEncoder.encode("pass3"), customer3);
 
-		userRepo.saveAll(List.of(user1, user2, user3));*/
+		userRepo.saveAll(List.of(user1, user2, user3));
 	}
-
+*/
 }
