@@ -50,7 +50,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Optional<Customer> findByEmail(String email) { // tested
-        log.info("Ejecutando método findByEmail() from CustomerService {}", email);
+        log.info("Ejecutando metodo findByEmail() from CustomerService {}", email);
         return customerRepository.findByEmail(email);
     }
 
