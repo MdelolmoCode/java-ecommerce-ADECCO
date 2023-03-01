@@ -25,10 +25,16 @@
             <div class="alert alert-danger" role="alert" >
                 <p th:text="${error}"></p>
             </div>
-            <a type="button" class="btn btn-primary" th:href="@{/manufacturer}">Volver</a>
+            <a type="button" class="btn btn-primary" th:href="@{/manufacturers}">Volver</a>
         </div>
 
-        <form th:if="${error} == null" th:action="@{/manufacturers}" method="POST" th:object="${manufacturer}">
+        <div th:if="${warning}">
+            <div class="alert alert-danger" role="alert" >
+                <p th:text="${warning}"></p>
+            </div>
+        </div>
+
+        <form th:unless="${error}" th:action="@{/manufacturers}" method="POST" th:object="${manufacturer}">
 
             <input type="hidden" id="id" name="id" th:field="*{id}" />
 

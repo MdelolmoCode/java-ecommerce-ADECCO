@@ -70,6 +70,12 @@ public class ManufacturerServiceImpl implements ManufacturerService {
     }
 
     @Override
+    public boolean existsByCif(String cif) {
+        log.info("existsByCif {}", cif);
+        return manufacturerRepo.existsByCif(cif);
+    }
+
+    @Override
     public Manufacturer save(Manufacturer manufacturer) {
         log.info("save {}", manufacturer);
         if(manufacturer == null)

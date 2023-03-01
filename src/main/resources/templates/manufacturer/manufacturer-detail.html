@@ -39,9 +39,11 @@
           <ul class="list-group list-group-flush">
               <li class="list-group-item"><b>Dirección:</b>
                   <a class="btn btn-link btn-sm"
-                     th:text="${manufacturer.address}"
+                     th:if="${manufacturer.address}"
+                     th:text="${manufacturer.address.name}"
                      th:href="@{/addresses/{id}(id=${manufacturer.address.id})}">
                   </a>
+                  <span th:unless="${manufacturer.address}">Sin dirección</span>
               </li>
           </ul>
           <ul class="list-group list-group-flush">

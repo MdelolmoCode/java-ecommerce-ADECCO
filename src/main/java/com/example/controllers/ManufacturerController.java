@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -61,7 +60,13 @@ public class ManufacturerController {
     }
 
     @PostMapping("manufacturers")
-    public String saveForm(@ModelAttribute Manufacturer manufacturer) {
+    public String saveForm(Model model, @ModelAttribute Manufacturer manufacturer) {
+        boolean cifAlreadyInUse = manufacturerService.existsByCif(manufacturer.getCif());
+        if (cifAlreadyInUse) {
+            model.addAttribute("warning", "CIF ya existente.");
+            return createForm(model);
+        }
+
         manufacturerService.save(manufacturer);
         return "redirect:/manufacturers";
     }

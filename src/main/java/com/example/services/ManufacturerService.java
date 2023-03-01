@@ -14,6 +14,8 @@ public interface ManufacturerService {
     List<Manufacturer> findAllByAddressCity(String city);
     Optional<Manufacturer> findByPhoneNumber(String phoneNumber);
 
+    boolean existsByCif(String cif);
+
     Manufacturer save(Manufacturer manufacturer);
     Manufacturer update(Manufacturer manufacturer);
     void deleteById(Long id);
