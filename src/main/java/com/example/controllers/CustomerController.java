@@ -2,10 +2,12 @@ package com.example.controllers;
 
 import com.example.entities.CartItem;
 import com.example.entities.Customer;
+import com.example.entities.Order;
 import com.example.entities.ShoppingCart;
 import com.example.repositories.CustomerRepository;
 import com.example.services.CartItemService;
 import com.example.services.CustomerService;
+import com.example.services.OrderService;
 import com.example.services.ShoppingCartService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -27,6 +29,7 @@ public class CustomerController {
     private final CustomerRepository customerRepository;
     private final ShoppingCartService shoppingCartService;
     private final CartItemService cartItemService;
+    private final OrderService orderService;
 
     // Crear metodos y cada metodo irá mapeado a una URL http
     // Normalmente estos metodos devuelven String; que es el nombre del archivo html
@@ -55,20 +58,9 @@ public class CustomerController {
 
     @GetMapping("/customers/{id}/borrar")
     public String deleteById(@PathVariable Long id) {
-        Optional<ShoppingCart> optionalShoppingCart = shoppingCartService.findById(id);
 
-        if(optionalShoppingCart.isPresent()){
-
-            List<CartItem> cartItems = optionalShoppingCart.get().getCartItems();
-
-            if(!cartItems.isEmpty()){
-                for (CartItem c: cartItems){
-                    cartItemService.deleteById(c.getId());
-                }
-            }
-            shoppingCartService.deleteById(optionalShoppingCart.get().getId());
-        }
         customerService.deleteById(id);
+
         return "redirect:/customers";
     }
 

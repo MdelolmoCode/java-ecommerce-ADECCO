@@ -147,22 +147,22 @@ public class App {
 		ShoppingCart shoppingCart1 = new ShoppingCart(null, customer1,null);
 		ShoppingCart shoppingCart2 = new ShoppingCart(null, customer2,null);
 		CartItem cartItem1 = new CartItem(null, shoppingCart1, productService.findById(1L).get(), 3L);
-	//	CartItem cartItem2 = new CartItem(null, shoppingCart1, productService.findById(2L).get(), 5L);
-//		CartItem cartItem3 = new CartItem(null, shoppingCart1, productService.findById(3L).get(), 1L);
-		//CartItem cartItem4 = new CartItem(null, shoppingCart2, productService.findById(4L).get(), 2L);
-//		List<CartItem> cartItems = List.of(cartItem1, cartItem2, cartItem3);
+		CartItem cartItem2 = new CartItem(null, shoppingCart1, productService.findById(2L).get(), 5L);
+		CartItem cartItem3 = new CartItem(null, shoppingCart1, productService.findById(3L).get(), 1L);
+		CartItem cartItem4 = new CartItem(null, shoppingCart2, productService.findById(4L).get(), 2L);
+		List<CartItem> cartItems = List.of(cartItem1, cartItem2, cartItem3);
 		cartItemRepo.saveAll(List.of(cartItem1));
 
-		//shoppingCart1.setCartItems(cartItems);
-//		shoppingCart2.setCartItems(List.of(cartItem4));
+		shoppingCart1.setCartItems(cartItems);
+		shoppingCart2.setCartItems(List.of(cartItem4));
 		shoppingCartRepo.saveAll(List.of(shoppingCart1, shoppingCart2));
-//
-//		Order order1 = new Order(null, 1000L, shoppingCart2, address1, PaymentMethod.CREDIT_CARD);
-//		Order order2 = new Order(null, 2000L, null, address2, PaymentMethod.CREDIT_CARD);
-//		Order order3 = new Order(null, 3000L, shoppingCart1, address2, PaymentMethod.PAYPAL);
-//		orderService.save(order1);
-//		orderService.save(order2);
-//		orderService.save(order3);
+
+		Order order1 = new Order(null, 1000L, shoppingCart2, address1, PaymentMethod.CREDIT_CARD);
+		Order order2 = new Order(null, 2000L, null, address2, PaymentMethod.CREDIT_CARD);
+		Order order3 = new Order(null, 3000L, shoppingCart1, address2, PaymentMethod.PAYPAL);
+		orderService.save(order1);
+		orderService.save(order2);
+		orderService.save(order3);
 		/* Tests
 		orderService.findAll().forEach(System.out::println);
 
