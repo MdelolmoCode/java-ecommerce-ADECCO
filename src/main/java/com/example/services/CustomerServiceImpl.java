@@ -1,7 +1,6 @@
 package com.example.services;
 
-import com.example.entities.Customer;
-import com.example.entities.Product;
+import com.example.entities.*;
 import com.example.repositories.CustomerRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,6 +16,9 @@ import java.util.Optional;
 public class CustomerServiceImpl implements CustomerService {
 
     private final CustomerRepository customerRepository;
+    private final ShoppingCartService shoppingCartService;
+    private final CartItemService cartItemService;
+    private final OrderService orderService;
 
 
     //métodos
@@ -38,15 +40,21 @@ public class CustomerServiceImpl implements CustomerService {
 
 
     @Override
-    public Optional <Customer> findBySurname(String surname) { //tested
+    public Optional<Customer> findBySurname(String surname) { //tested
         log.info("Ejecutando método findBySurname() from CustomerService {}", surname);
         return customerRepository.findBySurname(surname);
     }
 
     @Override
-    public Optional <Customer> findByEmail(String email) { // tested
+    public Optional<Customer> findByEmail(String email) { // tested
         log.info("Ejecutando método findByEmail() from CustomerService {}", email);
         return customerRepository.findByEmail(email);
+    }
+
+    @Override
+    public boolean existsByEmail(String email) {
+        log.info("existsByEmail {}", email);
+        return customerRepository.existsByEmail(email);
     }
 
     @Override
@@ -59,14 +67,15 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public Customer save(Customer customer) { // tested
 
-        if(customer == null){
+        if (customer == null) {
             throw new IllegalArgumentException("Customer no puede ser null");
         }
-        if(customer.getId() != null)
+        if (customer.getId() != null)
             update(customer);
-         return customerRepository.save(customer);
+        return customerRepository.save(customer);
 
     }
+
     @Override
     public void update(Customer customer) { //tested
 
@@ -83,6 +92,30 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public void deleteById(Long id) { // tested
 
+        Optional<Customer> optionalCustomer = findById(id);
+
+        if (optionalCustomer.isEmpty())
+            return;
+
+        Customer customer = optionalCustomer.get();
+
+        Optional<ShoppingCart> optionalShoppingCart = shoppingCartService.findByCustomer(customer);
+        Optional<Order> optionalOrder = orderService.findByCustomer(customer);
+
+        if (optionalOrder.isPresent()) {
+            orderService.deleteById(optionalOrder.get().getId());
+        }
+        if (optionalShoppingCart.isPresent()) {
+
+            List<CartItem> cartItems = optionalShoppingCart.get().getCartItems();
+
+            if (!cartItems.isEmpty()) {
+                for (CartItem c : cartItems) {
+                    cartItemService.deleteById(c.getId());
+                }
+            }
+            shoppingCartService.deleteById(optionalShoppingCart.get().getId());
+        }
         customerRepository.deleteById(id);
 
     }

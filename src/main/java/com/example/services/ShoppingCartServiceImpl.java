@@ -3,11 +3,9 @@ package com.example.services;
 import com.example.entities.CartItem;
 import com.example.entities.Customer;
 import com.example.entities.ShoppingCart;
-import com.example.repositories.CustomerRepository;
 import com.example.repositories.ShoppingCartRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

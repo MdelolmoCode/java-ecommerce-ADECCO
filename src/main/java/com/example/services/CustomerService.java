@@ -16,6 +16,8 @@ public interface CustomerService {
     Optional <Customer> findByEmail(String email);
     Optional <Customer> findByPhone(String phone);
 
+    boolean existsByEmail(String email);
+
     public Customer save(Customer customer);
     public void update(Customer customer);
     public void deleteById(Long id);

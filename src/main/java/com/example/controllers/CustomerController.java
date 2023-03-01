@@ -1,8 +1,14 @@
 package com.example.controllers;
 
+import com.example.entities.CartItem;
 import com.example.entities.Customer;
+import com.example.entities.Order;
+import com.example.entities.ShoppingCart;
 import com.example.repositories.CustomerRepository;
+import com.example.services.CartItemService;
 import com.example.services.CustomerService;
+import com.example.services.OrderService;
+import com.example.services.ShoppingCartService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +27,9 @@ public class CustomerController {
 
     private final CustomerService customerService;
     private final CustomerRepository customerRepository;
+    private final ShoppingCartService shoppingCartService;
+    private final CartItemService cartItemService;
+    private final OrderService orderService;
 
     // Crear metodos y cada metodo irá mapeado a una URL http
     // Normalmente estos metodos devuelven String; que es el nombre del archivo html
@@ -49,7 +58,9 @@ public class CustomerController {
 
     @GetMapping("/customers/{id}/borrar")
     public String deleteById(@PathVariable Long id) {
+
         customerService.deleteById(id);
+
         return "redirect:/customers";
     }
 
@@ -60,6 +71,9 @@ public class CustomerController {
         if(optionalCustomer.isPresent()){
             model.addAttribute("customer", optionalCustomer.get());
         }
+        else {
+        model.addAttribute("error", "Product not found");
+    }
         return "customer/customer-form";
     }
 

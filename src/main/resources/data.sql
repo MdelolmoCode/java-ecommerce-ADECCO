@@ -147,4 +147,10 @@ VALUES (1, 1, 0, 1, 1),
        (6, 6, 2, 6, 6)
 ;
 
+TRUNCATE TABLE users;
+INSERT INTO users (id, customer_id, username, password)
+VALUES (1, 1, 'user1', '$2a$10$wWR17vqMMwXZbk.Lj2IEguDQzRJF9BpY2no/W1o8ZR4ZK8slysLsK'), --pass1
+       (2, 2, 'user2', '$2a$10$c6D7.y9IXbEksCUh1PKjv.vAglBy49rR0haaXgxDdhU2qA5arAhmm'), --pass2
+       (3, 3, 'user3', '$2a$10$Gx8gTReYFXnL4CGnRvksgemvfjWG0CGKaQYaVmIgtNWrhhjTX9ZdC'); --pass3
+
 SET FOREIGN_KEY_CHECKS = 1;
