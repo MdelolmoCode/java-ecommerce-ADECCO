@@ -93,26 +93,24 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public void deleteById(Long id) { // tested
+    public void deleteById(Long id) {
 
         Optional<Customer> optionalCustomer = findById(id);
 
         if (optionalCustomer.isEmpty())
             return;
 
-        Customer customer = optionalCustomer.get(); // customer by id
+        Customer customer = optionalCustomer.get();
 
-        Optional<ShoppingCart> optionalShoppingCart = shoppingCartService.findByCustomer(customer); //carrito de customer
-        Optional<Order> optionalOrder = orderService.findByCustomer(customer); // order de customer
+        Optional<ShoppingCart> optionalShoppingCart = shoppingCartService.findByCustomer(customer);
+        Optional<Order> optionalOrder = orderService.findByCustomer(customer);
 
         if (optionalOrder.isPresent()) {
             orderService.deleteById(optionalOrder.get().getId());
         }
         if (optionalShoppingCart.isPresent()) {
 
-            List<CartItem> cartItems = optionalShoppingCart.get().getCartItems(); // lista items del carrito de customer
-            System.out.println("CANTIDAD CART ITEMSSS");
-            System.out.println(cartItems.size());
+            List<CartItem> cartItems = optionalShoppingCart.get().getCartItems();
 
             if (!cartItems.isEmpty()) {
                 for (CartItem c : cartItems) {
