@@ -7,6 +7,7 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -22,6 +23,12 @@ public class CartItemServiceImpl implements CartItemService
     {
         log.info("findAll");
         return cartItemRepo.findAll();
+    }
+
+    @Override
+    public List<CartItem> findAllByOrderByShoppingCartId()
+    {
+        return cartItemRepo.findAllByOrderByShoppingCartId();
     }
 
     @Override
