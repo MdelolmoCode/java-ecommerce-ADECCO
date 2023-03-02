@@ -43,11 +43,21 @@
           <a class="btn btn-link" th:href="@{/user/sign-in}">Registrarse</a>
         </div>
 
-        <div class="text-justify" sec:authorize="isAuthenticated()">
-          <b class="btn" sec:authentication="principal.username"></b>
-        </div>
-        <div sec:authorize="isAuthenticated()">
-          <a class="btn btn-link" th:href="@{/logout}">Cerrar sesión</a>
+        <div class="dropdown" sec:authorize="isAuthenticated()">
+          <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <strong th:text="${#authentication.principal.username}"></strong>
+          </button>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" th:href="@{/customers/{id}/editar(id=${#authentication.principal.customer.id})}">
+              Datos personales</a>
+            </li>
+            <li><a class="dropdown-item" th:href="@{/user/{id}/edit(id=${#authentication.principal.id})}">
+              Cambiar username / password</a>
+            </li>
+            <li><a class="dropdown-item" th:href="@{/logout}">
+              Cerrar sesión</a>
+            </li>
+          </ul>
         </div>
       </div>
 
@@ -58,7 +68,6 @@
     </div>
   </div>
 </nav>
-
 
 </body>
 </html>
