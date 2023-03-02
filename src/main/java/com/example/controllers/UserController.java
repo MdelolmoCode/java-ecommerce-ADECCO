@@ -10,7 +10,10 @@ import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.Optional;
 
 @AllArgsConstructor
 @Controller
@@ -18,6 +21,20 @@ public class UserController {
 
     private final UserService userService;
     private final PasswordEncoder passwordEncoder;
+
+    @GetMapping("user/{id}/edit")
+    public String editUserPass(Model model, @PathVariable Long id) {
+        Optional<UserEntity> userOpt = userService.findById(id);
+        // TODO solo permitir acceso al propio usuario?
+
+        if (userOpt.isPresent()) {
+            model.addAttribute("user", userOpt.get());
+        } else {
+            model.addAttribute("error", "Usuario no existe");
+        }
+
+        return "user/change-user-pass";
+    }
 
     @GetMapping("user/sign-in")
     public String getSignInForm(Model model) {
@@ -58,5 +75,12 @@ public class UserController {
     private String sendToSignInFormWithErrorMessage(Model model, String errorMessage) {
         model.addAttribute("error", errorMessage);
         return getSignInForm(model);
+    }
+
+    @PostMapping("users")
+    public String saveAfterEdit(@ModelAttribute UserEntity user) {
+        user.encodePassword(passwordEncoder);
+        userService.update(user);
+        return "redirect:/products";
     }
 }
