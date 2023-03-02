@@ -10,4 +10,6 @@ public interface UserService {
     boolean existsByEmail(String email);
     UserEntity save(UserEntity user);
     UserEntity update(UserEntity user);
+
+    boolean isCurrentUser(Long id);
 }

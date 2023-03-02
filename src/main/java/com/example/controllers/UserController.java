@@ -65,8 +65,13 @@ public class UserController {
 
     @GetMapping("user/{id}/edit")
     public String editUserPass(Model model, @PathVariable Long id) {
+        if (!userService.isCurrentUser(id)) {
+            model.addAttribute("error", "Acceso restringido");
+            model.addAttribute("hide_form", true);
+            return "user/change-user-pass";
+        }
+
         Optional<UserEntity> userOpt = userService.findById(id);
-        // TODO solo permitir acceso al propio usuario?
 
         if (userOpt.isPresent()) {
             model.addAttribute("user", userOpt.get());

@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -83,5 +84,12 @@ public class UserServiceImpl implements UserDetailsService, UserService {
         // Necesario en Spring Security al modificar datos de un usuario logeado
         var authentication = new UsernamePasswordAuthenticationToken(user, user.getPassword(), user.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(authentication);
+    }
+
+    @Override
+    public boolean isCurrentUser(Long id) {
+        UserEntity currentUser = (UserEntity)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Long currentUserId = currentUser.getId();
+        return Objects.equals(currentUserId, id);
     }
 }
