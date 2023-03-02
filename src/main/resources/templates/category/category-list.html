@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Category List</title>
+
+  <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+  <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+</head>
+<body>
+<div th:replace="~{navbar :: nav1}"></div>
+<div class="container text-center">
+  <div class="row">
+    <div class="col-1">
+
+    </div>
+    <div class="col-10">
+      <h1 class="h1-title">Listado Categorías</h1>
+      <div>
+        <a class="btn btn-info" th:href="@{/categories/create}">Crear nueva categoría</a>
+      </div>
+
+      <table class="table">
+        <thead>
+        <tr>
+          <th scope="col">Id</th>
+          <th scope="col">Name</th>
+          <th scope="col">Mature</th>
+          <th scope="col">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="category : ${categories}">
+          <td th:text="${category.id}"></td>
+          <td th:text="${category.name}"></td>
+          <td>
+            <a class="badge text-bg-danger"
+               th:if="${category.mature == true}">Mature content</a>
+            <a class="badge text-bg-success"
+               th:if="${category.mature != true}">All publics</a>
+          </td>
+
+          <td>
+            <!--<a class="btn btn-primary" th:href="@{/categories/{id}(id=${category.id})}">Ver</a>-->
+            <a class="btn btn-success" th:href="@{/categories/{id}/edit(id=${category.id})}">Editar</a>
+            <a class="btn btn-danger" th:href="@{/categories/{id}/delete(id=${category.id})}">Borrar</a>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+
+      <div class="alert alert-info" role="alert" th:if="${#lists.isEmpty(categories)}">
+        No hay elementos actualmente.
+      </div>
+      <div class="text-center" th:if="${#lists.size(categories) > 0}">
+        Hay <span th:text="${#lists.size(categories)}"></span> resultados.
+      </div>
+
+
+    </div>
+    <div class="col-1">
+
+    </div>
+  </div>
+</div>
+
+<div th:replace="~{footer :: footer1}"></div>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/main.js}"></script>
+</body>
+</html>
