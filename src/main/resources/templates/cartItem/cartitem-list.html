@@ -5,7 +5,7 @@
   <meta name="viewport"
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Product List</title>
+  <title>CartItem List</title>
 
   <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
   <link rel="stylesheet" th:href="@{/css/styles.css}"/>
@@ -52,7 +52,7 @@
         No hay elementos actualmente.
       </div>
       <div class="text-center" th:if="${#lists.size(cartItems) > 0}">
-        Hay <span th:text="${#lists.size(productss)}"></span> resultados.
+        Hay <span th:text="${#lists.size(cartItems)}"></span> resultados.
       </div>
 
 

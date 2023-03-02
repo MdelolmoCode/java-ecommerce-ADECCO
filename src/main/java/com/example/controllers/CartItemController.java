@@ -20,6 +20,6 @@ public class CartItemController
     {
         List<CartItem> cartItemList = cartItemService.findAllByOrderByShoppingCartId();
         model.addAttribute("cartItems", cartItemList);
-        return "cartItem/cartItem-list";
+        return "cartItem/cartitem-list";
     }
 }
