@@ -2,6 +2,7 @@ package com.example.services;
 
 import com.example.entities.*;
 import com.example.repositories.CustomerRepository;
+import com.example.repositories.UserEntityRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -14,11 +15,13 @@ import java.util.Optional;
 @AllArgsConstructor
 @Service
 public class CustomerServiceImpl implements CustomerService {
+    private final UserEntityRepository userEntityRepository;
 
     private final CustomerRepository customerRepository;
     private final ShoppingCartService shoppingCartService;
     private final CartItemService cartItemService;
     private final OrderService orderService;
+    private final UserService userService;
 
 
     //métodos
@@ -47,7 +50,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Optional<Customer> findByEmail(String email) { // tested
-        log.info("Ejecutando método findByEmail() from CustomerService {}", email);
+        log.info("Ejecutando metodo findByEmail() from CustomerService {}", email);
         return customerRepository.findByEmail(email);
     }
 
@@ -90,7 +93,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public void deleteById(Long id) { // tested
+    public void deleteById(Long id) {
 
         Optional<Customer> optionalCustomer = findById(id);
 
@@ -111,11 +114,13 @@ public class CustomerServiceImpl implements CustomerService {
 
             if (!cartItems.isEmpty()) {
                 for (CartItem c : cartItems) {
+
                     cartItemService.deleteById(c.getId());
                 }
             }
             shoppingCartService.deleteById(optionalShoppingCart.get().getId());
         }
+        userEntityRepository.deleteById(id);
         customerRepository.deleteById(id);
 
     }
