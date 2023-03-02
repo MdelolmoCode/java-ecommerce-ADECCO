@@ -3,6 +3,8 @@ package com.example.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.text.DecimalFormat;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -33,6 +35,7 @@ public class CartItem
         if(product == null)
             return 0;
 
-        return product.getPrice() * amount;
+
+        return Math.round(product.getPrice() * 100.0) / 100.0;
     }
 }
