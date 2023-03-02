@@ -71,7 +71,7 @@ public class UserServiceImpl implements UserDetailsService, UserService {
 
         try {
             userRepo.save(user);
-            updateCurrentUser(user);
+            updateSecurityToken(user);
             return user;
         } catch (Exception e) {
             log.error("Error al actualizar user.", e);
@@ -80,7 +80,7 @@ public class UserServiceImpl implements UserDetailsService, UserService {
         throw new EntitySavingException("Error al actualizar user.");
     }
 
-    private static void updateCurrentUser(UserEntity user) {
+    private static void updateSecurityToken(UserEntity user) {
         // Necesario en Spring Security al modificar datos de un usuario logeado
         var authentication = new UsernamePasswordAuthenticationToken(user, user.getPassword(), user.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(authentication);
