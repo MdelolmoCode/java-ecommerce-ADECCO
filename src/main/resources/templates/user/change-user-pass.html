@@ -24,10 +24,9 @@
                 <div class="alert alert-danger" role="alert" >
                     <p th:text="${error}"></p>
                 </div>
-                <a type="button" class="btn btn-primary" th:href="@{/products}">Volver</a>
             </div>
 
-            <form th:unless="${error}" th:action="@{/users}" method="POST" th:object="${user}">
+            <form th:action="@{/users}" method="POST" th:object="${user}">
 
                 <input type="hidden" id="id" name="id" th:field="*{id}" />
                 <input type="hidden" id="customer" name="customer" th:field="*{customer}" />

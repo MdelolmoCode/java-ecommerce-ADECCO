@@ -22,20 +22,6 @@ public class UserController {
     private final UserService userService;
     private final PasswordEncoder passwordEncoder;
 
-    @GetMapping("user/{id}/edit")
-    public String editUserPass(Model model, @PathVariable Long id) {
-        Optional<UserEntity> userOpt = userService.findById(id);
-        // TODO solo permitir acceso al propio usuario?
-
-        if (userOpt.isPresent()) {
-            model.addAttribute("user", userOpt.get());
-        } else {
-            model.addAttribute("error", "Usuario no existe");
-        }
-
-        return "user/change-user-pass";
-    }
-
     @GetMapping("user/sign-in")
     public String getSignInForm(Model model) {
         UserEntity userEntity = new UserEntity();
@@ -77,10 +63,40 @@ public class UserController {
         return getSignInForm(model);
     }
 
+    @GetMapping("user/{id}/edit")
+    public String editUserPass(Model model, @PathVariable Long id) {
+        Optional<UserEntity> userOpt = userService.findById(id);
+        // TODO solo permitir acceso al propio usuario?
+
+        if (userOpt.isPresent()) {
+            model.addAttribute("user", userOpt.get());
+        } else {
+            model.addAttribute("error", "Usuario no existe");
+        }
+
+        return "user/change-user-pass";
+    }
+
     @PostMapping("users")
-    public String saveAfterEdit(@ModelAttribute UserEntity user) {
+    public String saveAfterEdit(@ModelAttribute UserEntity user, Model model) {
+        if (!StringUtils.hasLength(user.getUsername()))
+            return sendToUserEditWithErrorMessage(model, user.getId(), "Nombre de usuario vacío.");
+
+        if (!StringUtils.hasLength(user.getPassword()))
+            return sendToUserEditWithErrorMessage(model, user.getId(), "Password vacío.");
+
+        String oldUsername = userService.findById(user.getId()).get().getUsername();
+        boolean usernameHasChanged = !user.getUsername().equals(oldUsername);
+        if (usernameHasChanged && userService.existsByUsername(user.getUsername()))
+            return sendToUserEditWithErrorMessage(model, user.getId(), "Nombre de usuario no disponible.");
+
         user.encodePassword(passwordEncoder);
         userService.update(user);
         return "redirect:/products";
+    }
+
+    private String sendToUserEditWithErrorMessage(Model model, Long id, String errorMessage) {
+        model.addAttribute("error", errorMessage);
+        return editUserPass(model, id);
     }
 }
