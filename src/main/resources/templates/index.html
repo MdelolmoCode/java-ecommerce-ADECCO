@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Magpie Homepage</title>
+
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+</head>
+<body>
+<div th:replace="~{navbar :: nav1}"></div>
+
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="col">
+            <div class="card h-100" th:each="product : ${products}">
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${product.name}"></h5>
+                    <p class="card-text" th:text="${product.description}"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+<div th:replace="~{footer :: footer1}"></div>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/main.js}"></script>
+</body>
+</html>
