@@ -20,6 +20,7 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests()
 
+                .requestMatchers("/user/sign-in").permitAll()
                 .requestMatchers("/user/**").authenticated()
 
                 .anyRequest().permitAll()
