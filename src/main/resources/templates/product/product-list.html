@@ -30,7 +30,24 @@
             th:href="@{/products/manufacturer/{id}(id=${product.manufacturer.id})}"></a>
       </div>-->
 
-      <table class="table">
+
+      <div class="row row-cols-1 row-cols-md-3 g-4" style="margin-top: 10px">
+        <div class="col" th:each="product : ${products}">
+          <div class="card" >
+            <img src="https://dummyimage.com/250x250/b8b8b8/000000.jpg&text=Product+Image" class="card-img-top" alt="PRODUCT IMAGE">
+            <div class="card-body">
+              <h5 class="card-title" th:text="${product.name}"></h5>
+              <p class="card-text" th:text="${product.description}"></p>
+              <p strong class="card-text" th:text="${product.price} + €"></p>
+              <a class="btn btn-primary" th:href="@{/products/{id}(id=${product.id})}">Ver</a>
+              <a class="btn btn-success">Añadir al carrito</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <table class="table" style="margin-top: 10px">
         <thead>
         <tr>
           <th scope="col">Id</th>
@@ -38,6 +55,8 @@
           <th scope="col">Description</th>
           <th scope="col">Price (€)</th>
           <th scope="col">Stock</th>
+          <th scope="col">Categoría(s)</th>
+          <th scope="col">Manufacturer</th>
           <th scope="col">Actions</th>
         </tr>
         </thead>
@@ -48,6 +67,17 @@
           <td th:text="${product.description}"></td>
           <td th:text="${#numbers.formatDecimal(product.price,1,2)}"></td>
           <td th:class="${product.stock} ? 'text-success' : 'text-danger'" th:text="${product.stock}"></td>
+          <td>
+            <div th:each="category: ${product.categories}"
+                 th:text="|${category.name}|"></div>
+          </td>
+          <td>
+            <a class="btn btn-link btn-sm"
+               th:if="${product.manufacturer != null}"
+               th:text="${product.manufacturer.name}"
+               th:href="@{/products/manufacturer/{id}(id=${product.manufacturer.id})}"></a>
+          </td>
+
           <td>
             <a class="btn btn-primary" th:href="@{/products/{id}(id=${product.id})}">Ver</a>
             <a class="btn btn-success" th:href="@{/products/{id}/edit(id=${product.id})}">Editar</a>
@@ -73,7 +103,6 @@
 </div>
 
 <div th:replace="~{footer :: footer1}"></div>
-<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
-<script th:src="@{/js/main.js}"></script>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
 </body>
 </html>

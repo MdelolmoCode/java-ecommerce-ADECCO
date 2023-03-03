@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Category Form</title>
+
+  <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+  <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+</head>
+<body>
+<div th:replace="~{navbar :: nav1}"></div>
+
+<div class="container text-center">
+  <div class="row">
+
+    <h1 th:if="${category.id}" class="h1-title">Modificar Categoría <span th:text="${category.id}"></span></h1>
+    <h1 th:if="${category.id} == null" class="h1-title">Crear nueva Categoría</h1>
+
+    <div class="col"></div>
+
+    <div class="col">
+
+      <div th:if="${error}">
+        <div class="alert alert-danger" role="alert" >
+          <p th:text="${error}"></p>
+        </div>
+        <a type="button" class="btn btn-primary" th:href="@{/categories}">Volver</a>
+      </div>
+
+      <form th:if="${error} == null" th:action="@{/categories}" method="POST" th:object="${category}">
+
+        <input type="hidden" id="id" name="id" th:field="*{id}" />
+
+        <div class="mb-2">
+          <label for="name" class="form-label">Name</label>
+          <input type="text" class="form-control" id="name" th:field="*{name}" >
+        </div>
+
+        <div class="form-check mb-4 mt-2 text-start">
+          <input class="form-check-input" type="checkbox" role="switch" id="mature" th:field="*{mature}">
+          <label class="form-check-label" for="mature">
+            Para adultos
+          </label>
+        </div>
+
+
+        <a class="btn btn-danger" th:href="@{/categories}">Cancelar</a>
+        <button type="submit" class="btn btn-success">Guardar</button>
+
+      </form>
+
+
+    </div>
+
+    <div class="col"></div>
+  </div>
+</div>
+
+<div th:replace="~{footer :: footer1}"></div>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/main.js}"></script>
+</body>
+</html>

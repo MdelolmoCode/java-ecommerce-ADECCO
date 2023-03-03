@@ -6,11 +6,14 @@ import com.example.repositories.CustomerRepository;
 import com.example.repositories.UserEntityRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -29,6 +32,11 @@ public class UserServiceImpl implements UserDetailsService, UserService {
             return userOpt.get();
         else
             throw new UsernameNotFoundException("Usuario " + username + "no encontrado");
+    }
+
+    @Override
+    public Optional<UserEntity> findById(Long id) {
+        return userRepo.findById(id);
     }
 
     @Override
@@ -55,5 +63,33 @@ public class UserServiceImpl implements UserDetailsService, UserService {
         }
 
         throw new EntitySavingException("Error al guardar user.");
+    }
+
+    @Override
+    public UserEntity update(UserEntity user) {
+        log.info("update {}", user);
+
+        try {
+            userRepo.save(user);
+            updateSecurityToken(user);
+            return user;
+        } catch (Exception e) {
+            log.error("Error al actualizar user.", e);
+        }
+
+        throw new EntitySavingException("Error al actualizar user.");
+    }
+
+    private static void updateSecurityToken(UserEntity user) {
+        // Necesario en Spring Security al modificar datos de un usuario logeado
+        var authentication = new UsernamePasswordAuthenticationToken(user, user.getPassword(), user.getAuthorities());
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+    }
+
+    @Override
+    public boolean isCurrentUser(Long id) {
+        UserEntity currentUser = (UserEntity)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Long currentUserId = currentUser.getId();
+        return Objects.equals(currentUserId, id);
     }
 }

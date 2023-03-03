@@ -1,9 +1,11 @@
 package com.example.services;
 
 import com.example.entities.Manufacturer;
+import com.example.entities.Product;
 import com.example.exception.EntityDeleteException;
 import com.example.exception.EntitySavingException;
 import com.example.repositories.ManufacturerRepository;
+import com.example.repositories.ProductRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,6 +21,7 @@ import java.util.Optional;
 @Service
 public class ManufacturerServiceImpl implements ManufacturerService {
     private ManufacturerRepository manufacturerRepo;
+    private ProductRepository productRepo;
 
     @Override
     public List<Manufacturer> findAll() {
@@ -64,6 +67,12 @@ public class ManufacturerServiceImpl implements ManufacturerService {
         if (!StringUtils.hasLength(phoneNumber))
             return Optional.empty();
         return manufacturerRepo.findByPhoneNumber(phoneNumber);
+    }
+
+    @Override
+    public boolean existsByCif(String cif) {
+        log.info("existsByCif {}", cif);
+        return manufacturerRepo.existsByCif(cif);
     }
 
     @Override
@@ -115,7 +124,15 @@ public class ManufacturerServiceImpl implements ManufacturerService {
     @Override
     public void deleteById(Long id) {
         log.info("deleteById {}", id);
+        if (id == null || id <= 0)
+            throw new IllegalArgumentException("ID inválido");
+
+        Optional<Manufacturer> manufacturerOpt = manufacturerRepo.findById(id);
+        if (manufacturerOpt.isEmpty())
+            return;
+
         try {
+            disassociateProducts(manufacturerOpt.get());
             manufacturerRepo.deleteById(id);
             return;
         } catch (Exception e) {
@@ -123,5 +140,12 @@ public class ManufacturerServiceImpl implements ManufacturerService {
         }
 
         throw new EntityDeleteException("Error al borrar manufacturer.");
+    }
+
+    private void disassociateProducts(Manufacturer manufacturer) {
+        List<Product> products = productRepo.findAllByManufacturer_Cif(manufacturer.getCif());
+        for (Product product : products) {
+            product.setManufacturer(null);
+        }
     }
 }

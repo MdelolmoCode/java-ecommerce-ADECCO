@@ -39,8 +39,10 @@
                         <td>
                             <a class="btn btn-link btn-sm"
                                th:if="${order.address}"
-                               th:text="${order.address}"
-                               th:href="@{/addresses/{id}(id=${order.address.id})}"></a>
+                               th:text="${order.address.name}"
+                               th:href="@{/addresses/{id}(id=${order.address.id})}">
+                            </a>
+                            <span th:unless="${order.address}">Sin dirección</span>
                         </td>
 
                         <td>
@@ -72,6 +74,6 @@
 </div>
 
 <div th:replace="~{footer :: footer1}"></div>
-<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
 </body>
 </html>

@@ -14,10 +14,5 @@ public interface ManufacturerRepository extends JpaRepository<Manufacturer, Long
     List<Manufacturer> findAllByAddressCity(String city);
     Optional<Manufacturer> findByPhoneNumber(String phoneNumber);
 
-
-
-
-
-
-
+    boolean existsByCif(String cif);
 }

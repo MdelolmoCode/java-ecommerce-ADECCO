@@ -115,6 +115,11 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public List<Product> findByCategories_Id(Long id) {
+        return productRepo.findByCategories_Id(id);
+    }
+
+    @Override
     public Product save(Product product) {
         log.info("save Product {}", product);
 

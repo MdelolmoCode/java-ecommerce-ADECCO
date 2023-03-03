@@ -5,11 +5,14 @@ import com.example.entities.CartItem;
 import java.util.List;
 import java.util.Optional;
 
+
 public interface CartItemService
 {
     //===============================  CRUD  =========================================
 
     List<CartItem> findAll();
+
+    List<CartItem> findAllByOrderByShoppingCartId();
 
     boolean existsById(Long id);
 

@@ -19,6 +19,7 @@ import java.util.Optional;
 public class CategoryServiceImpl implements CategoryService {
 
     private CategoryRepository categoryRepo;
+    private final ProductService productService;
     @Override
     public List<Category> findAll() {
         log.info("findAll");
@@ -89,6 +90,14 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public void deleteById(Long id) {
         log.info("DeleteById {}", id);
+        List<Product> products = productService.findByCategories_Id(id);
+        for (Product product : products) {
+            List<Category> remainingCat = product.getCategories();
+            remainingCat.remove(categoryRepo.findById(id).get());
+            product.setCategories(remainingCat);
+        }
+        productService.saveAll(products);;
+
         categoryRepo.deleteById(id);
     }
 

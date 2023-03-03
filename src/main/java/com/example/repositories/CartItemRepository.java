@@ -1,13 +1,18 @@
 package com.example.repositories;
 
 import com.example.entities.CartItem;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
 import java.util.List;
 
+@Repository
 public interface CartItemRepository extends JpaRepository<CartItem, Long>
 {
     List<CartItem> findAllByProductId(Long id);
-    //List<CartItem> findAllByShoppingCartId(Long id);
+    List<CartItem> findAllByOrderByShoppingCartId();
+
 
     List<CartItem> findAllByAmountIs(Long amount);
     List<CartItem> findAllByAmountGreaterThanEqual(Long minAmount);
