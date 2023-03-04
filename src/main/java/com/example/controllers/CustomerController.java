@@ -39,7 +39,6 @@ public class CustomerController {
 
         List<Customer> customers = customerService.findAll();
         model.addAttribute("customers", customers);
-        model.addAttribute("message", "Este mensaje es un addAtribute");
 
         return "customer/customer-list"; // devolver el nombre del archivo html
     }

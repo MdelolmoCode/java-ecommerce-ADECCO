@@ -10,7 +10,7 @@
 <div th:replace="~{navbar :: nav1}"></div>
 
 <div class="container text-center">
-    <h1>Listado de shoppingCarts</h1>
+    <h1>Listado de carritos</h1>
 
     <div class="row mt-5">
         <div class="col">
@@ -20,11 +20,13 @@
             <select class="form-select" aria-label="Default select example">
                 <option selected>Seleccione Carrito</option>
                 <tr th:each="shoppingcarts: ${shoppingcarts}">
-                    <option th:text="${shoppingcarts.customer.getName()}">Two</option>
+                    <option th:text="${shoppingcarts.customer.getName()}"></option>
 
                 </tr>
 
             </select>
+            <a class="btn btn-primary mt-3" >Ver Carrito</a>
+
         </div>
         <div class="col">
 
