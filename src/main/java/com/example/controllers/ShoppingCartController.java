@@ -15,13 +15,13 @@ public class ShoppingCartController {
 
     private final ShoppingCartService shoppingCartService;
 
-    @GetMapping("/shopping-carts") // Puede ser getmapping para recurar algo o PostMapping para enviar
+    @GetMapping("/shoppingCarts")
     public String findAll(Model model){
 
         List<ShoppingCart> shoppingCarts = shoppingCartService.findAll();
         model.addAttribute("shoppingcarts", shoppingCarts);
         model.addAttribute("message", "Este mensaje es un addAtribute");
 
-        return "shoppingcarts-list"; // devolver el nombre del archivo html
+        return "shoppingCart/shoppingcarts-list"; //
     }
 }

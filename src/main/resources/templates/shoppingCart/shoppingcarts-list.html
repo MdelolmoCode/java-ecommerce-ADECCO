@@ -1,18 +1,38 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>ShoppingCart List</title>
+    <meta charset="UTF-8">
+    <title>ShoppingCart List</title>
 
-  <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
 </head>
 <body>
 <div th:replace="~{navbar :: nav1}"></div>
 
+<div class="container text-center">
+    <h1>Listado de shoppingCarts</h1>
+
+    <div class="row mt-5">
+        <div class="col">
+
+        </div>
+        <div class="col">
+            <select class="form-select" aria-label="Default select example">
+                <option selected>Seleccione Carrito</option>
+                <tr th:each="shoppingcarts: ${shoppingcarts}">
+                    <option th:text="${shoppingcarts.customer.getName()}">Two</option>
+
+                </tr>
+
+            </select>
+        </div>
+        <div class="col">
+
+        </div>
+    </div>
 
 
-
-
+</div>
 <div th:replace="~{footer :: footer1}"></div>
 <script th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
 </body>
