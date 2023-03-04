@@ -2,7 +2,6 @@ package com.example.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -21,36 +20,15 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests()
 
-                .requestMatchers(HttpMethod.GET, "/products/**").permitAll()
-                .requestMatchers(HttpMethod.GET, "/cart-items/**").permitAll()
-                .requestMatchers(HttpMethod.GET, "/shopping-carts/**").permitAll()
-                .requestMatchers(HttpMethod.GET, "/orders/**").permitAll()
-                .requestMatchers(HttpMethod.GET, "/customers/**").permitAll()
-                .requestMatchers(HttpMethod.GET, "/addresses/**").permitAll()
-                .requestMatchers(HttpMethod.GET, "/categories/**").permitAll()
-                .requestMatchers(HttpMethod.GET, "/manufacturers/**").permitAll()
-                .requestMatchers(HttpMethod.GET, "/error/**").permitAll()
+                .requestMatchers("/user/sign-in").permitAll()
+                .requestMatchers("/user/**").authenticated()
 
-                .requestMatchers(HttpMethod.POST, "/products/**").permitAll()
-                .requestMatchers(HttpMethod.POST, "/cart-items/**").permitAll()
-                .requestMatchers(HttpMethod.POST, "/shopping-carts/**").permitAll()
-                .requestMatchers(HttpMethod.POST, "/orders/**").permitAll()
-                .requestMatchers(HttpMethod.POST, "/customers/**").permitAll()
-                .requestMatchers(HttpMethod.POST, "/addresses/**").permitAll()
-                .requestMatchers(HttpMethod.POST, "/categories/**").permitAll()
-                .requestMatchers(HttpMethod.POST, "/manufacturers/**").permitAll()
+                .anyRequest().permitAll()
 
-                .requestMatchers("/user/**").permitAll()
-                .requestMatchers("/css/**").permitAll()
-                .requestMatchers("/js/**").permitAll()
-                .requestMatchers("/img/**").permitAll()
-                .requestMatchers("/webjars/**").permitAll()
-                .requestMatchers("/product/**").permitAll()
-
-                .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .defaultSuccessUrl("/products", true)
+
                 .and()
                 .logout()
                 .logoutSuccessUrl("/products");
