@@ -44,6 +44,9 @@ public class ShoppingCartController {
             cartItems = shoppingCartService.findByCustomer(customer).get().getCartItems();
 
 
+
+
+
         }
 
         model.addAttribute("cartItems", cartItems);
