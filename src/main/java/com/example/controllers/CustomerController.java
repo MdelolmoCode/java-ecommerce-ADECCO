@@ -31,16 +31,14 @@ public class CustomerController {
     private final CartItemService cartItemService;
     private final OrderService orderService;
 
-    // Crear metodos y cada metodo irá mapeado a una URL http
-    // Normalmente estos metodos devuelven String; que es el nombre del archivo html
 
-    @GetMapping("/customers") // Puede ser getmapping para recurar algo o PostMapping para enviar
+    @GetMapping("/customers")
     public String findAll(Model model){
 
         List<Customer> customers = customerService.findAll();
         model.addAttribute("customers", customers);
 
-        return "customer/customer-list"; // devolver el nombre del archivo html
+        return "customer/customer-list";
     }
 
     @GetMapping("/customers/{id}")

@@ -10,30 +10,33 @@
 <div th:replace="~{navbar :: nav1}"></div>
 
 <div class="container text-center">
-    <h1>Listado de carritos</h1>
-
-    <div class="row mt-5">
-        <div class="col">
-
-        </div>
-        <div class="col">
-            <select class="form-select" aria-label="Default select example">
-                <option selected>Seleccione Carrito</option>
+    <div class="row">
+        <h1>Listado de carritos</h1>
+        <div class="col mt-3">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Propietario del carrito</th>
+                    <th scope="col">Cantidad items</th>
+                    <th scope="col">Acciones</th>
+                </tr>
+                </thead>
+                <tbody>
                 <tr th:each="shoppingcarts: ${shoppingcarts}">
-                    <option th:text="${shoppingcarts.customer.getName()}"></option>
 
+                    <td th:text="${shoppingcarts.customer.getName()}"></td>
+                    <td th:text="${shoppingcarts.getCartItems().size()}"></td>
+                    <td>
+                        <a class="btn btn-primary" th:href="@{/shoppingCarts/{id}(id=${shoppingcarts.id})}">Ver Carrito</a>
+                    </td>
                 </tr>
 
-            </select>
-            <a class="btn btn-primary mt-3" >Ver Carrito</a>
+                </tbody>
+            </table>
 
-        </div>
-        <div class="col">
 
         </div>
     </div>
-
-
 </div>
 <div th:replace="~{footer :: footer1}"></div>
 <script th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>

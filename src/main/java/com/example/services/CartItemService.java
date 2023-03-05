@@ -46,5 +46,4 @@ public interface CartItemService
 
     void removeAmountById(Long cartItem, Long amount);
 
-
 }

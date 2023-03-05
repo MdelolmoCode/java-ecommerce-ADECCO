@@ -1,7 +1,9 @@
 package com.example.controllers;
 
+import com.example.entities.CartItem;
 import com.example.entities.Customer;
 import com.example.entities.ShoppingCart;
+import com.example.services.CartItemService;
 import com.example.services.CustomerService;
 import com.example.services.ShoppingCartService;
 import lombok.AllArgsConstructor;
@@ -19,6 +21,7 @@ public class ShoppingCartController {
 
     private final ShoppingCartService shoppingCartService;
     private final CustomerService customerService;
+    private final CartItemService cartItemService;
 
     @GetMapping("/shoppingCarts")
     public String findAll(Model model){
@@ -30,10 +33,20 @@ public class ShoppingCartController {
     }
 
     @GetMapping("/shoppingCarts/{id}")
-    public String findById(Model model, @PathVariable Long id){
+    public String findById(Model model, @PathVariable Long id) {
 
         Optional<Customer> optionalCustomer = customerService.findById(id);
 
+        List<CartItem> cartItems = null;
+        if (optionalCustomer.isPresent()) {
+
+            Customer customer = optionalCustomer.get();
+            cartItems = shoppingCartService.findByCustomer(customer).get().getCartItems();
+
+
+        }
+
+        model.addAttribute("cartItems", cartItems);
         model.addAttribute("customer", optionalCustomer);
 
 

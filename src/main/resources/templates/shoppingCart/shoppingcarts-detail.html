@@ -10,7 +10,35 @@
 <div th:replace="~{navbar :: nav1}"></div>
 
 <div class="container text-center">
-    <h1>Detalle carrito</h1>
+    <h1>Carrito de: [[${customer.get().getName() + " " + customer.get().getSurname()}]]</h1>
+
+    <div class="col mt-5">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Producto</th>
+                <th scope="col">Cantidad</th>
+                <th scope="col">Precio</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="cartItem : ${cartItems}">
+                <td th:text="${cartItem.id}"></td>
+                <td th:text="${cartItem.product.getName()}"></td>
+                <td th:text="${cartItem.amount}"></td>
+                <td th:text="${cartItem.product.getPrice()}"></td>
+                <td>
+                    <a class="btn btn-primary" >Ver</a>
+                    <a class="btn btn-success" >Editar</a>
+                    <a class="btn btn-danger" >Borrar</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+
+    </div>
 
 
 
