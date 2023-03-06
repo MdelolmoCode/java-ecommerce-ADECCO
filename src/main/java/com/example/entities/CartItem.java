@@ -35,7 +35,6 @@ public class CartItem
         if(product == null)
             return 0;
 
-
-        return Math.round(product.getPrice() * 100.0) / 100.0;
+        return Math.round(product.getPrice() * amount * 100.0) / 100.0;
     }
 }
