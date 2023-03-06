@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Logout</title>
+
+  <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+</head>
+<body>
+<div th:replace="~{navbar :: nav1}"></div>
+
+<div class="container text-center">
+  <div class="row">
+    <div class="col"></div>
+
+    <div class="col-5">
+      <div th:if="${param.error}">
+        <div class="alert alert-danger" role="alert">Credenciales erróneas.</div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <h2>Introduzca credenciales</h2>
+        </div>
+
+        <div class="card-body">
+          <form th:action="@{/login}" method="post">
+            <div class="mb-3">
+              <div><strong>Usuario</strong></div>
+              <input type="text" name="username" required />
+            </div>
+            <div class="mb-3">
+              <div><strong>Password</strong></div>
+              <input type="password" name="password" required />
+            </div>
+            <div>
+              <input type="submit" class="btn btn-primary btn-lg" value="Login" />
+            </div>
+          </form>
+        </div>
+
+        <div class="card-footer text-muted">
+          <h6>¿Nuevo usuario?</h6>
+          <a th:href="@{/user/sign-in}" class="link-primary">Regístrese aquí</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col"></div>
+  </div>
+</div>
+
+<div th:replace="~{footer :: footer1}"></div>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>
