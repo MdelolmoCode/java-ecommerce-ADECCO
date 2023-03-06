@@ -24,7 +24,7 @@ public class ShoppingCartController {
     private final CartItemService cartItemService;
 
     @GetMapping("/shoppingCarts")
-    public String findAll(Model model){
+    public String findAll(Model model) {
 
         List<ShoppingCart> shoppingCarts = shoppingCartService.findAll();
         model.addAttribute("shoppingcarts", shoppingCarts);
@@ -45,13 +45,11 @@ public class ShoppingCartController {
             Customer customer = optionalCustomer.get();
             cartItems = shoppingCartService.findByCustomer(customer).get().getCartItems();
             totalCost = shoppingCartService.calculateShoppingCartPrice(shoppingCartService.findById(id).get());
-
             totalItems = 0L;
 
             for (CartItem c : cartItems) {
                 totalItems = c.getAmount() + totalItems;
             }
-
         }
 
         model.addAttribute("cartItems", cartItems);
@@ -61,4 +59,5 @@ public class ShoppingCartController {
 
         return "shoppingCart/shoppingcarts-detail";
     }
+
 }
