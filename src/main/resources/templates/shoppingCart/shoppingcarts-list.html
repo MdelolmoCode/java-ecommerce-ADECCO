@@ -34,6 +34,13 @@
                 </tbody>
             </table>
 
+            <div class="alert alert-info" role="alert" th:if="${#lists.isEmpty(shoppingcarts)}">
+                No hay elementos actualmente.
+            </div>
+            <div class="text-center" th:if="${#lists.size(shoppingcarts) > 0}">
+                Hay <span th:text="${#lists.size(shoppingcarts)}"></span> resultados.
+            </div>
+
 
         </div>
     </div>

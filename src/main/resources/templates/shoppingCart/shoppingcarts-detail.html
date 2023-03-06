@@ -20,7 +20,7 @@
                 <th scope="col">Producto</th>
                 <th scope="col">Cantidad</th>
                 <th scope="col">Precio</th>
-                <th scope="col">Coste Total</th>
+                <th scope="col">Coste total del producto</th>
             </tr>
             </thead>
             <tbody>
@@ -28,11 +28,11 @@
                 <td th:text="${cartItem.id}"></td>
                 <td th:text="${cartItem.product.getName()}"></td>
                 <td th:text="${cartItem.getAmount()}"></td>
-                <td th:text="${cartItem.product.getPrice()}"></td>
-                <td th:text="${cartItem.product.getPrice() * cartItem.getAmount()}"></td>
+                <td th:text="${cartItem.product.getPrice()}+ '€'"></td>
+                <td th:text="${cartItem.product.getPrice() * cartItem.getAmount()}+ '€'"></td>
                 <td>
-                    <a class="btn btn-primary" >Añadir producto</a>
-                    <a class="btn btn-danger" >Eliminar producto</a>
+                    <a class="btn btn-primary" >+</a>
+                    <a class="btn btn-danger" >-</a>
                 </td>
             </tr>
             <tr>
@@ -40,8 +40,21 @@
                 <th scope="col"></th>
                 <th scope="col">Cantidad Total</th>
                 <th scope="col"></th>
-                <th scope="col">Coste Total</th>
+                <th scope="col">Coste total del carrito</th>
             </tr>
+
+            <tr>
+                <td></td>
+                <td></td>
+                <td th:text="${totalItems}"></td>
+                <td></td>
+                <td th:text="${totalCoste} + '€'"></td>
+                <td>
+                    <a class="btn btn-success" >Pagar</a>
+                    <a class="btn btn-warning" >Vaciar carrito</a>
+                </td>
+            </tr>
+
             </tbody>
         </table>
 

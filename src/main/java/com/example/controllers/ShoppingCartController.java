@@ -38,20 +38,26 @@ public class ShoppingCartController {
         Optional<Customer> optionalCustomer = customerService.findById(id);
 
         List<CartItem> cartItems = null;
+        Long totalItems = null;
+        double totalCost = 0.0;
         if (optionalCustomer.isPresent()) {
 
             Customer customer = optionalCustomer.get();
             cartItems = shoppingCartService.findByCustomer(customer).get().getCartItems();
+            totalCost = shoppingCartService.calculateShoppingCartPrice(shoppingCartService.findById(id).get());
 
+            totalItems = 0L;
 
-
-
+            for (CartItem c : cartItems) {
+                totalItems = c.getAmount() + totalItems;
+            }
 
         }
 
         model.addAttribute("cartItems", cartItems);
         model.addAttribute("customer", optionalCustomer);
-
+        model.addAttribute("totalItems", totalItems);
+        model.addAttribute("totalCoste", totalCost);
 
         return "shoppingCart/shoppingcarts-detail";
     }
