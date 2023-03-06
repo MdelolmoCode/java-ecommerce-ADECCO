@@ -27,6 +27,7 @@ public class SecurityConfig {
 
                 .and()
                 .formLogin()
+                .loginPage("/login")
                 .defaultSuccessUrl("/products", true)
 
                 .and()

@@ -1,4 +1,4 @@
-package com.example.controllers;
+package com.example.controllers.user;
 
 import com.example.entities.Customer;
 import com.example.entities.UserEntity;

@@ -1,4 +1,4 @@
-package com.example.controllers;
+package com.example.controllers.user;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.http.HttpServletRequest;
