@@ -13,6 +13,9 @@
     <h1>Carrito de [[${customer.get().getName() + " " + customer.get().getSurname()}]]</h1>
 
     <div class="col mt-5">
+
+        </div>
+
         <table class="table">
             <thead>
             <tr>
@@ -51,7 +54,7 @@
                 <td th:text="${totalCoste} + '€'"></td>
                 <td>
                     <a class="btn btn-success" >Pagar</a>
-                    <a class="btn btn-warning" >Vaciar carrito</a>
+                    <a class="btn btn-warning" th:href="${removeItems}" >Vaciar carrito</a>
                 </td>
             </tr>
 

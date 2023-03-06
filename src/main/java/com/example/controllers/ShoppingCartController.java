@@ -40,12 +40,15 @@ public class ShoppingCartController {
         List<CartItem> cartItems = null;
         Long totalItems = null;
         double totalCost = 0.0;
+        List<CartItem> removeItems = null;
         if (optionalCustomer.isPresent()) {
 
             Customer customer = optionalCustomer.get();
             cartItems = shoppingCartService.findByCustomer(customer).get().getCartItems();
             totalCost = shoppingCartService.calculateShoppingCartPrice(shoppingCartService.findById(id).get());
             totalItems = 0L;
+            removeItems = cartItemService.removeAllItems(cartItemService.findCartItemsByShoppingCartId(id));
+
 
             for (CartItem c : cartItems) {
                 totalItems = c.getAmount() + totalItems;
@@ -56,8 +59,10 @@ public class ShoppingCartController {
         model.addAttribute("customer", optionalCustomer);
         model.addAttribute("totalItems", totalItems);
         model.addAttribute("totalCoste", totalCost);
+        model.addAttribute("removeItems", removeItems);
 
         return "shoppingCart/shoppingcarts-detail";
     }
+
 
 }
