@@ -89,7 +89,6 @@ public class ProductController {
     @GetMapping("products/{id}/addProduct")
     public String addProductToShoppingCart(Model model, @PathVariable Long id){
 
-
         return "";
     }
 }

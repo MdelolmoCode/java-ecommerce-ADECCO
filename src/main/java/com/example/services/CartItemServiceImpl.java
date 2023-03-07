@@ -304,12 +304,11 @@ public class CartItemServiceImpl implements CartItemService
         return amountProducts;
     }
 
-
     //============================  UTILITIES  ===================================
 
     private boolean idAmountPriceValido(Long toCheck)
     {
-        if(toCheck != null && toCheck > 0){
+        if(toCheck == null || toCheck <= 0){
             log.info("Error: parametro nulo o no valido");
             return false;
         }
