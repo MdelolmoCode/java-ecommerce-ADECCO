@@ -57,11 +57,15 @@
                     <a class="btn btn-warning" th:href="${removeItems}" >Vaciar carrito</a>
                 </td>
             </tr>
-
             </tbody>
+
         </table>
 
-
+    <div class="alert alert-danger" role="alert" th:if="${#lists.isEmpty(cartItems)}">
+        El carrito está vacio.
+    </div>
+    <div class="alert alert-success" role="alert" th:if="${#lists.size(cartItems) > 0}">
+        Hay <span th:text="${amountProducts}"></span> productos pendientes de pago.
     </div>
 
 
