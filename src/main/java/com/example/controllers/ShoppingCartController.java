@@ -57,4 +57,13 @@ public class ShoppingCartController {
 
         return "redirect:/shoppingCarts";
     }
+
+    @GetMapping("/shoppingCarts/{id}/{idItem}/delete")
+    public String deleteCartItem(@PathVariable Long id, @PathVariable Long idItem){
+
+        cartItemService.deleteById(idItem);
+
+        return "redirect:/shoppingCarts/{id}";
+    }
+
 }
