@@ -25,39 +25,36 @@ public class ShoppingCartController {
 
     @GetMapping("/shoppingCarts")
     public String findAll(Model model) {
-
-        List<ShoppingCart> shoppingCarts = shoppingCartService.findAll();
-        model.addAttribute("shoppingcarts", shoppingCarts);
-
+        model.addAttribute("shoppingcarts", shoppingCartService.findAll());
         return "shoppingCart/shoppingcarts-list"; //
     }
 
     @GetMapping("/shoppingCarts/{id}")
     public String findById(Model model, @PathVariable Long id) {
 
-        Optional<Customer> optionalCustomer = customerService.findById(id);
+        Optional<ShoppingCart> optionalShoppingCart = shoppingCartService.findById(id);
+        if(optionalShoppingCart.isPresent()){
+            model.addAttribute("shoppincartById", optionalShoppingCart.get());
+            model.addAttribute("customer", optionalShoppingCart.get().getCustomer());
+            model.addAttribute("cartItems", optionalShoppingCart.get().getCartItems());
+            model.addAttribute("amountProducts", cartItemService.amountProductByCartItemList(optionalShoppingCart.get().getCartItems()));
+            model.addAttribute("totalShoppingCartCost", shoppingCartService.calculateShoppingCartPrice(optionalShoppingCart.get()));
 
-        List<CartItem> cartItems = null;
-        Long totalItems = null;
-        double totalCost = 0.0;
-        if (optionalCustomer.isPresent()) {
-
-            Customer customer = optionalCustomer.get();
-            cartItems = shoppingCartService.findByCustomer(customer).get().getCartItems();
-            totalCost = shoppingCartService.calculateShoppingCartPrice(shoppingCartService.findById(id).get());
-            totalItems = 0L;
-
-            for (CartItem c : cartItems) {
-                totalItems = c.getAmount() + totalItems;
-            }
+        }else{
+            model.addAttribute("error", "Not Found");
         }
-
-        model.addAttribute("cartItems", cartItems);
-        model.addAttribute("customer", optionalCustomer);
-        model.addAttribute("totalItems", totalItems);
-        model.addAttribute("totalCoste", totalCost);
-
         return "shoppingCart/shoppingcarts-detail";
     }
 
+    @GetMapping("/shoppingCarts/{id}/emptyShoppingCart")
+    public String emptyShoppingCart(Model model, @PathVariable Long id) {
+        Optional<ShoppingCart> optionalShoppingCart = shoppingCartService.findById(id);
+        if(optionalShoppingCart.isPresent()){
+
+            model.addAttribute("removeItemsFromShoppingCart", cartItemService.removeAllItems(optionalShoppingCart.get().getCartItems()));
+
+        }
+
+        return "redirect:/shoppingCarts";
+    }
 }

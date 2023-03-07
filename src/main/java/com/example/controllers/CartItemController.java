@@ -6,8 +6,10 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
+import java.util.Optional;
 
 @AllArgsConstructor
 @Controller
@@ -20,6 +22,20 @@ public class CartItemController
     {
         List<CartItem> cartItemList = cartItemService.findAllByOrderByShoppingCartId();
         model.addAttribute("cartItems", cartItemList);
-        return "cartItem/cartitem-list";
+        return "cartitem/cartitem-list";
     }
+
+    @GetMapping("cartitem/{id}")
+    public String findById(Model model, @PathVariable Long id)
+    {
+        Optional<CartItem> cartItemOpt = cartItemService.findById(id);
+
+        if(cartItemOpt.isEmpty())
+            model.addAttribute("error", "No existe el cartItem solicitado");
+        else
+            model.addAttribute("cartitem", cartItemOpt.get());
+
+        return "cartitem/cartitem-detail";
+    }
+
 }
