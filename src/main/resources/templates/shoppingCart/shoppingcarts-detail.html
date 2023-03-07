@@ -55,7 +55,7 @@
                         <td th:text="${totalShoppingCartCost} + '€'"></td>
                         <td>
                             <a class="btn btn-success">Pagar</a>
-                            <a class="btn btn-warning" th:href="${removeItems}">Vaciar carrito</a>
+                            <a class="btn btn-warning" th:href="@{/shoppingCarts/{id}/emptyShoppingCart(id=${(shoppincartById.getId())})}">Vaciar carrito</a>
                         </td>
                     </tr>
                     </tbody>

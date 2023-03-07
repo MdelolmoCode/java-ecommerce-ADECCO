@@ -39,12 +39,22 @@ public class ShoppingCartController {
             model.addAttribute("cartItems", optionalShoppingCart.get().getCartItems());
             model.addAttribute("amountProducts", cartItemService.amountProductByCartItemList(optionalShoppingCart.get().getCartItems()));
             model.addAttribute("totalShoppingCartCost", shoppingCartService.calculateShoppingCartPrice(optionalShoppingCart.get()));
-            model.addAttribute("removeItemsFromShoppingCart", cartItemService.removeAllItems(optionalShoppingCart.get().getCartItems()));
+
         }else{
             model.addAttribute("error", "Not Found");
         }
         return "shoppingCart/shoppingcarts-detail";
     }
 
+    @GetMapping("/shoppingCarts/{id}/emptyShoppingCart")
+    public String emptyShoppingCart(Model model, @PathVariable Long id) {
+        Optional<ShoppingCart> optionalShoppingCart = shoppingCartService.findById(id);
+        if(optionalShoppingCart.isPresent()){
 
+            model.addAttribute("removeItemsFromShoppingCart", cartItemService.removeAllItems(optionalShoppingCart.get().getCartItems()));
+
+        }
+
+        return "redirect:/shoppingCarts";
+    }
 }
