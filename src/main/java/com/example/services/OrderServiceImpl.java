@@ -1,5 +1,6 @@
 package com.example.services;
 
+import com.example.entities.CartItem;
 import com.example.entities.Customer;
 import com.example.entities.Order;
 import com.example.entities.ShoppingCart;
@@ -21,6 +22,8 @@ import java.util.Optional;
 @Service
 public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
+
+    private static long currentOrderNumber = 1;
 
     @Override
     public List<Order> findAll() {
@@ -45,14 +48,6 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Optional<Order> findByShoppingCart(ShoppingCart shoppingCart) {
-        log.info("findByShoppingCart {}", shoppingCart);
-        if (shoppingCart == null)
-            return Optional.empty();
-        return orderRepository.findByShoppingCart(shoppingCart);
-    }
-
-    @Override
     public List<Order> findAllByAddressCity(String city) {
         log.info("findAllByAddressCity {}", city);
         if (!StringUtils.hasLength(city))
@@ -65,7 +60,27 @@ public class OrderServiceImpl implements OrderService {
         log.info("findByCustomer {}", customer);
         if (customer == null)
             return Optional.empty();
-        return orderRepository.findByShoppingCartCustomer(customer);
+        return orderRepository.findByCustomer(customer);
+    }
+
+    @Override
+    public double calculateTotalPrice(List<CartItem> cartItems) {
+        log.info("calculateTotalPrice {}", cartItems);
+        if (cartItems == null)
+            return 0;
+
+        return cartItems.stream().mapToDouble(CartItem::getPrice).sum();
+    }
+
+    @Override
+    public void emptyCart(ShoppingCart shoppingCart) {
+        shoppingCart.getCartItems().forEach(cartItem -> cartItem.setShoppingCart(null));
+        shoppingCart.getCartItems().clear();
+    }
+
+    @Override
+    public long getAvailableOrderNumber() {
+        return currentOrderNumber++;
     }
 
     @Override
@@ -101,9 +116,10 @@ public class OrderServiceImpl implements OrderService {
 
         Order orderFromDB = orderOpt.get();
         orderFromDB.setOrderNumber(order.getOrderNumber());
-        orderFromDB.setShoppingCart(order.getShoppingCart());
         orderFromDB.setAddress(order.getAddress());
         orderFromDB.setPaymentMethod(order.getPaymentMethod());
+        orderFromDB.setCustomer(order.getCustomer());
+        orderFromDB.setCartItems(order.getCartItems());
 
         try {
             return orderRepository.save(orderFromDB);

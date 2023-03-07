@@ -16,10 +16,6 @@ class OrderRepositoryTest {
 
     @Autowired
     OrderRepository orderRepository;
-    @Autowired
-    ShoppingCartRepository shoppingCartRepository;
-    @Autowired
-    CustomerRepository customerRepository;
 
     @Sql("Orders.sql")
     @Test
@@ -53,23 +49,4 @@ class OrderRepositoryTest {
         assertTrue(orderOpt.isEmpty());
     }
 
-    @Sql("Orders.sql")
-    @Test
-    void findByShoppingCart() {
-        var cart1 = shoppingCartRepository.findById(1L).get();
-        Optional<Order> orderOpt = orderRepository.findByShoppingCart(cart1);
-        assertTrue(orderOpt.isPresent());
-    }
-
-    @Sql("Orders.sql")
-    @Test
-    void findByShoppingCartCustomer() {
-        var customer1 = customerRepository.findById(1L).get();
-        Optional<Order> orderOpt = orderRepository.findByShoppingCartCustomer(customer1);
-        assertTrue(orderOpt.isPresent());
-
-        var customer3 = customerRepository.findById(3L).get(); // Customer sin ShoppingCart
-        orderOpt = orderRepository.findByShoppingCartCustomer(customer3);
-        assertTrue(orderOpt.isEmpty());
-    }
 }

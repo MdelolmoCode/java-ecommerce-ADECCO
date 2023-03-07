@@ -25,17 +25,15 @@
             <div class="alert alert-danger" role="alert" >
                 <p th:text="${error}"></p>
             </div>
-            <a type="button" class="btn btn-primary" th:href="@{/order}">Volver</a>
+            <a type="button" class="btn btn-primary" th:href="@{/orders}">Volver</a>
         </div>
 
-        <form th:unless="${error}" th:action="@{/orders}" method="POST" th:object="${order}">
+        <form th:unless="${error}" th:action="@{/orders/{cartId}(cartId=${cartId})}" method="POST" th:object="${order}">
 
             <input type="hidden" id="id" name="id" th:field="*{id}" />
-
-            <div class="mb-3">
-                <strong><label for="orderNumber" class="form-label">Número de pedido</label></strong>
-                <input type="number" class="form-control" id="orderNumber" th:field="*{orderNumber}">
-            </div>
+            <input type="hidden" id="orderNumber" name="orderNumber" th:field="*{orderNumber}" />
+            <input type="hidden" id="customer" name="customer" th:field="*{customer}" />
+            <input type="hidden" id="cartItems" name="cartItems" th:field="*{cartItems}" />
 
             <div class="mb-3">
                 <strong><div class="form-label">Método de pago</div></strong>

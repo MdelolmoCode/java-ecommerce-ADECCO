@@ -35,7 +35,7 @@
         <tbody>
         <tr th:each="cartItem : ${cartItems}">
           <td th:text="${cartItem.id}"></td>
-          <td th:text="${cartItem.shoppingCart.getId()}"></td>
+          <td><span th:if="${cartItem.shoppingCart}" th:text="${cartItem.shoppingCart.getId()}"></span></td>
           <td th:text="${cartItem.product.getName()}"></td>
           <td th:text="${cartItem.amount}"></td>
           <td th:text="${cartItem.getPrice()}"></td>

@@ -29,6 +29,13 @@
           <div class="card-body">
               <h5 class="card-title" th:text="|Pedido nº: ${order.orderNumber}|"></h5>
           </div>
+
+          <ul class="list-group list-group-flush" th:if="${order.customer}">
+              <li class="list-group-item">
+                  <b>Cliente:</b> <span th:text="${order.customer.name} + ' ' + ${order.customer.surname}"></span>
+              </li>
+          </ul>
+
           <ul class="list-group list-group-flush">
               <li class="list-group-item">
                   <b>Método de pago:</b> <span th:text="${order.paymentMethod.getDisplayName()}"></span>
@@ -36,8 +43,8 @@
           </ul>
 
           <div class="my-2 mx-2">
-              <b>Carrito:</b>
-              <div th:replace="~{item-list-fragment :: item-list(shoppingCart=${order.shoppingCart})}"></div>
+              <b>Productos:</b>
+              <div th:replace="~{item-list-fragment :: item-list(cartItems=${order.cartItems})}"></div>
           </div>
 
           <ul class="list-group list-group-flush">
