@@ -294,6 +294,17 @@ public class CartItemServiceImpl implements CartItemService
         return shoppingCart.getCartItems();
     }
 
+    @Override
+    public Long amountProductByCartItemList(List<CartItem> cartItemList) {
+
+        Long amountProducts = 0L;
+        for(CartItem c: cartItemList){
+
+            amountProducts = c.getAmount() + amountProducts;
+        }
+        return amountProducts;
+    }
+
 
     //============================  UTILITIES  ===================================
 

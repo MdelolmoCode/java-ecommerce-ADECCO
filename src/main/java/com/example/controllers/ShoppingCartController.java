@@ -25,9 +25,7 @@ public class ShoppingCartController {
 
     @GetMapping("/shoppingCarts")
     public String findAll(Model model) {
-
-        List<ShoppingCart> shoppingCarts = shoppingCartService.findAll();
-        model.addAttribute("shoppingcarts", shoppingCarts);
+        model.addAttribute("shoppingcarts", shoppingCartService.findAll());
 
         return "shoppingCart/shoppingcarts-list"; //
     }
@@ -35,32 +33,17 @@ public class ShoppingCartController {
     @GetMapping("/shoppingCarts/{id}")
     public String findById(Model model, @PathVariable Long id) {
 
-        Optional<Customer> optionalCustomer = customerService.findById(id);
-
-        List<CartItem> cartItems = null;
-        Long totalItems = null;
-        double totalCost = 0.0;
-        List<CartItem> removeItems = null;
-        if (optionalCustomer.isPresent()) {
-
-            Customer customer = optionalCustomer.get();
-            cartItems = shoppingCartService.findByCustomer(customer).get().getCartItems();
-            totalCost = shoppingCartService.calculateShoppingCartPrice(shoppingCartService.findById(id).get());
-            totalItems = 0L;
-            removeItems = cartItemService.removeAllItems(cartItemService.findCartItemsByShoppingCartId(id));
-
-
-            for (CartItem c : cartItems) {
-                totalItems = c.getAmount() + totalItems;
-            }
+        Optional<ShoppingCart> optionalShoppingCart = shoppingCartService.findById(id);
+        if(optionalShoppingCart.isPresent()){
+            model.addAttribute("shoppincartById", optionalShoppingCart.get());
+            model.addAttribute("customer", optionalShoppingCart.get().getCustomer());
+            model.addAttribute("cartItems", optionalShoppingCart.get().getCartItems());
+            model.addAttribute("amountProducts", cartItemService.amountProductByCartItemList(optionalShoppingCart.get().getCartItems()));
+            model.addAttribute("totalShoppingCartCost", shoppingCartService.calculateShoppingCartPrice(optionalShoppingCart.get()));
+            model.addAttribute("removeItemsFromShoppingCart", cartItemService.removeAllItems(optionalShoppingCart.get().getCartItems()));
+        }else{
+            model.addAttribute("error", "Not Found");
         }
-
-        model.addAttribute("cartItems", cartItems);
-        model.addAttribute("customer", optionalCustomer);
-        model.addAttribute("totalItems", totalItems);
-        model.addAttribute("totalCoste", totalCost);
-        model.addAttribute("removeItems", removeItems);
-
         return "shoppingCart/shoppingcarts-detail";
     }
 

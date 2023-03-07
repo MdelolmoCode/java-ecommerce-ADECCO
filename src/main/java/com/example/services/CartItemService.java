@@ -51,4 +51,5 @@ public interface CartItemService
 
     List<CartItem> findCartItemsByShoppingCartId (Long id);
 
+    Long amountProductByCartItemList (List<CartItem> cartItemList);
 }

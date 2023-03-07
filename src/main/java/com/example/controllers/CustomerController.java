@@ -45,7 +45,6 @@ public class CustomerController {
     public String findById(Model model, @PathVariable Long id){
         Optional<Customer> customerOptional = customerService.findById(id);
         if(customerOptional.isPresent()){
-
             model.addAttribute("customer", customerOptional.get());
         }else{
             model.addAttribute("error", "customer not found");

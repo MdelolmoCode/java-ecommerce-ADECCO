@@ -10,7 +10,7 @@
 <div th:replace="~{navbar :: nav1}"></div>
 
 <div class="container text-center">
-    <h1>Carrito de [[${customer.get().getName() + " " + customer.get().getSurname()}]]</h1>
+    <h1>Carrito de [[${customer.getName() + " " + customer.getSurname()}]]</h1>
 
     <div class="col mt-5">
 
@@ -49,9 +49,9 @@
             <tr>
                 <td></td>
                 <td></td>
-                <td th:text="${totalItems}"></td>
+                <td th:text="${amountProducts}"></td>
                 <td></td>
-                <td th:text="${totalCoste} + '€'"></td>
+                <td th:text="${totalShoppingCartCost} + '€'"></td>
                 <td>
                     <a class="btn btn-success" >Pagar</a>
                     <a class="btn btn-warning" th:href="${removeItems}" >Vaciar carrito</a>
@@ -66,8 +66,6 @@
 
 
 
-
-</div>
 <div th:replace="~{footer :: footer1}"></div>
 <script th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
 </body>
