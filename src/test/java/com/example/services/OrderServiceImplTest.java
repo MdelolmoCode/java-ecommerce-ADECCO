@@ -2,7 +2,6 @@ package com.example.services;
 
 import com.example.entities.Customer;
 import com.example.entities.Order;
-import com.example.entities.ShoppingCart;
 import com.example.entities.enums.PaymentMethod;
 import com.example.repositories.OrderRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -30,9 +29,9 @@ class OrderServiceImplTest {
     @Test
     void findAll() {
         List<Order> ordersDB = new ArrayList<>(List.of(
-                new Order(1L, 1000L, null, null, PaymentMethod.CREDIT_CARD),
-                new Order(2L, 2000L, null, null, PaymentMethod.CREDIT_CARD),
-                new Order(3L, 3000L, null, null, PaymentMethod.DEBIT_CARD)
+                new Order(1L, 1000L, null, null, null, PaymentMethod.CREDIT_CARD),
+                new Order(2L, 2000L, null, null, null, PaymentMethod.CREDIT_CARD),
+                new Order(3L, 3000L, null, null, null, PaymentMethod.DEBIT_CARD)
         ));
         when(orderRepo.findAll()).thenReturn(ordersDB);
 
@@ -56,7 +55,7 @@ class OrderServiceImplTest {
 
     @Test
     void findById() {
-        Order orderDB = new Order(1L, 1000L, null, null, PaymentMethod.CREDIT_CARD);
+        Order orderDB = new Order(1L, 1000L, null, null, null, PaymentMethod.CREDIT_CARD);
         when(orderRepo.findById(1L)).thenReturn(Optional.of(orderDB));
         when(orderRepo.findById(999L)).thenReturn(Optional.empty());
 
@@ -74,7 +73,7 @@ class OrderServiceImplTest {
 
     @Test
     void findByOrderNumber() {
-        Order orderDB = new Order(1L, 1000L, null, null, PaymentMethod.CREDIT_CARD);
+        Order orderDB = new Order(1L, 1000L, null, null, null, PaymentMethod.CREDIT_CARD);
         when(orderRepo.findByOrderNumber(1000L)).thenReturn(Optional.of(orderDB));
 
         assertTrue(orderService.findByOrderNumber(1000L).isPresent());
@@ -84,24 +83,10 @@ class OrderServiceImplTest {
     }
 
     @Test
-    void findByShoppingCart() {
-        ShoppingCart shoppingCartDB1 = new ShoppingCart();
-        ShoppingCart shoppingCartDB2 = new ShoppingCart();
-        Order orderDB = new Order(1L, 1000L, shoppingCartDB1, null, PaymentMethod.CREDIT_CARD);
-        when(orderRepo.findByShoppingCart(shoppingCartDB1)).thenReturn(Optional.of(orderDB));
-        when(orderRepo.findByShoppingCart(shoppingCartDB2)).thenReturn(Optional.empty());
-
-        assertTrue(orderService.findByShoppingCart(shoppingCartDB1).isPresent());
-        assertTrue(orderService.findByShoppingCart(shoppingCartDB2).isEmpty());
-        assertTrue(orderService.findByShoppingCart(null).isEmpty());
-    }
-
-    @Test
     void findByCustomer() {
         Customer customerDB = new Customer();
-        ShoppingCart shoppingCartDB = new ShoppingCart();
-        Order orderDB = new Order(1L, 1000L, shoppingCartDB, null, PaymentMethod.CREDIT_CARD);
-        when(orderRepo.findByShoppingCartCustomer(customerDB)).thenReturn(Optional.of(orderDB));
+        Order orderDB = new Order(1L, 1000L, customerDB, null, null, PaymentMethod.CREDIT_CARD);
+        when(orderRepo.findByCustomer(customerDB)).thenReturn(Optional.of(orderDB));
 
         assertTrue(orderService.findByCustomer(customerDB).isPresent());
         assertTrue(orderService.findByCustomer(null).isEmpty());
@@ -109,8 +94,8 @@ class OrderServiceImplTest {
 
     @Test
     void save() {
-        Order orderInput = new Order(null, 1000L, null, null, PaymentMethod.PAYPAL);
-        Order orderOutput = new Order(1L, 1000L, null, null, PaymentMethod.PAYPAL);
+        Order orderInput = new Order(null, 1000L, null, null, null, PaymentMethod.PAYPAL);
+        Order orderOutput = new Order(1L, 1000L, null, null, null, PaymentMethod.PAYPAL);
         when(orderRepo.save(orderInput)).thenReturn(orderOutput);
 
         Order orderDB = orderService.save(orderInput);
@@ -124,7 +109,7 @@ class OrderServiceImplTest {
 
     @Test
     void saveWithId() {
-        Order orderDB = new Order(1L, 1000L, null, null, PaymentMethod.PAYPAL);
+        Order orderDB = new Order(1L, 1000L, null, null, null, PaymentMethod.PAYPAL);
         when(orderRepo.save(orderDB)).thenReturn(orderDB);
         when(orderRepo.findById(1L)).thenReturn(Optional.of(orderDB));
 
@@ -144,8 +129,8 @@ class OrderServiceImplTest {
 
     @Test
     void update() {
-        Order orderOld = new Order(1L, 1000L, null, null, PaymentMethod.PAYPAL);
-        Order orderNew = new Order(1L, 2000L, null, null, PaymentMethod.PAYPAL);
+        Order orderOld = new Order(1L, 1000L, null, null, null, PaymentMethod.PAYPAL);
+        Order orderNew = new Order(1L, 2000L, null, null, null, PaymentMethod.PAYPAL);
         when(orderRepo.findById(1L)).thenReturn(Optional.of(orderOld));
         when(orderRepo.save(any())).thenReturn(orderNew);
 
@@ -163,13 +148,13 @@ class OrderServiceImplTest {
 
     @Test
     void updateIdNull() {
-        Order order = new Order(null, 1000L, null, null, PaymentMethod.PAYPAL);
+        Order order = new Order(null, 1000L, null, null, null, PaymentMethod.PAYPAL);
         assertThrows(IllegalArgumentException.class, () -> orderService.update(order));
     }
 
     @Test
     void updateNotInDB() {
-        Order order = new Order(1L, 2000L, null, null, PaymentMethod.PAYPAL);
+        Order order = new Order(1L, 2000L, null, null, null, PaymentMethod.PAYPAL);
         when(orderRepo.findById(1L)).thenReturn(Optional.empty());
 
         assertThrows(EntityNotFoundException.class, () -> orderService.update(order));

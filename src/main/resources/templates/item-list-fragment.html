@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <body>
-<div th:fragment="item-list (shoppingCart)">
-  <table class="table table-hover mt-1" th:if="${shoppingCart} AND ${#lists.size(shoppingCart.cartItems) > 0}">
+<div th:fragment="item-list (cartItems)">
+  <table class="table table-hover mt-1" th:if="${cartItems} AND ${#lists.size(cartItems) > 0}">
     <thead class="table-light">
     <tr>
       <th scope="col">Producto</th>
@@ -12,7 +12,7 @@
     </thead>
     <tbody>
     <!-- Productos -->
-    <tr th:each="cartItem : ${shoppingCart.cartItems}">
+    <tr th:each="cartItem : ${cartItems}">
       <td>
         <a class="btn btn-link btn-sm"
            th:text="${cartItem.product.name}"
@@ -26,11 +26,11 @@
     <tr>
       <td></td>
       <td><b>Total:</b></td>
-      <td class="text-success" th:text="|${@shoppingCartServiceImpl.calculateShoppingCartPrice(shoppingCart)} €|"></td>
+      <td class="text-success" th:text="|${@orderServiceImpl.calculateTotalPrice(cartItems)} €|"></td>
     </tr>
     </tbody>
   </table>
-  <span th:if="${shoppingCart} == null OR ${#lists.size(shoppingCart.cartItems) == 0}">Vacío</span>
+  <span th:if="${cartItems} == null OR ${#lists.size(cartItems) == 0}">Vacío</span>
 </div>
 </body>
 </html>

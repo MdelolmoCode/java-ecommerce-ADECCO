@@ -1,8 +1,10 @@
 package com.example.controllers;
 
 import com.example.entities.Order;
+import com.example.entities.ShoppingCart;
 import com.example.services.AddressService;
 import com.example.services.OrderService;
+import com.example.services.ShoppingCartService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +22,7 @@ public class OrderController {
 
     private final OrderService orderService;
     private final AddressService addressService;
+    private final ShoppingCartService shoppingCartService;
 
     @GetMapping("orders")
     public String findAll(Model model) {
@@ -34,15 +37,28 @@ public class OrderController {
         if (orderOpt.isPresent())
             model.addAttribute("order", orderOpt.get());
         else
-            model.addAttribute("error", "Order not found");
+            model.addAttribute("error", "No existe ese pedido.");
 
         return "order/order-detail";
     }
 
-    @GetMapping("orders/create")
-    public String createForm(Model model) {
-        model.addAttribute("order", new Order());
-        model.addAttribute("addresses", addressService.findAll());
+    @GetMapping("orders/create/{cartId}")
+    public String createForm(Model model, @PathVariable Long cartId) {
+        Optional<ShoppingCart> shoppingCartOpt = shoppingCartService.findById(cartId);
+        if (shoppingCartOpt.isPresent()) {
+            ShoppingCart shoppingCart = shoppingCartOpt.get();
+            Order order = new Order();
+            order.setCustomer(shoppingCart.getCustomer());
+            order.setCartItems(shoppingCart.getCartItems());
+            order.setOrderNumber(orderService.getAvailableOrderNumber());
+
+            model.addAttribute("order", order);
+            model.addAttribute("cartId", cartId);
+            model.addAttribute("addresses", addressService.findAll());
+        }
+        else
+            model.addAttribute("error", "No existe ese carrito.");
+
         return "order/order-form";
     }
 
@@ -53,14 +69,16 @@ public class OrderController {
             model.addAttribute("order", orderOpt.get());
             model.addAttribute("addresses", addressService.findAll());
         } else {
-            model.addAttribute("error", "Order not found");
+            model.addAttribute("error", "No existe se pedido.");
         }
 
         return "order/order-form";
     }
 
-    @PostMapping("orders")
-    public String saveForm(@ModelAttribute Order order) {
+    @PostMapping("orders/{cartId}")
+    public String saveForm(@ModelAttribute Order order, @PathVariable Long cartId) {
+        Optional<ShoppingCart> shoppingCartOpt = shoppingCartService.findById(cartId);
+        shoppingCartOpt.ifPresent(orderService::emptyCart);
         orderService.save(order);
         return "redirect:/orders";
     }
