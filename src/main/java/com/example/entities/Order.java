@@ -23,17 +23,17 @@ public class Order {
 
     @Column(unique = true)
     private Long orderNumber;
-    @OneToOne
-    private ShoppingCart shoppingCart;
+
+    @ManyToOne
+    @JoinColumn(unique = true)
+    Customer customer;
+
+    @OneToMany(fetch = FetchType.EAGER)
+    @ToString.Exclude
+    private List<CartItem> cartItems = new ArrayList<>();
+
     @ManyToOne
     private Address address;
     private PaymentMethod paymentMethod;
-
-    public List<CartItem> getCartItems() {
-        if (getShoppingCart() == null || getShoppingCart().getCartItems() == null) {
-            return new ArrayList<>();
-        }
-        return getShoppingCart().getCartItems();
-    }
 
 }

@@ -26,7 +26,7 @@
                         <th scope="col">Número de pedido</th>
                         <th scope="col">Método de pago</th>
                         <th scope="col">Dirección</th>
-                        <th scope="col">Carrito</th>
+                        <th scope="col">Productos</th>
                         <th scope="col">Acciones</th>
                     </tr>
                 </thead>
@@ -46,7 +46,7 @@
                         </td>
 
                         <td>
-                            <div th:replace="~{item-list-fragment :: item-list(shoppingCart=${order.shoppingCart})}"></div>
+                            <div th:replace="~{item-list-fragment :: item-list(cartItems=${order.cartItems})}"></div>
                         </td>
 
                         <td>
