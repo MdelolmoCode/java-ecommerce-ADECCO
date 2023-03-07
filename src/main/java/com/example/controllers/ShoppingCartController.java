@@ -26,7 +26,6 @@ public class ShoppingCartController {
     @GetMapping("/shoppingCarts")
     public String findAll(Model model) {
         model.addAttribute("shoppingcarts", shoppingCartService.findAll());
-
         return "shoppingCart/shoppingcarts-list"; //
     }
 

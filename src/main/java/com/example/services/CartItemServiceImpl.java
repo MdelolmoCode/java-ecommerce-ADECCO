@@ -248,7 +248,6 @@ public class CartItemServiceImpl implements CartItemService
         if(optionalCartItem.isEmpty())
         {
             log.info("Error: cartItem no encontrado");
-
         }else {
             CartItem cartItem = optionalCartItem.get();
             Long amountPresent = cartItem.getAmount();
