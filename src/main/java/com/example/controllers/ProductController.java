@@ -1,12 +1,15 @@
 package com.example.controllers;
 
 import com.example.entities.Product;
+import com.example.entities.ShoppingCart;
+import com.example.entities.UserEntity;
 import com.example.repositories.CategoryRepository;
 import com.example.repositories.ManufacturerRepository;
 import com.example.repositories.ProductRepository;
 import com.example.services.CategoryService;
 import com.example.services.ManufacturerService;
 import com.example.services.ProductService;
+import com.example.services.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,6 +31,7 @@ public class ProductController {
     private final ManufacturerService manufacturerService;
     private final CategoryRepository categoryRepository;
     private final CategoryService categoryService;
+    private final UserService userService;
 
 
 
@@ -80,5 +84,12 @@ public class ProductController {
     public String deleteById(@PathVariable Long id) {
         productService.deleteById(id);
         return "redirect:/products";
+    }
+
+    @GetMapping("products/{id}/addProduct")
+    public String addProductToShoppingCart(Model model, @PathVariable Long id){
+
+
+        return "";
     }
 }

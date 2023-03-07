@@ -1,6 +1,8 @@
 package com.example.services;
 
+import com.example.entities.CartItem;
 import com.example.entities.Product;
+import com.example.entities.ShoppingCart;
 
 import java.util.List;
 import java.util.Optional;
@@ -38,5 +40,7 @@ public interface ProductService {
     void removeStock(Product product, Long amount);
     boolean isAvailable(Product product); // comprobar si hay stock (stock !0)
     Product changeAvailability(Product product); // si hay 0 stock (isAvailable==0), cambiar a no disponible. y viceversa
+
+    public List<CartItem> addProductToShoopingCart(Long id, ShoppingCart shoppingCart);
 
 }

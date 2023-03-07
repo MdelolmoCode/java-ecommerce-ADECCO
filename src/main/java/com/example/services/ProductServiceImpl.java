@@ -1,6 +1,8 @@
 package com.example.services;
 
+import com.example.entities.CartItem;
 import com.example.entities.Product;
+import com.example.entities.ShoppingCart;
 import com.example.exception.EntitySavingException;
 import com.example.repositories.ProductRepository;
 import lombok.AllArgsConstructor;
@@ -18,6 +20,7 @@ import java.util.Optional;
 public class ProductServiceImpl implements ProductService {
 
     private ProductRepository productRepo;
+    private final  CartItemService cartItemService;
 
     @Override
     public Optional<Product> findByIdWithCategories(Long id) {
@@ -249,6 +252,18 @@ public class ProductServiceImpl implements ProductService {
             log.error("Error saving product", e);
         }
         throw new EntitySavingException("Error saving product");
+    }
+
+    @Override
+    public List<CartItem> addProductToShoopingCart(Long id, ShoppingCart shoppingCart) {
+
+        List<CartItem> cartItemList = shoppingCart.getCartItems();
+
+        Optional <CartItem> optionalCartItem = cartItemService.findById(id);
+        cartItemList.add(optionalCartItem.get());
+
+
+        return cartItemList;
     }
 
 }
