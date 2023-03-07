@@ -21,7 +21,7 @@ public class CartItem
     @Column(name = "cart_item_id", nullable = false)
     private Long id;
 
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @ToString.Exclude
     private ShoppingCart shoppingCart;
 

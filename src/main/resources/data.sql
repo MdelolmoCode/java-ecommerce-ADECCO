@@ -137,6 +137,7 @@ VALUES (1, 1, 1, 1),
        (24, 3, 8, 10)
 ;
 
+/*
 TRUNCATE TABLE orders;
 INSERT INTO orders (id, order_number, payment_method, address_id, customer_id)
 VALUES (1, 1, 0, 1, 1),
@@ -148,8 +149,9 @@ TRUNCATE TABLE orders_cart_items;
 INSERT INTO orders_cart_items (order_id, cart_items_cart_item_id)
 VALUES (1, 1),
        (1, 2),
-       (1, 3);
-
+       (1, 3)
+;
+*/
 
 TRUNCATE TABLE users;
 INSERT INTO users (id, customer_id, username, password)

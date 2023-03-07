@@ -3,6 +3,7 @@ package com.example.services;
 import com.example.entities.CartItem;
 import com.example.entities.Customer;
 import com.example.entities.Order;
+import com.example.entities.ShoppingCart;
 import com.example.exception.EntityDeleteException;
 import com.example.exception.EntitySavingException;
 import com.example.repositories.OrderRepository;
@@ -21,6 +22,8 @@ import java.util.Optional;
 @Service
 public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
+
+    private static long currentOrderNumber = 1;
 
     @Override
     public List<Order> findAll() {
@@ -66,10 +69,18 @@ public class OrderServiceImpl implements OrderService {
         if (cartItems == null)
             return 0;
 
-        return cartItems.stream().mapToDouble(this::getCartItemPrice).sum();
+        return cartItems.stream().mapToDouble(CartItem::getPrice).sum();
     }
-    double getCartItemPrice(CartItem cartItem) {
-        return cartItem.getPrice() * cartItem.getAmount();
+
+    @Override
+    public void emptyCart(ShoppingCart shoppingCart) {
+        shoppingCart.getCartItems().forEach(cartItem -> cartItem.setShoppingCart(null));
+        shoppingCart.getCartItems().clear();
+    }
+
+    @Override
+    public long getAvailableOrderNumber() {
+        return currentOrderNumber++;
     }
 
     @Override
