@@ -73,6 +73,10 @@
             <li><a class="dropdown-item" th:href="@{/user/{id}/edit(id=${#authentication.principal.id})}">
               Cambiar username / password</a>
             </li>
+            <li><a class="dropdown-item"
+                   th:href="@{/shoppingCarts/{id}(id=${@shoppingCartServiceImpl.findByCustomer(#authentication.principal.customer).get().getId()})}">
+              Carrito</a>
+            </li>
             <li><a class="dropdown-item" th:href="@{/logout}">
               Cerrar sesión</a>
             </li>
