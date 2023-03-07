@@ -25,7 +25,6 @@ public class Order {
     private Long orderNumber;
 
     @ManyToOne
-    @JoinColumn(unique = true)
     Customer customer;
 
     @OneToMany(fetch = FetchType.EAGER)
