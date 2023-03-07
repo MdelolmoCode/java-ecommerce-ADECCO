@@ -1,6 +1,7 @@
 package com.example.services;
 
 import com.example.entities.CartItem;
+import com.example.entities.ShoppingCart;
 
 import java.util.List;
 import java.util.Optional;
@@ -46,4 +47,9 @@ public interface CartItemService
 
     void removeAmountById(Long cartItem, Long amount);
 
+    List<CartItem> removeAllItems(List<CartItem> cartItemList);
+
+    List<CartItem> findCartItemsByShoppingCartId (Long id);
+
+    Long amountProductByCartItemList (List<CartItem> cartItemList);
 }

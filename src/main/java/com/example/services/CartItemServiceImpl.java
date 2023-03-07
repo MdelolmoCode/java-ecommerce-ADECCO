@@ -1,6 +1,7 @@
 package com.example.services;
 
 import com.example.entities.CartItem;
+import com.example.entities.ShoppingCart;
 import com.example.exception.EntitySavingException;
 import com.example.repositories.CartItemRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -17,6 +18,7 @@ import java.util.Optional;
 public class CartItemServiceImpl implements CartItemService
 {
     private final CartItemRepository cartItemRepo;
+    private  final  ShoppingCartService shoppingCartService;
 
     @Override
     public List<CartItem> findAll()
@@ -274,6 +276,34 @@ public class CartItemServiceImpl implements CartItemService
         }
     }
 
+    @Override
+    public List<CartItem> removeAllItems(List<CartItem> cartItemList) {
+
+        for(CartItem c: cartItemList){
+
+            deleteById(c.getId());
+        }
+        return cartItemList;
+    }
+
+    @Override
+    public List<CartItem> findCartItemsByShoppingCartId(Long id) {
+
+        ShoppingCart shoppingCart = shoppingCartService.findById(id).get();
+
+        return shoppingCart.getCartItems();
+    }
+
+    @Override
+    public Long amountProductByCartItemList(List<CartItem> cartItemList) {
+
+        Long amountProducts = 0L;
+        for(CartItem c: cartItemList){
+
+            amountProducts = c.getAmount() + amountProducts;
+        }
+        return amountProducts;
+    }
 
     //============================  UTILITIES  ===================================
 
