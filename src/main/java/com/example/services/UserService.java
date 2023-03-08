@@ -11,5 +11,6 @@ public interface UserService {
     UserEntity save(UserEntity user);
     UserEntity update(UserEntity user);
 
+    UserEntity getCurrentUser();
     boolean isCurrentUser(Long id);
 }

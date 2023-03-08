@@ -1,5 +1,6 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport"
@@ -40,7 +41,8 @@
               <p class="card-text" th:text="${product.description}"></p>
               <p strong class="card-text" th:text="${product.price} + €"></p>
               <a class="btn btn-primary" th:href="@{/products/{id}(id=${product.id})}">Ver</a>
-              <a class="btn btn-success">Añadir al carrito</a>
+              <a sec:authorize="isAuthenticated()"
+                 class="btn btn-success" th:href="@{/products/{id}/add(id=${product.id})}">Añadir al carrito</a>
             </div>
           </div>
         </div>

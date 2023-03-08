@@ -1,6 +1,5 @@
 package com.example.controllers;
 
-import com.example.entities.CartItem;
 import com.example.entities.Customer;
 import com.example.entities.ShoppingCart;
 import com.example.services.CartItemService;
@@ -12,7 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import java.util.List;
 import java.util.Optional;
 
 @AllArgsConstructor
@@ -44,6 +42,20 @@ public class ShoppingCartController {
             model.addAttribute("error", "Not Found");
         }
         return "shoppingCart/shoppingcarts-detail";
+    }
+
+    @GetMapping("shoppingCarts/byCustomer/{customerId}")
+    public String findByCustomerId(Model model, @PathVariable Long customerId) {
+        Optional<Customer> customerOpt = customerService.findById(customerId);
+        if (customerOpt.isEmpty())
+            return "redirect:/shoppingCarts";
+
+        Optional<ShoppingCart> shoppingCartOpt = shoppingCartService.findByCustomer(customerOpt.get());
+        if (shoppingCartOpt.isEmpty())
+            return "redirect:/shoppingCarts";
+
+        Long shoppingCartId = shoppingCartOpt.get().getId();
+        return "redirect:/shoppingCarts/" + shoppingCartId;
     }
 
     @GetMapping("/shoppingCarts/{id}/emptyShoppingCart")

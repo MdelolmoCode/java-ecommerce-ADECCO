@@ -1,11 +1,9 @@
 package com.example.controllers;
 
 import com.example.entities.Product;
-import com.example.entities.ShoppingCart;
 import com.example.entities.UserEntity;
 import com.example.repositories.CategoryRepository;
 import com.example.repositories.ManufacturerRepository;
-import com.example.repositories.ProductRepository;
 import com.example.services.CategoryService;
 import com.example.services.ManufacturerService;
 import com.example.services.ProductService;
@@ -25,7 +23,6 @@ import java.util.Optional;
 @Controller
 public class ProductController {
 
-    private final ProductRepository productRepository;
     private final ProductService productService;
     private final ManufacturerRepository manufacturerRepository;
     private final ManufacturerService manufacturerService;
@@ -33,7 +30,10 @@ public class ProductController {
     private final CategoryService categoryService;
     private final UserService userService;
 
-
+    @GetMapping("/")
+    public String index() {
+        return "redirect:/products";
+    }
 
     // http://localhost:8080/products
     @GetMapping("products")
@@ -86,9 +86,14 @@ public class ProductController {
         return "redirect:/products";
     }
 
-    @GetMapping("products/{id}/addProduct")
+    @GetMapping("products/{id}/add")
     public String addProductToShoppingCart(Model model, @PathVariable Long id){
+        UserEntity user = userService.getCurrentUser();
+        if (user == null)
+            return "redirect:/products";
 
-        return "";
+        productService.addProductToShoppingCart(id);
+        Long customerId = user.getCustomer().getId();
+        return "redirect:/shoppingCarts/byCustomer/" + customerId;
     }
 }

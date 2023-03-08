@@ -1,18 +1,22 @@
 package com.example.services;
 
+import com.example.entities.ShoppingCart;
 import com.example.entities.UserEntity;
 import com.example.exception.EntitySavingException;
 import com.example.repositories.CustomerRepository;
+import com.example.repositories.ShoppingCartRepository;
 import com.example.repositories.UserEntityRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -23,6 +27,7 @@ public class UserServiceImpl implements UserDetailsService, UserService {
 
     private final UserEntityRepository userRepo;
     private final CustomerRepository customerRepo;
+    private final ShoppingCartRepository shoppingCartRepo;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -54,6 +59,10 @@ public class UserServiceImpl implements UserDetailsService, UserService {
 
         try {
             customerRepo.save(user.getCustomer());
+
+            ShoppingCart shoppingCart = new ShoppingCart(null, user.getCustomer(), new ArrayList<>());
+            shoppingCartRepo.save(shoppingCart);
+
             return userRepo.save(user);
         } catch (Exception e) {
             log.error("Error al guardar user.", e);
@@ -84,8 +93,21 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     }
 
     @Override
+    public UserEntity getCurrentUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication == null)
+            return null;
+
+        Object principal = authentication.getPrincipal();
+        return (principal instanceof UserEntity) ? (UserEntity)principal : null;
+    }
+
+    @Override
     public boolean isCurrentUser(Long id) {
-        UserEntity currentUser = (UserEntity)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserEntity currentUser = getCurrentUser();
+        if (currentUser == null)
+            return false;
+
         Long currentUserId = currentUser.getId();
         return Objects.equals(currentUserId, id);
     }

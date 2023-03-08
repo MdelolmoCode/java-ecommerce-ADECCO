@@ -74,7 +74,7 @@
               Cambiar username / password</a>
             </li>
             <li><a class="dropdown-item"
-                   th:href="@{/shoppingCarts/{id}(id=${@shoppingCartServiceImpl.findByCustomer(#authentication.principal.customer).get().getId()})}">
+                   th:href="@{/shoppingCarts/byCustomer/{customerId}(customerId=${#authentication.principal.customer.id})}">
               Carrito</a>
             </li>
             <li><a class="dropdown-item" th:href="@{/logout}">

@@ -3,6 +3,7 @@ package com.example.services;
 import com.example.entities.CartItem;
 import com.example.entities.Product;
 import com.example.entities.ShoppingCart;
+import com.example.entities.UserEntity;
 import com.example.exception.EntitySavingException;
 import com.example.repositories.ProductRepository;
 import lombok.AllArgsConstructor;
@@ -12,6 +13,7 @@ import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Slf4j // add log
@@ -20,7 +22,9 @@ import java.util.Optional;
 public class ProductServiceImpl implements ProductService {
 
     private ProductRepository productRepo;
-    private final  CartItemService cartItemService;
+    private final CartItemService cartItemService;
+    private final ShoppingCartService shoppingCartService;
+    private final UserService userService;
 
     @Override
     public Optional<Product> findByIdWithCategories(Long id) {
@@ -255,15 +259,42 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<CartItem> addProductToShoopingCart(Long id, ShoppingCart shoppingCart) {
+    public void addProductToShoppingCart(Long productId) {
+        log.info("addProductToShoppingCart productId: {}", productId);
+        if (productId == null || productId <= 0)
+            return;
 
-        List<CartItem> cartItemList = shoppingCart.getCartItems();
+        UserEntity user = userService.getCurrentUser();
+        if (user == null)
+            return;
 
-        Optional <CartItem> optionalCartItem = cartItemService.findById(id);
-        cartItemList.add(optionalCartItem.get());
+        Optional<ShoppingCart> shoppingCartOpt = shoppingCartService.findByCustomer(user.getCustomer());
+        if (shoppingCartOpt.isEmpty())
+            return;
 
+        List<CartItem> cartItems = shoppingCartOpt.get().getCartItems();
+        if (cartItemsContainsProduct(cartItems, productId)) {
+            CartItem cartItem = getCartItemOfProductId(cartItems, productId);
+            cartItem.setAmount(cartItem.getAmount() + 1);
+            cartItemService.update(cartItem);
+        }
+        else {
+            Product product = findById(productId).orElse(null);
+            CartItem cartItem = new CartItem(null, shoppingCartOpt.get(), product, 1L);
+            cartItemService.save(cartItem);
+            cartItems.add(cartItem);
+        }
+    }
 
-        return cartItemList;
+    private static boolean cartItemsContainsProduct(List<CartItem> cartItems, Long productId) {
+        return cartItems.stream().
+                anyMatch(cartItem -> Objects.equals(cartItem.getProduct().getId(), productId));
+    }
+
+    private static CartItem getCartItemOfProductId(List<CartItem> cartItems, Long productId) {
+        return cartItems.stream()
+                .filter(cartItem -> Objects.equals(cartItem.getProduct().getId(), productId))
+                .findFirst().orElse(null);
     }
 
 }
