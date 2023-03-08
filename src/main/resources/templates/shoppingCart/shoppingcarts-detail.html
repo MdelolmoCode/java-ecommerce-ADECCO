@@ -60,6 +60,7 @@
                             <a th:class="'btn btn-success ' + ${#lists.isEmpty(cartItems) ? 'disabled' : ''}"
                                th:href="@{/orders/create/{cartId}(cartId=${(shoppincartById.getId())})}">Pagar</a>
                             <a class="btn btn-warning" th:href="@{/shoppingCarts/{id}/emptyShoppingCart(id=${(shoppincartById.getId())})}">Vaciar carrito</a>
+                            <a class="btn btn-secondary" th:href="@{/products}">Seguir comprando</a>
                         </td>
                     </tr>
                     </tbody>
