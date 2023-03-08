@@ -87,7 +87,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         for(CartItem c: list){
             totalPrice = totalPrice + (c.getProduct().getPrice() * c.getAmount());
         }
-        return totalPrice;
+        return Math.round(totalPrice);
     }
 
 
