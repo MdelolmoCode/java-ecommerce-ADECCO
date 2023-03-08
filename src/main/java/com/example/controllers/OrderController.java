@@ -80,7 +80,11 @@ public class OrderController {
         Optional<ShoppingCart> shoppingCartOpt = shoppingCartService.findById(cartId);
         shoppingCartOpt.ifPresent(orderService::emptyCart);
         orderService.save(order);
-        return "redirect:/orders";
+
+        if (shoppingCartOpt.isPresent())
+            return "redirect:/customers/" + shoppingCartOpt.get().getCustomer().getId() + "/orders";
+        else
+            return "redirect:/orders";
     }
 
     @GetMapping("orders/{id}/delete")
