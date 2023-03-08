@@ -27,7 +27,7 @@
 
           </div>
           <ul class="list-group list-group-flush">
-            <li class="list-group-item">Historial pedidos</li>
+            <a class="list-group-item" th:href="@{/customers/{id}/orders(id=${customer.id})}">Historial pedidos</a>
             <li class="list-group-item">Direcciones</li>
             <li class="list-group-item">Pagos</li>
           </ul>

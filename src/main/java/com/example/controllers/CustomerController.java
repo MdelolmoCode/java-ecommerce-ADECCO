@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -85,6 +86,25 @@ public class CustomerController {
     public String save(@ModelAttribute Customer customer){
             customerService.save(customer);
         return "redirect:/customers";
+    }
+
+    @GetMapping("/customers/{id}/orders")
+    public String customerOrder(Model model, @PathVariable Long id){
+
+        List<Order> orderList  = orderService.findAll();
+        List<Order> aux = new ArrayList<>();
+
+        for(Order c: orderList){
+
+            if(c.getCustomer().getId() == id){
+                assert aux != null;
+                aux.add(c);
+            }
+        }
+        model.addAttribute("orderByCustomer", aux);
+
+
+        return "customer/customer-orderlist";
     }
 }
 
