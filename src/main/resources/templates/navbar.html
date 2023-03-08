@@ -77,6 +77,10 @@
                    th:href="@{/shoppingCarts/byCustomer/{customerId}(customerId=${#authentication.principal.customer.id})}">
               Carrito</a>
             </li>
+            <li><a class="dropdown-item"
+                   th:href="@{/customers/{id}/orders(id=${#authentication.principal.customer.id})}">
+              Pedidos</a>
+            </li>
             <li><a class="dropdown-item" th:href="@{/logout}">
               Cerrar sesión</a>
             </li>
