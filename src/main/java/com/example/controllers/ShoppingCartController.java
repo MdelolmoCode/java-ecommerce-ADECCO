@@ -55,7 +55,7 @@ public class ShoppingCartController {
 
         }
 
-        return "redirect:/shoppingCarts";
+        return "redirect:/shoppingCarts/{id}";
     }
 
     @GetMapping("/shoppingCarts/{id}/{idItem}/delete")
