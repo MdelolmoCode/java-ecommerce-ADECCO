@@ -48,47 +48,6 @@
         </div>
       </div>
 
-
-      <table class="table" style="margin-top: 10px">
-        <thead>
-        <tr>
-          <th scope="col">Id</th>
-          <th scope="col">Name</th>
-          <th scope="col">Description</th>
-          <th scope="col">Price (€)</th>
-          <th scope="col">Stock</th>
-          <th scope="col">Categoría(s)</th>
-          <th scope="col">Manufacturer</th>
-          <th scope="col">Actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="product : ${products}">
-          <td th:text="${product.id}"></td>
-          <td th:text="${product.name}"></td>
-          <td th:text="${product.description}"></td>
-          <td th:text="${#numbers.formatDecimal(product.price,1,2)}"></td>
-          <td th:class="${product.stock} ? 'text-success' : 'text-danger'" th:text="${product.stock}"></td>
-          <td>
-            <div th:each="category: ${product.categories}"
-                 th:text="|${category.name}|"></div>
-          </td>
-          <td>
-            <a class="btn btn-link btn-sm"
-               th:if="${product.manufacturer != null}"
-               th:text="${product.manufacturer.name}"
-               th:href="@{/products/manufacturer/{id}(id=${product.manufacturer.id})}"></a>
-          </td>
-
-          <td>
-            <a class="btn btn-primary" th:href="@{/products/{id}(id=${product.id})}">Ver</a>
-            <a class="btn btn-success" th:href="@{/products/{id}/edit(id=${product.id})}">Editar</a>
-            <a class="btn btn-danger" th:href="@{/products/{id}/delete(id=${product.id})}">Borrar</a>
-          </td>
-        </tr>
-        </tbody>
-      </table>
-
       <div class="alert alert-info" role="alert" th:if="${#lists.isEmpty(products)}">
         No hay elementos actualmente.
       </div>
