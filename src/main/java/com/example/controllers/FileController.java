@@ -16,7 +16,11 @@ public class FileController {
 
     @GetMapping("files/{filename:.+}")
     public ResponseEntity<Resource> showImage(@PathVariable String filename) {
-        Resource file = fileService.loadFile(filename);
-        return ResponseEntity.ok().body(file);
+        try {
+            Resource file = fileService.loadFile(filename);
+            return ResponseEntity.ok().body(file);
+        } catch (Exception e) {
+            return ResponseEntity.noContent().build();
+        }
     }
 }
