@@ -31,6 +31,8 @@ public class Product {
     @JoinColumn(name = "manufacturer_id")
     private Manufacturer manufacturer;
 
+    private String imageUrl;
+
     /*// constructor sin ID
     public Product(String name, String description, Double price, Long stock, Boolean available, List<Category> categories, Manufacturer manufacturer) {
         this.name = name;

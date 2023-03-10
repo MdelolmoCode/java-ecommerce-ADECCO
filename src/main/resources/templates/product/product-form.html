@@ -27,7 +27,7 @@
         <a type="button" class="btn btn-primary" th:href="@{/products}">Volver</a>
       </div>
 
-      <form th:if="${error} == null" th:action="@{/products}" method="POST" th:object="${product}">
+      <form th:if="${error} == null" th:action="@{/products}" method="POST" th:object="${product}" enctype="multipart/form-data">
 
         <input type="hidden" id="id" name="id" th:field="*{id}" />
 
@@ -80,6 +80,17 @@
                     th:value="${manufacturer.id}"
                     th:text="${manufacturer.name}"></option>
           </select>
+        </div>
+
+        <div th:if="${product.imageUrl}" class="mb-3">
+          <span>Imagen actual</label>
+          <img th:src="|/files/${product.imageUrl}|" class="card-img-top" alt="Imagen de producto">
+          <input class="form-control" type="hidden" id="imageUrl" th:field="*{imageUrl}" readonly>
+        </div>
+
+        <div class="mb-3">
+          <label for="file" class="form-label">Cargar imagen</label>
+          <input class="form-control" type="file" id="file" name="file">
         </div>
 
         <a class="btn btn-danger" th:href="@{/products}">Cancelar</a>

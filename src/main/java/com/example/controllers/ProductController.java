@@ -4,17 +4,12 @@ import com.example.entities.Product;
 import com.example.entities.UserEntity;
 import com.example.repositories.CategoryRepository;
 import com.example.repositories.ManufacturerRepository;
-import com.example.services.CategoryService;
-import com.example.services.ManufacturerService;
-import com.example.services.ProductService;
-import com.example.services.UserService;
+import com.example.services.*;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Optional;
@@ -29,6 +24,7 @@ public class ProductController {
     private final CategoryRepository categoryRepository;
     private final CategoryService categoryService;
     private final UserService userService;
+    private final FileService fileService;
 
     @GetMapping("/")
     public String index() {
@@ -75,9 +71,23 @@ public class ProductController {
     }
 
     @PostMapping("products") // POST http://localhost:8080/products
-    public String saveForm(@ModelAttribute Product product) {
-        productService.save(product);
-        return "redirect:/products"; // Redirección a GET /products
+    public String saveForm(Model model,
+                           @ModelAttribute Product product,
+                           @RequestParam("file") MultipartFile file) {
+        if (file == null || file.isEmpty()) {
+            productService.save(product);
+            return "redirect:/products";
+        }
+
+        try {
+            String fileName = fileService.storeInFileSystem(file);
+            product.setImageUrl(fileName);
+            productService.save(product);
+            return "redirect:/products";
+        } catch (Exception e) {
+            model.addAttribute("error", "No se ha podido guardar la imagen");
+            return findAll(model);
+        }
     }
 
     @GetMapping("products/{id}/delete")

@@ -17,7 +17,14 @@
 
         <div class="col">
             <div class="card" th:if="${error} == null">
-                <img src="https://dummyimage.com/300" class="card-img-top" alt="Product Image">
+
+                <img th:src="${#strings.isEmpty(product.imageUrl)}
+                      ? 'https://dummyimage.com/250x250/b8b8b8/000000.jpg&text=Product+Image'
+                      : |/files/${product.imageUrl}|"
+                      class="card-img-top" alt="Imagen de producto"
+                >
+
+
                 <div class="card-body">
                     <h5 class="card-title" th:text="${product.name}"></h5>
                     <p class="card-text" th:text="${product.description}"></p>
@@ -54,9 +61,11 @@
                     </li>-->
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">
-                            <a class="btn btn-link btn-sm"
+                            <a class="btn btn-link btn-sm" th:if="${product.manufacturer}"
                                th:text="${product.manufacturer.name}"
-                               th:href="@{/manufacturers/{id}(id=${product.manufacturer.id})}"></a>
+                               th:href="@{/manufacturers/{id}(id=${product.manufacturer.id})}">
+                            </a>
+                            <span th:unless="${product.manufacturer}">Desconocido</span>
                         </li>
                     </ul>
 
