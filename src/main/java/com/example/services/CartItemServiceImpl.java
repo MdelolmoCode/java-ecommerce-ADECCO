@@ -2,6 +2,7 @@ package com.example.services;
 
 import com.example.entities.CartItem;
 import com.example.entities.Customer;
+import com.example.entities.Product;
 import com.example.entities.ShoppingCart;
 import com.example.exception.EntitySavingException;
 import com.example.repositories.CartItemRepository;
@@ -236,9 +237,17 @@ public class CartItemServiceImpl implements CartItemService
         }else{
 
             CartItem cartItem = optionalCartItem.get();
+            Product product = cartItem.getProduct();
+            Long productStock = product.getStock();
 
-                cartItem.setAmount(cartItem.getAmount() + amount);
-                update(cartItem);
+                if(productStock >= amount){
+                    cartItem.setAmount(cartItem.getAmount() + amount);
+                    productStock = productStock - amount;
+
+                    update(cartItem);
+                }
+
+
         }
     }
 
