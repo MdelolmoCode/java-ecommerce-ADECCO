@@ -20,8 +20,8 @@ public class CartItemController
     @GetMapping("cartitems")
     public String findAll(Model model)
     {
-        List<CartItem> cartItemList = cartItemService.findAllByOrderByShoppingCartId();
-        model.addAttribute("cartItems", cartItemList);
+
+        model.addAttribute("cartItems", cartItemService.findAll());
         return "cartitem/cartitem-list";
     }
 

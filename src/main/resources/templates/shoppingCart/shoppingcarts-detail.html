@@ -33,7 +33,12 @@
                         <td th:text="${cartItem.getAmount()}"></td>
                         <td th:text="${cartItem.product.getPrice()}+ '€'"></td>
                         <td th:text="${cartItem.product.getPrice() * cartItem.getAmount()}+ '€'"></td>
+                        <td><a class="btn btn-success" th:href="@{/shoppingCarts/{id}/{idItem}/addOne(id=${shoppincartById.id}, idItem=${cartItem.id})}">add1</a></td>
                         <td><a class="btn btn-danger" th:href="@{/shoppingCarts/{id}/{idItem}/delete(id=${shoppincartById.id}, idItem=${cartItem.id})}">Eliminar</a></td>
+                        <td><a class="btn btn-success" th:href="@{/shoppingCarts/{id}/{idItem}/deleteOne(id=${shoppincartById.id}, idItem=${cartItem.id})}">borrar1</a></td>
+
+
+
 
 
                     </tr>

@@ -4,10 +4,7 @@ import com.example.entities.Product;
 import com.example.entities.UserEntity;
 import com.example.repositories.CategoryRepository;
 import com.example.repositories.ManufacturerRepository;
-import com.example.services.CategoryService;
-import com.example.services.ManufacturerService;
-import com.example.services.ProductService;
-import com.example.services.UserService;
+import com.example.services.*;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,6 +26,7 @@ public class ProductController {
     private final CategoryRepository categoryRepository;
     private final CategoryService categoryService;
     private final UserService userService;
+    private final CartItemService cartItemService;
 
     @GetMapping("/")
     public String index() {
@@ -96,4 +94,5 @@ public class ProductController {
         Long customerId = user.getCustomer().getId();
         return "redirect:/shoppingCarts/byCustomer/" + customerId;
     }
+
 }
