@@ -38,9 +38,9 @@
                         <td th:text="${cartItem.product.getPrice()}+ '€'"></td>
                         <td th:text="${cartItem.product.getPrice() * cartItem.getAmount()}+ '€'"></td>
                         <td>
-                            <a th:href="@{/shoppingCarts/{id}/{idItem}/addOne(id=${shoppincartById.id}, idItem=${cartItem.id})}"><button><i class="bi bi-cart-plus fs-5"></i></button></a>
-                            <a th:href="@{/shoppingCarts/{id}/{idItem}/delete(id=${shoppincartById.id}, idItem=${cartItem.id})}"><button><i class="bi bi-cart-x fs-5" ></i></button></a>
-                            <a th:href="@{/shoppingCarts/{id}/{idItem}/deleteOne(id=${shoppincartById.id}, idItem=${cartItem.id})}"><button><i class="bi bi-cart-dash fs-5" >-</i></button></a>
+                            <a th:href="@{/shoppingCarts/{id}/{idItem}/addOne(id=${shoppincartById.id}, idItem=${cartItem.id})}"><button><i class="bi bi-cart-plus fs-4"></i></button></a>
+                            <a th:href="@{/shoppingCarts/{id}/{idItem}/delete(id=${shoppincartById.id}, idItem=${cartItem.id})}"><button><i class="bi bi-cart-x fs-4" ></i></button></a>
+                            <a th:href="@{/shoppingCarts/{id}/{idItem}/deleteOne(id=${shoppincartById.id}, idItem=${cartItem.id})}"><button><i class="bi bi-cart-dash fs-4" >-</i></button></a>
 
 
                         </td>
