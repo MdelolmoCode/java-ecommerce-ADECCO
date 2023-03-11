@@ -35,8 +35,8 @@
                         <td th:text="${cartItem.id}"></td>
                         <td th:text="${cartItem.product.getName()}"></td>
                         <td th:text="${cartItem.getAmount()}"></td>
-                        <td th:text="${cartItem.product.getPrice()}+ '€'"></td>
-                        <td th:text="${cartItem.product.getPrice() * cartItem.getAmount()}+ '€'"></td>
+                        <td th:text="${#numbers.formatDecimal(cartItem.product.getPrice(), 1, 2)}+ '€'"></td>
+                        <td th:text="${#numbers.formatDecimal(cartItem.getPrice(), 1, 2)}+ '€'"></td>
                         <td>
                             <a th:href="@{/shoppingCarts/{id}/{idItem}/addOne(id=${shoppincartById.id}, idItem=${cartItem.id})}"><button><i class="bi bi-cart-plus fs-4"></i></button></a>
                             <a th:href="@{/shoppingCarts/{id}/{idItem}/delete(id=${shoppincartById.id}, idItem=${cartItem.id})}"><button><i class="bi bi-cart-x fs-4" ></i></button></a>
@@ -72,7 +72,7 @@
                         <td></td>
                         <td th:text="${amountProducts}"></td>
                         <td></td>
-                        <td th:text="${totalShoppingCartCost} + '€'"></td>
+                        <td th:text="${#numbers.formatDecimal(totalShoppingCartCost, 1, 2)} + '€'"></td>
                         <td>
                             <a th:class="'btn btn-success ' + ${#lists.isEmpty(cartItems) ? 'disabled' : ''}"
                                th:href="@{/orders/create/{cartId}(cartId=${(shoppincartById.getId())})}">Pagar</a>

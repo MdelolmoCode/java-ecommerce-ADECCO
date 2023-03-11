@@ -20,13 +20,14 @@
         </a>
       </td>
       <td th:text="|x${cartItem.amount}|"></td>
-      <td th:text="|${cartItem.product.price} €|"></td>
+      <td th:text="|${#numbers.formatDecimal(cartItem.product.price, 1, 2)} €|"></td>
     </tr>
     <!-- Precio total -->
     <tr>
       <td></td>
       <td><b>Total:</b></td>
-      <td class="text-success" th:text="|${@orderServiceImpl.calculateTotalPrice(cartItems)} €|"></td>
+      <td class="text-success"
+          th:text="|${#numbers.formatDecimal(@orderServiceImpl.calculateTotalPrice(cartItems), 1, 2)} €|"></td>
     </tr>
     </tbody>
   </table>
