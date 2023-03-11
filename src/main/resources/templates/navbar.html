@@ -16,29 +16,11 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link" th:href="@{/products}">Products</a>
+          <a class="nav-link" th:href="@{/products}">Productos</a>
         </li>
-
-
-        <li class="nav-item">
-          <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Categorías
-            </button>
-            <div class="dropdown-menu">
-              <div th:each="category:${categories}">
-                <a class="dropdown-item" href="@{/categories/{id}}" th:text="${category.name}"></a>
-              </div>
-            </div>
-          </div>
-        </li>
-
 
         <li class="nav-item">
           <a class="nav-link" th:href="@{/categories}">Link a categories</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" th:href="@{/manufacturers}">Manufacturers</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" th:href="@{/orders}">Orders</a>
@@ -53,10 +35,10 @@
 
       <div class="d-flex">
         <div sec:authorize="isAnonymous()">
-          <a class="btn btn-link" th:href="@{/login}">Iniciar sesión</a>
+          <a class="btn btn-link login-class" th:href="@{/login}">Iniciar sesión</a>
         </div>
         <div sec:authorize="isAnonymous()">
-          <a class="btn btn-link" th:href="@{/user/sign-in}">Registrarse</a>
+          <a class="btn btn-link register-class" th:href="@{/user/sign-in}">Registrarse</a>
         </div>
 
         <div class="dropdown" sec:authorize="isAuthenticated()">

@@ -8,7 +8,7 @@ SET FOREIGN_KEY_CHECKS = 0;
 
 TRUNCATE TABLE  address;
 INSERT INTO address (id, city, country, name, state, street_type, zipcode)
-VALUES (1, 'London','England','Deninton','Big London','Road','98230'),
+VALUES (1, 'Tokyo','Japan','Deninton','Minami Ward','Road','98230'),
        (2, 'Madrid','Spain','Recoletos','Comunidad de Madrid','Paseo','68249'),
        (3, 'Pamplona','Spain','San Nicolas','Navarra','Calle','31000'),
        (4, 'Zaragoza','Spain','Cristobal Colon','Zaragoza','Plaza','58423'),
@@ -18,7 +18,7 @@ VALUES (1, 'London','England','Deninton','Big London','Road','98230'),
 
 TRUNCATE TABLE category;
 INSERT INTO category(id,name, mature)
-VALUES  (1, 'arte',false),
+VALUES  (1, 'videojuegos',false),
         (2, 'bricolaje',false),
 		(3, 'lencería',true),
 		(4, 'armas de fuego',true),
@@ -59,14 +59,14 @@ VALUES (1, 1),
 
 TRUNCATE TABLE manufacturer;
 INSERT INTO manufacturer (id, cif, name, address_id, phone_number)
-VALUES  (1, 'L16516165', 'Pinturas Jaime', 1, '570278613'),
+VALUES  (1, 'L16516165', 'Nintendo Company, Ltd.', 1, '570278613'),
         (2, 'Q13274406', 'Merceria Evaristo', 3, '940888411'),
         (3, 'X55472064', 'Armeria Josefina', 5, '098088156')
 ;
 
 TRUNCATE TABLE product;
 INSERT INTO product (id, name, description, price, stock, available, manufacturer_id)
-VALUES  (1, 'pincel','desc pincel',10.99, 10,true,1),
+VALUES  (1, 'Game Boy','Nintendo Gameboy Color Claro Púrpura',123.99, 10,true,1),
         (2, 'acuarelas', 'desc acuarelas', 20.99, 20,true, 1),
         (3, 'pincel de acuarelas', 'desc pincel de acuarelas', 30.99, 30,true, 1),
         (4, 'ropa de noche blanca', 'desc ropa de noche blanco', 40.99, 40,false, 2),

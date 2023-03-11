@@ -3,3 +3,18 @@ body {
     font-family: "serif";
     font-size: 25px;
 }
+
+.login-class{
+    font-weight: bold;
+    font-size: 24px;
+    color:black;
+
+}
+
+.register-class{
+
+    font-weight: bold;
+    font-size: 24px;
+    color:black;
+}
+
