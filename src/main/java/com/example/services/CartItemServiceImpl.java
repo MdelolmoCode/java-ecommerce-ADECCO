@@ -1,6 +1,8 @@
 package com.example.services;
 
 import com.example.entities.CartItem;
+import com.example.entities.Customer;
+import com.example.entities.Product;
 import com.example.entities.ShoppingCart;
 import com.example.exception.EntitySavingException;
 import com.example.repositories.CartItemRepository;
@@ -176,6 +178,17 @@ public class CartItemServiceImpl implements CartItemService
         throw new EntitySavingException("Error al guardar cartItem");
     }
 
+    @Override
+    public void update(CartItem cartItem) { //tested
+
+        CartItem cartItemFromDB = cartItemRepo.findById(cartItem.getId()).get();
+        cartItemFromDB.setShoppingCart(cartItem.getShoppingCart());
+        cartItemFromDB.setProduct(cartItem.getProduct());
+        cartItemFromDB.setAmount(cartItem.getAmount());
+
+        cartItemRepo.save(cartItemFromDB);
+    }
+
     public void saveAll(List<CartItem> cartItemList)
     {
         for (CartItem c : cartItemList)
@@ -192,30 +205,6 @@ public class CartItemServiceImpl implements CartItemService
     Si el cartItem parametro no es nulo y  existe en la BB.DD,
     sustituye los atributos del almacenado por los del parametro.
      */
-    @Override
-    public CartItem update(CartItem cartItem)
-    {
-        log.info("Updating {}", cartItem);
-
-        if(cartItem == null){
-            log.info("Error: cartItem nulo");
-            throw new IllegalArgumentException("Error: cartItem nulo");
-        }
-
-        Optional<CartItem> cartItemToUpdateOptional = findById(cartItem.getId());
-        if(cartItemToUpdateOptional.isEmpty()){
-            log.info("Error: cartItem inexistente");
-            throw new EntityNotFoundException("Error: cartItem inexistente");
-        }else {
-            cartItemRepo.save(cartItem);
-//            CartItem cartItemAlmacenada = cartItemToUpdateOptional.get();
-//            cartItemAlmacenada.setAmount(cartItem.getAmount());
-//            cartItemAlmacenada.setPrice(cartItem.getPrice());
-//            cartItemAlmacenada.setProduct(cartItem.getProduct());
-        }
-
-        return cartItem;
-    }
 
     /*
     Si el cartItem parametro no es nulo y  existe en la BB.DD, lo borra.
@@ -241,37 +230,44 @@ public class CartItemServiceImpl implements CartItemService
     {
         log.info("AddAmountById {} {}", id, amount);
 
-        if(! idAmountPriceValido(id) || ! idAmountPriceValido(amount))
-            return;
+        Optional <CartItem> optionalCartItem = cartItemRepo.findById(id);
 
-        Optional<CartItem> optionalCartItem = cartItemRepo.findById(id);
-        if(optionalCartItem.isEmpty())
-        {
-            log.info("Error: cartItem no encontrado");
-        }else {
+        if(optionalCartItem.isEmpty()){
+            log.info("invalid cartItem");
+        }else{
+
             CartItem cartItem = optionalCartItem.get();
-            Long amountPresent = cartItem.getAmount();
-            cartItem.setAmount(amountPresent + amount);
+            Product product = cartItem.getProduct();
+            Long productStock = product.getStock();
+
+                if(productStock >= amount){
+                    cartItem.setAmount(cartItem.getAmount() + amount);
+                    productStock = productStock - amount;
+
+                    update(cartItem);
+                }
+
+
         }
     }
 
     @Override
-    public void removeAmountById(Long id, Long amount)
-    {
-        log.info("AddAmountById {} {}", id, amount);
+    public void removeAmountById(Long id, Long amount) {
+        log.info("removeAmountById {} {}", id, amount);
 
-        if(! idAmountPriceValido(id) || ! idAmountPriceValido(amount))
-            return;
+        Optional <CartItem> optionalCartItem = cartItemRepo.findById(id);
 
-        Optional<CartItem> optionalCartItem = cartItemRepo.findById(id);
-        if(optionalCartItem.isEmpty())
-        {
-            log.info("Error: cartItem no encontrado");
+        if(optionalCartItem.isEmpty()){
+            log.info("invalid cartItem");
+        }else{
 
-        }else {
             CartItem cartItem = optionalCartItem.get();
-            Long amountPresent = cartItem.getAmount();
-            cartItem.setAmount(amountPresent - amount);
+            if(cartItem.getAmount()>0){
+                cartItem.setAmount(cartItem.getAmount() - amount);
+                update(cartItem);
+            }else{
+                return;
+            }
         }
     }
 

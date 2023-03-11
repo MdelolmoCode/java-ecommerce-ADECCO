@@ -9,7 +9,9 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.Optional;
 
@@ -75,6 +77,20 @@ public class ShoppingCartController {
 
         cartItemService.deleteById(idItem);
 
+        return "redirect:/shoppingCarts/{id}";
+    }
+
+
+
+    @GetMapping("/shoppingCarts/{id}/{idItem}/deleteOne")
+    public String deleteOneProductFromItem(@PathVariable Long id, @PathVariable Long idItem){
+        cartItemService.removeAmountById(idItem, 1L);
+        return "redirect:/shoppingCarts/{id}";
+    }
+
+    @GetMapping("/shoppingCarts/{id}/{idItem}/addOne")
+    public String addOneProductFromItem(@PathVariable Long id, @PathVariable Long idItem){
+        cartItemService.addAmountById(idItem, 1L);
         return "redirect:/shoppingCarts/{id}";
     }
 

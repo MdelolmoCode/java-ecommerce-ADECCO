@@ -23,9 +23,8 @@ public interface CartItemService
 
     void saveAll(List<CartItem> cartItemList);
 
-    CartItem update(CartItem cartItem);
-
     void deleteById(Long id);
+    public void update(CartItem cartItem);
 
     //===============================  FILTERS  =========================================
 
@@ -36,10 +35,6 @@ public interface CartItemService
     List<CartItem> findAllByAmountIsLessThanEqual(Long maxAmount);
     List<CartItem> findAllByAmountIsBetween(long minAmount, Long maxAmount);
 
-//    List<CartItem> findAllByPriceIs(double price);
-//    List<CartItem> findAllByPriceIsGreaterThanEqual(double price);
-//    List<CartItem> findAllByPriceIsLessThanEqual(double price);
-//    List<CartItem> findAllByPriceIsBetween(double minPrice, double maxPrice);
 
     //=====================  BUSINESS LOGIC  ========================
 

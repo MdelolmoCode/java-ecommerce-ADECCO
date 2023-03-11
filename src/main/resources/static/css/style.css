@@ -1,0 +1,60 @@
+.nav-item{
+    font-size: 18px;
+}
+body {
+    background-color: #BFDCDB; /* Cambia el color de fondo según tu preferencia */
+    font-family: "serif";
+}
+
+.login-class{
+    font-weight: bold;
+    font-size: 14px;
+    color:black;
+
+}
+
+.register-class{
+
+    font-weight: bold;
+    font-size: 14px;
+    color:black;
+}
+
+.card {
+    border: 1px solid black;
+}
+
+
+
+.card-title {
+    font-weight: bold;
+}
+
+.list-group-item a {
+    color:black;
+    font-size: 24px;
+}
+
+.card-img-top {
+
+}
+
+.card-body {
+}
+
+.card-title{
+
+    font-size: 16px;
+}
+
+.card-text {
+    font-size: 14px;
+
+}
+
+.card-text-price{
+    font-size: 20px;
+    font-weight: bold;
+    color:green;
+
+}

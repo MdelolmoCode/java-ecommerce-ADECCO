@@ -5,6 +5,9 @@
     <title>ShoppingCart List</title>
 
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+
 </head>
 <body>
 <div th:replace="~{navbar :: nav1}"></div>
@@ -16,14 +19,15 @@
         <div class="row align-items-start">
                 <div class="col mt-5" ></div>
 
-                <table class="table">
+                <table class="table table-bordered border border-dark">
                     <thead>
-                    <tr style="background-color: #7F8094;">
+                    <tr style="background-color: #6eaec5;">
                         <th scope="col">Id</th>
                         <th scope="col">Producto</th>
                         <th scope="col">Cantidad</th>
                         <th scope="col">Precio</th>
                         <th scope="col">Coste total del producto</th>
+                        <th scope="col">Acciones</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -33,22 +37,35 @@
                         <td th:text="${cartItem.getAmount()}"></td>
                         <td th:text="${cartItem.product.getPrice()}+ '€'"></td>
                         <td th:text="${cartItem.product.getPrice() * cartItem.getAmount()}+ '€'"></td>
-                        <td><a class="btn btn-danger" th:href="@{/shoppingCarts/{id}/{idItem}/delete(id=${shoppincartById.id}, idItem=${cartItem.id})}">Eliminar</a></td>
+                        <td>
+                            <a th:href="@{/shoppingCarts/{id}/{idItem}/addOne(id=${shoppincartById.id}, idItem=${cartItem.id})}"><button><i class="bi bi-cart-plus fs-4"></i></button></a>
+                            <a th:href="@{/shoppingCarts/{id}/{idItem}/delete(id=${shoppincartById.id}, idItem=${cartItem.id})}"><button><i class="bi bi-cart-x fs-4" ></i></button></a>
+                            <a th:href="@{/shoppingCarts/{id}/{idItem}/deleteOne(id=${shoppincartById.id}, idItem=${cartItem.id})}"><button><i class="bi bi-cart-dash fs-4" >-</i></button></a>
 
 
-                    </tr>
+                        </td>
 
-                    <tr style="background-color: #7F8094;">
 
-                            <th scope="col"></th>
-                            <th scope="col"></th>
-                            <th scope="col">Cantidad Total</th>
-                            <th scope="col"></th>
-                            <th scope="col">Coste total del carrito</th>
+
 
 
                     </tr>
+                    </tbody>
 
+                </table>
+
+            <div class="mt-5">
+
+                <table>
+                    <tr style="background-color: #6eaec5;">
+
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                        <th scope="col">Cantidad Total</th>
+                        <th scope="col"></th>
+                        <th scope="col">Coste total del carrito</th>
+
+                    </tr>
 
                     <tr>
                         <td></td>
@@ -63,14 +80,18 @@
                             <a class="btn btn-secondary" th:href="@{/products}">Seguir comprando</a>
                         </td>
                     </tr>
-                    </tbody>
+
 
                 </table>
 
-                <div class="alert alert-danger" role="alert" th:if="${#lists.isEmpty(cartItems)}">
+            </div>
+
+
+
+                <div class="alert alert-danger mt-5" role="alert" th:if="${#lists.isEmpty(cartItems)}">
                     El carrito está vacio.
                 </div>
-                <div class="alert alert-success" role="alert" th:if="${#lists.size(cartItems) > 0}">
+                <div class="alert alert-success mt-5" role="alert" th:if="${#lists.size(cartItems) > 0}">
                     Hay <span th:text="${amountProducts}"></span> productos pendientes de pago.
                 </div>
 
