@@ -116,6 +116,7 @@ public class ProductController {
     }
 
     public String searchByNameSubstring(Model model, String search) {
+        search = search.trim();
         List<Product> products = productService.findAllByNameContainsIgnoreCase(search);
         model.addAttribute("products", products);
         model.addAttribute("search", search);
