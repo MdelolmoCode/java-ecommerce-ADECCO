@@ -39,7 +39,7 @@
             <img th:src="${#strings.isEmpty(product.imageUrl)}
               ? 'https://dummyimage.com/250x250/b8b8b8/000000.jpg&text=Product+Image'
               : |/files/${product.imageUrl}|"
-                 class="card-img-top" alt="Imagen de producto"
+                 class="card-img-top" alt="Imagen de producto" style="aspect-ratio:1;"
             >
 
             <div class="card-body">

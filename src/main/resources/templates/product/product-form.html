@@ -84,7 +84,7 @@
 
         <div th:if="${product.imageUrl}" class="mb-3">
           <span>Imagen actual</label>
-          <img th:src="|/files/${product.imageUrl}|" class="card-img-top" alt="Imagen de producto">
+          <img th:src="|/files/${product.imageUrl}|" class="card-img-top" alt="Imagen de producto" style="aspect-ratio:1;">
           <input class="form-control" type="hidden" id="imageUrl" th:field="*{imageUrl}" readonly>
         </div>
 
