@@ -69,9 +69,9 @@ TRUNCATE TABLE product;
 
 INSERT INTO product (id, name, description, price, stock, available, manufacturer_id, image_url)
 VALUES
-    (1, 'GAME BOY', 'Nintendo Gameboy Color Claro Púrpura', 123.95, 10, true, 1, 'img/1.jpg'),
-    (2, 'MEGAZORD', 'Power Rangers Megazord Dino', 50.95, 20, true, 2, 'img/megazord.png'),
-    (3, 'pincel de acuarelas', 'desc pincel de acuarelas', 30.99, 30, true, 1, 'https://dummyimage.com/250x250/b8b8b8/000000.jpg&text=Pincel+de+acuarelas'),
+    (1, 'GAME BOY', 'Nintendo Gameboy Color Claro Púrpura', 123.95, 10, true, 1, 'img/2.jpg'),
+    (2, 'MEGAZORD', 'Power Rangers Megazord Dino', 50.95, 20, true, 2, 'img/megazord2.png'),
+    (3, 'JUEGO OCA', 'Juego de mesa de la oca con dados', 9.95, 30, true, 1, 'img/oca2.jpg'),
     (4, 'ropa de noche blanca', 'desc ropa de noche blanco', 40.99, 40, false, 2, 'https://dummyimage.com/250x250/b8b8b8/000000.jpg&text=Ropa+de+noche+blanca'),
     (5, 'collar de noche', 'desc collar de noche', 50.99, 50, true, 2, 'https://dummyimage.com/250x250/b8b8b8/000000.jpg&text=Collar+de+noche'),
     (6, 'rodillo de pintura', 'desc rodillo de pintura', 60.99, 60, true, 2, 'https://dummyimage.com/250x250/b8b8b8/000000.jpg&text=Rodillo+de+pintura'),
