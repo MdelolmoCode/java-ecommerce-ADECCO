@@ -19,17 +19,31 @@
           <a class="nav-link" th:href="@{/products}">Productos</a>
         </li>
 
+        <li class="nav-item dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Categorías
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <li th:each="category: ${@categoryServiceImpl.findAll()}">
+              <a class="dropdown-item"
+                 th:href="@{/products/category/{id}(id=${category.id})}"
+                 th:text="${#strings.capitalize(category.name)}">
+              </a>
+            </li>
+          </ul>
+        </li>
+
         <li class="nav-item">
-          <a class="nav-link" th:href="@{/categories}">Link a categories</a>
+          <a class="nav-link" th:href="@{/categories}">Link a categorías</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" th:href="@{/orders}">Orders</a>
+          <a class="nav-link" th:href="@{/orders}">Pedidos</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" th:href="@{/customers}">Customers</a>
+          <a class="nav-link" th:href="@{/customers}">Clientes</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" th:href="@{/shoppingCarts}">ShoppingCarts</a>
+          <a class="nav-link" th:href="@{/shoppingCarts}">Carritos</a>
         </li>
         <div class="dropdown">
           <a class="nav-link" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -42,7 +56,7 @@
         </div>
       </ul>
 
-      <div class="d-flex">
+      <div class="d-flex px-3">
         <div sec:authorize="isAnonymous()">
           <a class="btn btn-link login-class" th:href="@{/login}">Iniciar sesión</a>
         </div>
@@ -51,7 +65,7 @@
         </div>
 
         <div class="dropdown" sec:authorize="isAuthenticated()">
-          <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
             <strong th:text="${#authentication.principal.username}"></strong>
           </button>
           <ul class="dropdown-menu">

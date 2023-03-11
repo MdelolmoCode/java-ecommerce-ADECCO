@@ -47,6 +47,13 @@ public class ProductController {
         return findAll(model, null);
     }
 
+    @GetMapping("products/category/{categoryId}")
+    public String findByCategory(Model model, @PathVariable Long categoryId) {
+        List<Product> products = productService.findByCategories_Id(categoryId);
+        model.addAttribute("products", products);
+        return "product/product-list";
+    }
+
     @GetMapping("products/{id}")
     public String findById(Model model, @PathVariable Long id){
         Optional<Product> productOpt = productService.findByIdWithCategories(id);
