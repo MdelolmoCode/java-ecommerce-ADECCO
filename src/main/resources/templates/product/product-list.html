@@ -44,7 +44,11 @@
       </div>
 
       <div class="alert alert-info" role="alert" th:if="${#lists.isEmpty(products)}">
-        No hay elementos actualmente.
+        <div th:if="${search}">
+          <b>No se encuentran resultados para <i><span th:text="${search}"></span></i>.<br></b>
+          Revise su ortografía o use términos más generales.
+        </div>
+        <div th:unless="${search}">No hay productos actualmente.</div>
       </div>
       <div class="text-center" th:if="${#lists.size(products) > 0}">
         Hay <span th:text="${#lists.size(products)}"></span> productos.

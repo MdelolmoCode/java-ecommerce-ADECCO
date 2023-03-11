@@ -32,11 +32,19 @@ public class ProductController {
     }
 
     // http://localhost:8080/products
+    // http://localhost:8080/products?search=pincel
     @GetMapping("products")
-    public String findAll(Model model){
-        List<Product> products = productService.findAll();
-        model.addAttribute("products", products);
-        return "product/product-list";
+    public String findAll(Model model, String search){
+        if (search == null) {
+            List<Product> products = productService.findAll();
+            model.addAttribute("products", products);
+            return "product/product-list";
+        }
+        return searchByNameSubstring(model, search);
+    }
+
+    public String findAll(Model model) {
+        return findAll(model, null);
     }
 
     @GetMapping("products/{id}")
@@ -106,4 +114,13 @@ public class ProductController {
         Long customerId = user.getCustomer().getId();
         return "redirect:/shoppingCarts/byCustomer/" + customerId;
     }
+
+    public String searchByNameSubstring(Model model, String search) {
+        search = search.trim();
+        List<Product> products = productService.findAllByNameContainsIgnoreCase(search);
+        model.addAttribute("products", products);
+        model.addAttribute("search", search);
+        return "product/product-list";
+    }
+
 }

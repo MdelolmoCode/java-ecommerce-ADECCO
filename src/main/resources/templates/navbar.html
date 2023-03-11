@@ -76,9 +76,10 @@
         </div>
       </div>
 
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
+      <form class="d-flex" role="search" th:action="@{/products}" method="get">
+        <input class="form-control me-2" type="search" name="search" th:value="${search}"
+               placeholder="Buscar..." aria-label="Buscar">
+        <button class="btn btn-outline-success" type="submit">Buscar</button>
       </form>
     </div>
   </div>
