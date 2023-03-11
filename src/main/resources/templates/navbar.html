@@ -31,6 +31,15 @@
         <li class="nav-item">
           <a class="nav-link" th:href="@{/shoppingCarts}">ShoppingCarts</a>
         </li>
+        <div class="dropdown">
+          <a class="nav-link" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Crear
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" th:href="@{/products/create}">Crear nuevo producto</a></li>
+            <li><a class="dropdown-item" th:href="@{/categories/create}">Crear nueva categoría</a></li>
+          </ul>
+        </div>
       </ul>
 
       <div class="d-flex">

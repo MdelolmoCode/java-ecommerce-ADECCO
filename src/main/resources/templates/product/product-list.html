@@ -20,18 +20,6 @@
 
     </div>
     <div class="col-10">
-      <h1 class="h1-title">Listado Products</h1>
-      <div>
-        <a class="btn btn-info" th:href="@{/products/create}">Crear nuevo producto</a>
-      </div>
-<!--      <div class="mt-2">
-        <span>Filtrar por manufacturer: </span>
-        <<a class="btn btn-link btn-sm"
-            th:if="${product.manufacturer != null}"
-            th:text="${product.manufacturer.name}"
-            th:href="@{/products/manufacturer/{id}(id=${product.manufacturer.id})}"></a>
-      </div>-->
-
 
       <div class="row row-cols-1 row-cols-md-3 g-4" style="margin-top: 10px">
         <div class="col" th:each="product : ${products}">
@@ -59,7 +47,7 @@
         No hay elementos actualmente.
       </div>
       <div class="text-center" th:if="${#lists.size(products) > 0}">
-        Hay <span th:text="${#lists.size(products)}"></span> resultados.
+        Hay <span th:text="${#lists.size(products)}"></span> productos.
       </div>
 
 

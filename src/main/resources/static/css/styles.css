@@ -1,6 +1,10 @@
 .nav-item{
     font-size: 18px;
 }
+
+.dropdown{
+    font-size: 18px;
+}
 body {
     background-color: white; /* Cambia el color de fondo según tu preferencia */
     font-family: "serif";

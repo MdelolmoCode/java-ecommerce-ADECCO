@@ -66,16 +66,16 @@ VALUES  (1, 'L16516165', 'Pinturas Jaime', 1, '570278613'),
 
 TRUNCATE TABLE product;
 INSERT INTO product (id, name, description, price, stock, available, manufacturer_id, image_url)
-VALUES  (1, 'pincel','desc pincel',10.99, 10,true,1, 'db_artiom-vallat-v6n0iUuD4M0-unsplash.jpg'),
-        (2, 'acuarelas', 'desc acuarelas', 20.99, 20,true, 1, 'db_elena-mozhvilo-gp4hlZC2aFs-unsplash.jpg'),
-        (3, 'pincel de acuarelas', 'desc pincel de acuarelas', 30.99, 30,true, 1, 'db_denise-johnson-3DkouQeZjp4-unsplash.jpg'),
-        (4, 'ropa de noche blanca', 'desc ropa de noche blanco', 40.99, 40,false, 2, 'db_parker-burchfield-tvG4WvjgsEY-unsplash.jpg'),
-        (5, 'collar de noche', 'desc collar de noche', 50.99, 50,true, 2, 'db_eve-maier-7uQQHORcTpc-unsplash.jpg'),
-        (6, 'rodillo de pintura', 'desc rodillo de pintura', 60.99, 60,true, 2, 'db_theme-photos-Cl-OpYWFFm0-unsplash.jpg'),
-        (7, 'escopeta', 'desc escopeta', 70.99, 70,false, 3, 'db_thomas-tucker-VJRk64F2nhs-unsplash.jpg'),
-        (8, 'pistola', 'desc pistola', 80.99, 0,false, 3, 'db_jay-rembert-e0kgA5otj0Q-unsplash.jpg'),
-        (9, 'cuchillo', 'desc cuchillo', 90.99, 90,true, 3, 'db_marios-gkortsilas-aAiy88ytl0c-unsplash.jpg'),
-        (10, 'machete', 'desc machete', 100.99, 100,true, 3, 'db_taylor-daugherty-K0GO2Hd1lRw-unsplash.jpg')
+VALUES  (1, 'Pincel','pincel 3/9 negro',10.99, 10,true,1, 'db_artiom-vallat-v6n0iUuD4M0-unsplash.jpg'),
+        (2, 'Acuarelas', 'desc acuarelas', 20.99, 20,true, 1, 'db_elena-mozhvilo-gp4hlZC2aFs-unsplash.jpg'),
+        (3, 'Pincel de acuarelas', 'desc pincel de acuarelas', 30.99, 30,true, 1, 'db_denise-johnson-3DkouQeZjp4-unsplash.jpg'),
+        (4, 'Ropa de noche blanca', 'desc ropa de noche blanco', 40.99, 40,false, 2, 'db_parker-burchfield-tvG4WvjgsEY-unsplash.jpg'),
+        (5, 'Collar de noche', 'desc collar de noche', 50.99, 50,true, 2, 'db_eve-maier-7uQQHORcTpc-unsplash.jpg'),
+        (6, 'Rodillo de pintura', 'desc rodillo de pintura', 60.99, 60,true, 2, 'db_theme-photos-Cl-OpYWFFm0-unsplash.jpg'),
+        (7, 'Escopeta', 'desc escopeta', 70.99, 70,false, 3, 'db_thomas-tucker-VJRk64F2nhs-unsplash.jpg'),
+        (8, 'Pistola', 'desc pistola', 80.99, 0,false, 3, 'db_jay-rembert-e0kgA5otj0Q-unsplash.jpg'),
+        (9, 'Cuchillo', 'desc cuchillo', 90.99, 90,true, 3, 'db_marios-gkortsilas-aAiy88ytl0c-unsplash.jpg'),
+        (10, 'Machete', 'desc machete', 100.99, 100,true, 3, 'db_taylor-daugherty-K0GO2Hd1lRw-unsplash.jpg')
 ;
 
 TRUNCATE TABLE product_categories;
