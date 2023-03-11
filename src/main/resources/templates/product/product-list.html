@@ -10,6 +10,7 @@
 
   <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
   <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 </head>
 <body>
 <div th:replace="~{navbar :: nav1}"></div>
@@ -45,10 +46,10 @@
             <div class="card-body">
               <h5 class="card-title" th:text="${product.name}"></h5>
               <p class="card-text" th:text="${product.description}"></p>
-              <p strong class="card-text" th:text="${product.price} + €"></p>
-              <a class="btn btn-primary" th:href="@{/products/{id}(id=${product.id})}">Ver</a>
+              <p strong class="card-text-price" th:text="${product.price} + €"></p>
+              <a th:href="@{/products/{id}(id=${product.id})}"><button th:title="Ver"><i class="bi bi-binoculars fs-3"></i></button></a>
               <a sec:authorize="isAuthenticated()"
-                 class="btn btn-success" th:href="@{/products/{id}/add(id=${product.id})}">Añadir al carrito</a>
+                 th:href="@{/products/{id}/add(id=${product.id})}"><button th:title="Añadir"><i class="bi bi-cart4 fs-3"></i></button></a>
             </div>
           </div>
         </div>

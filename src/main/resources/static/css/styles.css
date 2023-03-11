@@ -2,7 +2,7 @@
     font-size: 18px;
 }
 body {
-    background-color: #BFDCDB; /* Cambia el color de fondo según tu preferencia */
+    background-color: white; /* Cambia el color de fondo según tu preferencia */
     font-family: "serif";
 }
 
@@ -55,6 +55,6 @@ body {
 .card-text-price{
     font-size: 20px;
     font-weight: bold;
-    color:green;
+    color:black;
 
 }
