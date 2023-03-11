@@ -69,12 +69,12 @@ TRUNCATE TABLE product;
 
 INSERT INTO product (id, name, description, price, stock, available, manufacturer_id, image_url)
 VALUES
-    (1, 'GAME BOY', 'Nintendo Gameboy Color verde pistacho', 123.95, 10, true, 1, 'img/2.jpg'),
+    (1, 'GAME BOY', 'Gameboy Color verde pistacho', 123.95, 10, true, 1, 'img/2.jpg'),
     (2, 'MEGAZORD', 'Power Rangers Megazord Dino', 50.95, 20, true, 2, 'img/megazord2.png'),
-    (3, 'JUEGO OCA', 'Juego de mesa de la oca con dados', 9.95, 30, true, 1, 'img/oca2.jpg'),
-    (4, 'JHAYBERG', 'Zapatillas Jhayber usadas (buen estado)', 12.50, 40, false, 2, 'img/Jhayber.jpg'),
-    (5, 'MOTOCICLETA', 'Vespino Piaggio F9 año 1995 49cc', 450.00, 50, true, 2, 'img/vespino.jpg'),
-    (6, 'rodillo de pintura', 'desc rodillo de pintura', 60.99, 60, true, 2, 'https://dummyimage.com/250x250/b8b8b8/000000.jpg&text=Rodillo+de+pintura'),
+    (3, 'JUEGO OCA', 'Juego de mesa de la oca', 9.95, 30, true, 1, 'img/oca2.jpg'),
+    (4, 'JHAYBERG', 'Zapatillas Jhayber (casi nuevas)', 12.95, 40, false, 2, 'img/Jhayber.jpg'),
+    (5, 'MOTOCICLETA 49cc', 'Vespino Piaggio F9 año 1995', 450.05, 50, true, 2, 'img/vespino.jpg'),
+    (6, 'CAMISETA FÚTBOL', 'Camiseta Hércules CF 08/09', 30.55, 60, true, 2, '/img/hcf.jpg'),
     (7, 'escopeta', 'desc escopeta', 70.99, 70, false, 3, 'https://dummyimage.com/250x250/b8b8b8/000000.jpg&text=Escopeta'),
     (8, 'pistola', 'desc pistola', 80.99, 0, false, 3, 'https://dummyimage.com/250x250/b8b8b8/000000.jpg&text=Pistola'),
     (9, 'cuchillo', 'desc cuchillo', 90.99, 90, true, 3, 'https://dummyimage.com/250x250/b8b8b8/000000.jpg&text=Cuchillo'),

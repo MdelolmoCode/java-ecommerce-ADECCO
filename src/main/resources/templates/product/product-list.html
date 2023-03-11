@@ -23,16 +23,16 @@
     <div class="col-10">
 
 
-      <div class="row row-cols-1 row-cols-md-3 g-4" style="margin-top: 10px">
+      <div class="row row-cols-2 row-cols-md-4 g-4" style="margin-top: 10px">
         <div class="col" th:each="product : ${products}">
-          <div class="card" style="border: 4px solid black;">
+          <div class="card">
             <img th:src="${product.imageUrl}" class="card-img-top" alt="PRODUCT IMAGE">
 
             <div class="card-body">
               <h5 class="card-title" th:text="${product.name}"></h5>
               <p class="card-text" th:text="${product.description}"></p>
-              <p strong class="card-text" th:text="${product.price} + €"></p>
-              <a th:href="@{/products/{id}(id=${product.id})}"><button th:title="Ver"><i class="bi bi-binoculars fs-3"></i></button></a>
+              <p strong class="card-text-price" th:text="${product.price} + €"></p>
+              <a th:href="@{/products/{id}(id=${product.id})}"><button th:title="Ver"><i class="bi bi-binoculars fs-4"></i></button></a>
               <a sec:authorize="isAuthenticated()"
                  th:href="@{/products/{id}/add(id=${product.id})}"><button th:title="Añadir"><i class="bi bi-cart4 fs-3"></i></button></a>
             </div>

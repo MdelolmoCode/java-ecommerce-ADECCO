@@ -1,12 +1,14 @@
+.nav-item{
+    font-size: 18px;
+}
 body {
     background-color: #BFDCDB; /* Cambia el color de fondo según tu preferencia */
     font-family: "serif";
-    font-size: 25px;
 }
 
 .login-class{
     font-weight: bold;
-    font-size: 24px;
+    font-size: 14px;
     color:black;
 
 }
@@ -14,9 +16,15 @@ body {
 .register-class{
 
     font-weight: bold;
-    font-size: 24px;
+    font-size: 14px;
     color:black;
 }
+
+.card {
+    border: 1px solid black;
+}
+
+
 
 .card-title {
     font-weight: bold;
@@ -31,4 +39,22 @@ body {
 
 }
 
+.card-body {
+}
 
+.card-title{
+
+    font-size: 16px;
+}
+
+.card-text {
+    font-size: 14px;
+
+}
+
+.card-text-price{
+    font-size: 20px;
+    font-weight: bold;
+    color:green;
+
+}
