@@ -18,3 +18,12 @@ body {
     color:black;
 }
 
+.card-title {
+    font-weight: bold;
+}
+
+.list-group-item a {
+    color:black;
+    font-size: 24px;
+}
+

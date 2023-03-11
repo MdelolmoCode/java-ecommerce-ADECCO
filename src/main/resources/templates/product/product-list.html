@@ -21,19 +21,13 @@
 
     </div>
     <div class="col-10">
-<!--      <div class="mt-2">
-        <span>Filtrar por manufacturer: </span>
-        <<a class="btn btn-link btn-sm"
-            th:if="${product.manufacturer != null}"
-            th:text="${product.manufacturer.name}"
-            th:href="@{/products/manufacturer/{id}(id=${product.manufacturer.id})}"></a>
-      </div>-->
 
 
       <div class="row row-cols-1 row-cols-md-3 g-4" style="margin-top: 10px">
         <div class="col" th:each="product : ${products}">
           <div class="card" >
-            <img src="https://dummyimage.com/250x250/b8b8b8/000000.jpg&text=Product+Image" class="card-img-top" alt="PRODUCT IMAGE">
+            <img th:src="${product.imageUrl}" class="card-img-top" alt="PRODUCT IMAGE">
+
             <div class="card-body">
               <h5 class="card-title" th:text="${product.name}"></h5>
               <p class="card-text" th:text="${product.description}"></p>

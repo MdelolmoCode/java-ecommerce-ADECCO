@@ -10,7 +10,7 @@ TRUNCATE TABLE  address;
 INSERT INTO address (id, city, country, name, state, street_type, zipcode)
 VALUES (1, 'Tokyo','Japan','Deninton','Minami Ward','Road','98230'),
        (2, 'Madrid','Spain','Recoletos','Comunidad de Madrid','Paseo','68249'),
-       (3, 'Pamplona','Spain','San Nicolas','Navarra','Calle','31000'),
+       (3, 'Tokyo','Japan','Kuramae','Asakusa','Road','31000'),
        (4, 'Zaragoza','Spain','Cristobal Colon','Zaragoza','Plaza','58423'),
        (5, 'Sevilla','Spain','España','Sevilla','Plaza','32975'),
        (6, 'Paris','France','Liberte','Ile de France','Avenue','12896')
@@ -19,13 +19,14 @@ VALUES (1, 'Tokyo','Japan','Deninton','Minami Ward','Road','98230'),
 TRUNCATE TABLE category;
 INSERT INTO category(id,name, mature)
 VALUES  (1, 'videojuegos',false),
-        (2, 'bricolaje',false),
+        (2, 'juguetes',false),
 		(3, 'lencería',true),
 		(4, 'armas de fuego',true),
 		(5, 'armas blancas',true),
 		(6, 'armas',true),
 		(7, 'ropa',false),
-		(8, 'bisutería',false)
+		(8, 'bisutería',false),
+		(9, 'superheroes', false)
 ;
 
 TRUNCATE TABLE customer;
@@ -60,30 +61,30 @@ VALUES (1, 1),
 TRUNCATE TABLE manufacturer;
 INSERT INTO manufacturer (id, cif, name, address_id, phone_number)
 VALUES  (1, 'L16516165', 'Nintendo Company, Ltd.', 1, '570278613'),
-        (2, 'Q13274406', 'Merceria Evaristo', 3, '940888411'),
+        (2, 'Q13274406', 'Bandai', 3, '940888411'),
         (3, 'X55472064', 'Armeria Josefina', 5, '098088156')
 ;
 
 TRUNCATE TABLE product;
-INSERT INTO product (id, name, description, price, stock, available, manufacturer_id)
-VALUES  (1, 'Game Boy','Nintendo Gameboy Color Claro Púrpura',123.99, 10,true,1),
-        (2, 'acuarelas', 'desc acuarelas', 20.99, 20,true, 1),
-        (3, 'pincel de acuarelas', 'desc pincel de acuarelas', 30.99, 30,true, 1),
-        (4, 'ropa de noche blanca', 'desc ropa de noche blanco', 40.99, 40,false, 2),
-        (5, 'collar de noche', 'desc collar de noche', 50.99, 50,true, 2),
-        (6, 'rodillo de pintura', 'desc rodillo de pintura', 60.99, 60,true, 2),
-        (7, 'escopeta', 'desc escopeta', 70.99, 70,false, 3),
-        (8, 'pistola', 'desc pistola', 80.99, 0,false, 3),
-        (9, 'cuchillo', 'desc cuchillo', 90.99, 90,true, 3),
-        (10, 'machete', 'desc machete', 100.99, 100,true, 3)
-;
+
+INSERT INTO product (id, name, description, price, stock, available, manufacturer_id, image_url)
+VALUES
+    (1, 'GAME BOY', 'Nintendo Gameboy Color Claro Púrpura', 123.95, 10, true, 1, 'img/1.jpg'),
+    (2, 'MEGAZORD', 'Power Rangers Megazord Dino', 50.95, 20, true, 2, 'img/megazord.png'),
+    (3, 'pincel de acuarelas', 'desc pincel de acuarelas', 30.99, 30, true, 1, 'https://dummyimage.com/250x250/b8b8b8/000000.jpg&text=Pincel+de+acuarelas'),
+    (4, 'ropa de noche blanca', 'desc ropa de noche blanco', 40.99, 40, false, 2, 'https://dummyimage.com/250x250/b8b8b8/000000.jpg&text=Ropa+de+noche+blanca'),
+    (5, 'collar de noche', 'desc collar de noche', 50.99, 50, true, 2, 'https://dummyimage.com/250x250/b8b8b8/000000.jpg&text=Collar+de+noche'),
+    (6, 'rodillo de pintura', 'desc rodillo de pintura', 60.99, 60, true, 2, 'https://dummyimage.com/250x250/b8b8b8/000000.jpg&text=Rodillo+de+pintura'),
+    (7, 'escopeta', 'desc escopeta', 70.99, 70, false, 3, 'https://dummyimage.com/250x250/b8b8b8/000000.jpg&text=Escopeta'),
+    (8, 'pistola', 'desc pistola', 80.99, 0, false, 3, 'https://dummyimage.com/250x250/b8b8b8/000000.jpg&text=Pistola'),
+    (9, 'cuchillo', 'desc cuchillo', 90.99, 90, true, 3, 'https://dummyimage.com/250x250/b8b8b8/000000.jpg&text=Cuchillo'),
+    (10, 'machete', 'desc machete', 100.99, 100, true, 3, 'https://dummyimage.com/250x250/b8b8b8/000000.jpg&text=Machete');
+
 
 TRUNCATE TABLE product_categories;
 INSERT INTO product_categories (product_id, categories_id)
 VALUES (1, 1),
-       (1, 2),
-       (2, 1),
-       (1, 2),
+       (2, 2),
        (3, 1),
        (3, 2),
        (4, 7),
