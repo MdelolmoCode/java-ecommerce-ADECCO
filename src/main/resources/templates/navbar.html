@@ -55,10 +55,7 @@
 
       <div class="d-flex px-3">
         <div sec:authorize="isAnonymous()">
-          <a class="btn btn-link login-class" th:href="@{/login}">Iniciar sesión</a>
-        </div>
-        <div sec:authorize="isAnonymous()">
-          <a class="btn btn-link register-class" th:href="@{/user/sign-in}">Registrarse</a>
+          <a class="btn btn-link login-class" th:href="@{/login}"><button type="button" class="btn btn-light"><i class="bi bi-person-fill fs-4"></i></button></a>
         </div>
 
         <div class="dropdown" sec:authorize="isAuthenticated()">
