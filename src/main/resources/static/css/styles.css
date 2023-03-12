@@ -1,4 +1,4 @@
-.navbar{
+.navbar {
     position: fixed;
     top: 0;
     left: 0;
@@ -7,33 +7,32 @@
 }
 
 
-
-.nav-item{
+.nav-item {
     font-size: 18px;
 }
 
 
-
-.dropdown{
+.dropdown {
     font-size: 18px;
 }
+
 body {
     background-color: white; /* Cambia el color de fondo según tu preferencia */
     font-family: "serif";
 }
 
-.login-class{
+.login-class {
     font-weight: bold;
     font-size: 14px;
-    color:black;
+    color: black;
 
 }
 
-.register-class{
+.register-class {
 
     font-weight: bold;
     font-size: 14px;
-    color:black;
+    color: black;
 }
 
 .card {
@@ -41,13 +40,12 @@ body {
 }
 
 
-
 .card-title {
     font-weight: bold;
 }
 
 .list-group-item a {
-    color:black;
+    color: black;
     font-size: 24px;
 }
 
@@ -58,7 +56,7 @@ body {
 .card-body {
 }
 
-.card-title{
+.card-title {
 
     font-size: 16px;
 }
@@ -68,9 +66,9 @@ body {
 
 }
 
-.card-text-price{
+.card-text-price {
     font-size: 20px;
     font-weight: bold;
-    color:black;
+    color: black;
 
 }
