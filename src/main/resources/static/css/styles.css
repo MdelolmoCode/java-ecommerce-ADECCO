@@ -78,3 +78,15 @@ body {
     margin-top: 65px;
 
 }
+
+.footer-span{
+
+    font-weight: bold;
+    color: black;
+}
+
+.contact-footer{
+
+    color: black;
+    text-decoration: none;
+}
