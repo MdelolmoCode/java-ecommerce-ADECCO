@@ -20,9 +20,9 @@
         </li>
 
         <li class="nav-item dropdown">
-          <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link" type="button" data-bs-toggle="dropdown" aria-expanded="false">
             Categorías
-          </button>
+          </a>
           <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <li th:each="category: ${@categoryServiceImpl.findAll()}">
               <a class="dropdown-item"
@@ -31,10 +31,6 @@
               </a>
             </li>
           </ul>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link" th:href="@{/categories}">Link a categorías</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" th:href="@{/orders}">Pedidos</a>
