@@ -10,7 +10,7 @@
 <body>
 <div th:replace="~{navbar :: nav1}"></div>
 
-<div class="text-center">
+<div class="container text-center">
     <h1 class="mb-3">¿Quiere cerrar sesión?</h1>
     <form th:action="@{/logout}" method="post">
         <input type="submit" class="btn btn-danger btn-lg" value="Cerrar sesión" />
