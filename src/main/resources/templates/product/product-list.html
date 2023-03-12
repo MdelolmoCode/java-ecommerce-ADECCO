@@ -35,9 +35,9 @@
               <h5 class="card-title" th:text="${product.name}"></h5>
               <p class="card-text" th:text="${product.description}"></p>
               <p strong class="card-text-price" th:text="${#numbers.formatDecimal(product.price, 1, 2)} + €"></p>
-              <a th:href="@{/products/{id}(id=${product.id})}"><button th:title="Ver"><i class="bi bi-binoculars fs-3"></i></button></a>
+              <a th:href="@{/products/{id}(id=${product.id})}"><button class="btn btn-light" th:title="Ver"><i class="bi bi-binoculars fs-3"></i></button></a>
               <a sec:authorize="isAuthenticated()"
-                 th:href="@{/products/{id}/add(id=${product.id})}"><button th:title="Añadir"><i class="bi bi-cart4 fs-3"></i></button></a>
+                 th:href="@{/products/{id}/add(id=${product.id})}"><button class="btn btn-light" th:title="Añadir"><i class="bi bi-cart4 fs-3"></i></button></a>
             </div>
           </div>
         </div>

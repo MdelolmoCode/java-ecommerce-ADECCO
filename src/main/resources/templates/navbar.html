@@ -55,11 +55,10 @@
 
       <div class="d-flex px-3">
         <div sec:authorize="isAnonymous()">
-          <a class="btn btn-link login-class" th:href="@{/login}">Iniciar sesión</a>
+          <a class="btn btn-link login-class" th:href="@{/login}"><button th:title="Acceder" type="button" class="btn btn-light p-0 m-0"><i class="bi bi-person-fill fs-4"></i></button></a>
+          <a class="btn btn-link login-class" th:href="@{/login}"><button th:title="Carrito" type="button" class="btn btn-light p-0 m-0"><i class="bi bi-cart4 fs-4"></i></button></a>
         </div>
-        <div sec:authorize="isAnonymous()">
-          <a class="btn btn-link register-class" th:href="@{/user/sign-in}">Registrarse</a>
-        </div>
+
 
         <div class="dropdown" sec:authorize="isAuthenticated()">
           <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
