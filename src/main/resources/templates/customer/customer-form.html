@@ -10,7 +10,7 @@
 <body>
 <div th:replace="~{navbar :: nav1}"></div>
 
-<div class="text-center">
+<div class="container text-center">
     <h2 th:if="${customer.id}">Modificar datos cliente</h2>
     <h2 th:if="${customer.id == null}">Crear cliente</h2>
 </div>
