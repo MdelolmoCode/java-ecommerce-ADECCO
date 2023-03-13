@@ -66,17 +66,18 @@ VALUES  (1, 'L16516165', 'Pinturas Jaime', 1, '570278613'),
 
 TRUNCATE TABLE product;
 INSERT INTO product (id, name, description, price, stock, available, manufacturer_id, image_url)
-VALUES  (1, 'Pincel','pincel 3/9 negro',10.99, 10,true,1, 'db_artiom-vallat-v6n0iUuD4M0-unsplash.jpg'),
-        (2, 'Acuarelas', 'desc acuarelas', 20.99, 20,true, 1, 'db_elena-mozhvilo-gp4hlZC2aFs-unsplash.jpg'),
-        (3, 'Pincel de acuarelas', 'desc pincel de acuarelas', 30.99, 30,true, 1, 'db_denise-johnson-3DkouQeZjp4-unsplash.jpg'),
-        (4, 'Ropa de noche blanca', 'desc ropa de noche blanco', 40.99, 40,false, 2, 'db_parker-burchfield-tvG4WvjgsEY-unsplash.jpg'),
-        (5, 'Collar de noche', 'desc collar de noche', 50.99, 50,true, 2, 'db_eve-maier-7uQQHORcTpc-unsplash.jpg'),
-        (6, 'Rodillo de pintura', 'desc rodillo de pintura', 60.99, 60,true, 2, 'db_theme-photos-Cl-OpYWFFm0-unsplash.jpg'),
-        (7, 'Escopeta', 'desc escopeta', 70.99, 70,false, 3, 'db_thomas-tucker-VJRk64F2nhs-unsplash.jpg'),
-        (8, 'Pistola', 'desc pistola', 80.99, 0,false, 3, 'db_jay-rembert-e0kgA5otj0Q-unsplash.jpg'),
-        (9, 'Cuchillo', 'desc cuchillo', 90.99, 90,true, 3, 'db_marios-gkortsilas-aAiy88ytl0c-unsplash.jpg'),
-        (10, 'Machete', 'desc machete', 100.99, 100,true, 3, 'db_taylor-daugherty-K0GO2Hd1lRw-unsplash.jpg'),
-        (11, 'AK-47', 'Arma AK-47 Rusa', 300.94, 10,true, 3, 'ak47.jpg')
+VALUES  (1, 'Pincel','Pincel 3/9 negro.',10.99, 10,true,1, 'db_artiom-vallat-v6n0iUuD4M0-unsplash.jpg'),
+        (2, 'Acuarelas', 'Juego de pintura de acuarela sólida de 36 colores.', 20.99, 20,true, 1, 'db_elena-mozhvilo-gp4hlZC2aFs-unsplash.jpg'),
+        (3, 'Pincel de acuarelas', 'Pluma de pincel para colorear con depósito de agua.', 30.99, 30,true, 1, 'db_denise-johnson-3DkouQeZjp4-unsplash.jpg'),
+        (4, 'Rodillo de pintura', 'Rodillo de pintura de 6 pulgadas.', 60.99, 60,true, 2, 'db_theme-photos-Cl-OpYWFFm0-unsplash.jpg'),
+        (5, 'Pincel sintético', 'Pincel sintético ergonómico para acrílicos y óleos.', 60.95, 60, true, 2, 'db_andres-perez-se0GXEsgtPk-unsplash.jpg'),
+        (6, 'Ropa de noche blanca', 'Ropa de noche blanca.', 40.99, 40,false, 2, 'db_katy-duclos-M5_gg2SdZfI-unsplash.jpg'),
+        (7, 'Set camisetas', 'Set de 10 camisetas de diverso color.', 100.90, 40,false, 2, 'db_parker-burchfield-tvG4WvjgsEY-unsplash.jpg'),
+        (8, 'Collar de noche', 'Collar de plata.', 50.99, 50,true, 2, 'db_eve-maier-7uQQHORcTpc-unsplash.jpg'),
+        (9, 'Escopeta', 'Escopeta semiautomática.', 70.99, 70,false, 3, 'db_thomas-tucker-VJRk64F2nhs-unsplash.jpg'),
+        (10, 'Pistola', 'Pistola.', 80.99, 0,false, 3, 'db_jay-rembert-e0kgA5otj0Q-unsplash.jpg'),
+        (11, 'Cuchillo', 'Cuchillo de cocina, hoja de acero inoxidable.', 90.99, 90,true, 3, 'db_marios-gkortsilas-aAiy88ytl0c-unsplash.jpg'),
+        (12, 'Machete', 'Cuchillo de supervivencia para exteriores.', 100.99, 100,true, 3, 'db_taylor-daugherty-K0GO2Hd1lRw-unsplash.jpg')
 ;
 
 TRUNCATE TABLE product_categories;
@@ -84,25 +85,23 @@ INSERT INTO product_categories (product_id, categories_id)
 VALUES (1, 1),
        (1, 2),
        (2, 1),
-       (1, 2),
        (3, 1),
-       (3, 2),
-       (4, 7),
-       (4, 3),
-       (5, 7),
-       (5, 8),
-       (6, 1),
-       (6, 2),
-       (7, 4),
-       (7, 6),
-       (8, 4),
-       (8, 6),
-       (9, 5),
+       (4, 1),
+       (4, 2),
+       (5, 1),
+       (6, 7),
+       (6, 3),
+       (7, 7),
+       (8, 7),
+       (8, 8),
+       (9, 4),
        (9, 6),
-       (10, 5),
+       (10, 4),
        (10, 6),
+       (11, 5),
        (11, 6),
-       (11, 4)
+       (12, 5),
+       (12, 6)
 ;
 
 TRUNCATE TABLE shopping_cart;
