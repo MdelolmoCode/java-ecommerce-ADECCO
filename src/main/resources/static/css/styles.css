@@ -25,11 +25,14 @@ body {
     font-weight: bold;
     font-size: 14px;
     color: black;
-
+}
+.alert{
+    font-weight: bold;
+    font-size: 14px;
+    color: #5cadc3;
 }
 
 .register-class {
-
     font-weight: bold;
     font-size: 14px;
     color: black;
@@ -50,43 +53,40 @@ body {
 }
 
 .card-img-top {
-
 }
 
 .card-body {
 }
 
 .card-title {
-
     font-size: 16px;
 }
 
 .card-text {
     font-size: 14px;
-
 }
 
 .card-text-price {
     font-size: 20px;
     font-weight: bold;
     color: black;
-
 }
 
 .container{
-
     margin-top: 65px;
-
 }
 
 .footer-span{
-
     font-weight: bold;
     color: black;
 }
 
 .contact-footer{
-
     color: black;
     text-decoration: none;
+}
+
+.button-pay{
+
+    background: #5cadc3;
 }
