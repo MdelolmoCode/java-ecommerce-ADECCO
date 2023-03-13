@@ -21,7 +21,6 @@
                 <table class="table table-bordered border border-dark">
                     <thead>
                     <tr style="background-color: #E4E3E3;">
-                        <th scope="col">Id</th>
                         <th scope="col">Producto</th>
                         <th scope="col">Cantidad</th>
                         <th scope="col">Precio Unidad</th>
@@ -31,7 +30,6 @@
                     </thead>
                     <tbody>
                     <tr th:each="cartItem : ${cartItems}">
-                        <td th:text="${cartItem.id}"></td>
                         <td th:text="${cartItem.product.getName()}"></td>
                         <td th:text="${cartItem.getAmount()}"></td>
                         <td th:text="${#numbers.formatDecimal(cartItem.product.getPrice(), 1, 2)}+ '€'"></td>
