@@ -11,61 +11,64 @@
 <body>
 <div th:replace="~{navbar :: nav1}"></div>
 
-<div class="container text-center">
-    <div class="row">
+<div>
+    <div class="container text-center">
+        <div class="row">
 
-        <h1>Registrar nuevo usuario</h1>
+            <h1>Únete a Magpie</h1>
 
-        <div class="col"></div>
+            <div class="col"></div>
 
-        <div class="col">
+            <div class="col">
 
-            <div th:if="${error}">
-                <div class="alert alert-danger" role="alert">
-                    <p th:text="${error}"></p>
+                <div th:if="${error}">
+                    <div class="alert alert-danger" role="alert">
+                        <p th:text="${error}"></p>
+                    </div>
                 </div>
+
+                <form th:action="@{/user/sign-in}" method="POST" th:object="${user}">
+
+                    <input type="hidden" id="id" name="id" th:field="*{id}"/>
+
+                    <div class="mb-3">
+                        <strong><label for="username" class="form-label">Username</label></strong>
+                        <input type="text" class="form-control" id="username" th:field="*{username}">
+                    </div>
+                    <div class="mb-3">
+                        <strong><label for="password" class="form-label">Password</label></strong>
+                        <input type="password" class="form-control" id="password" th:field="*{password}">
+                    </div>
+
+                    <div class="mb-2">
+                        <strong><label for="email" class="form-label">Email: </label></strong>
+                        <input type="text" class="form-control" id="email" th:field="*{customer.email}">
+                    </div>
+                    <div class="mb-2 ">
+                        <strong><label for="name" class="form-label">Nombre: </label></strong>
+                        <input type="text" class="form-control" id="name" th:field="*{customer.name}">
+                    </div>
+                    <div class="mb-2 ">
+                        <strong><label for="apellido" class="form-label">Apellido: </label></strong>
+                        <input type="text" class="form-control" id="apellido" th:field="*{customer.surname}">
+                    </div>
+                    <div class="mb-2">
+                        <strong><label for="telefono" class="form-label">Teléfono: </label></strong>
+                        <input type="text" class="form-control" id="telefono" th:field="*{customer.phone}">
+                    </div>
+
+                    <a class="btn btn-danger" th:href="@{/}">Cancelar</a>
+                    <button type="submit" class="btn btn-success">Guardar</button>
+
+                </form>
+
+
             </div>
 
-            <form th:action="@{/user/sign-in}" method="POST" th:object="${user}">
-
-                <input type="hidden" id="id" name="id" th:field="*{id}"/>
-
-                <div class="mb-3">
-                    <strong><label for="username" class="form-label">Username</label></strong>
-                    <input type="text" class="form-control" id="username" th:field="*{username}">
-                </div>
-                <div class="mb-3">
-                    <strong><label for="password" class="form-label">Password</label></strong>
-                    <input type="password" class="form-control" id="password" th:field="*{password}">
-                </div>
-
-                <div class="mb-2">
-                    <strong><label for="email" class="form-label">Email: </label></strong>
-                    <input type="text" class="form-control" id="email" th:field="*{customer.email}">
-                </div>
-                <div class="mb-2 ">
-                    <label for="name" class="form-label">Nombre: </label>
-                    <input type="text" class="form-control" id="name" th:field="*{customer.name}">
-                </div>
-                <div class="mb-2 ">
-                    <label for="apellido" class="form-label">Apellido: </label>
-                    <input type="text" class="form-control" id="apellido" th:field="*{customer.surname}">
-                </div>
-                <div class="mb-2">
-                    <label for="telefono" class="form-label">Teléfono: </label>
-                    <input type="text" class="form-control" id="telefono" th:field="*{customer.phone}">
-                </div>
-
-                <a class="btn btn-danger" th:href="@{/}">Cancelar</a>
-                <button type="submit" class="btn btn-success">Guardar</button>
-
-            </form>
-
-
+            <div class="col"></div>
         </div>
-
-        <div class="col"></div>
     </div>
+
 </div>
 
 <div th:replace="~{footer :: footer1}"></div>

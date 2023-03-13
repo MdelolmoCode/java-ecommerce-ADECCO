@@ -5,7 +5,7 @@
     <title>ShoppingCart List</title>
 
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
-    <link rel="stylesheet" type="text/css" href="/css/styles.css" />
+    <link rel="stylesheet" type="text/css" href="/css/styles.css"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 
 </head>
@@ -17,16 +17,15 @@
 
     <div class="container text-center">
         <div class="row align-items-start">
-                <div class="col mt-5" ></div>
-
+            <div class="col-8">
                 <table class="table table-bordered border border-dark">
                     <thead>
-                    <tr style="background-color: #6eaec5;">
+                    <tr style="background-color: #E4E3E3;">
                         <th scope="col">Id</th>
                         <th scope="col">Producto</th>
                         <th scope="col">Cantidad</th>
-                        <th scope="col">Precio</th>
-                        <th scope="col">Coste total del producto</th>
+                        <th scope="col">Precio Unidad</th>
+                        <th scope="col">Total</th>
                         <th scope="col">Acciones</th>
                     </tr>
                     </thead>
@@ -38,66 +37,60 @@
                         <td th:text="${#numbers.formatDecimal(cartItem.product.getPrice(), 1, 2)}+ '€'"></td>
                         <td th:text="${#numbers.formatDecimal(cartItem.getPrice(), 1, 2)}+ '€'"></td>
                         <td>
-                            <a th:href="@{/shoppingCarts/{id}/{idItem}/addOne(id=${shoppincartById.id}, idItem=${cartItem.id})}"><button><i class="bi bi-cart-plus fs-4"></i></button></a>
-                            <a th:href="@{/shoppingCarts/{id}/{idItem}/delete(id=${shoppincartById.id}, idItem=${cartItem.id})}"><button><i class="bi bi-cart-x fs-4" ></i></button></a>
-                            <a th:href="@{/shoppingCarts/{id}/{idItem}/deleteOne(id=${shoppincartById.id}, idItem=${cartItem.id})}"><button><i class="bi bi-cart-dash fs-4" >-</i></button></a>
-
-
+                            <a th:href="@{/shoppingCarts/{id}/{idItem}/addOne(id=${shoppincartById.id}, idItem=${cartItem.id})}">
+                                <button><i class="bi bi-cart-plus fs-4"></i></button>
+                            </a>
+                            <a th:href="@{/shoppingCarts/{id}/{idItem}/delete(id=${shoppincartById.id}, idItem=${cartItem.id})}">
+                                <button><i class="bi bi-trash3-fill fs-4"></i></button>
+                            </a>
+                            <a th:href="@{/shoppingCarts/{id}/{idItem}/deleteOne(id=${shoppincartById.id}, idItem=${cartItem.id})}">
+                                <button><i class="bi bi-cart-dash fs-4">-</i></button>
+                            </a>
                         </td>
-
-
-
-
-
                     </tr>
                     </tbody>
-
                 </table>
-
-            <div class="mt-5">
-
-                <table>
-                    <tr style="background-color: #6eaec5;">
-
-                        <th scope="col"></th>
-                        <th scope="col"></th>
-                        <th scope="col">Cantidad Total</th>
-                        <th scope="col"></th>
-                        <th scope="col">Coste total del carrito</th>
-
-                    </tr>
-
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td th:text="${amountProducts}"></td>
-                        <td></td>
-                        <td th:text="${#numbers.formatDecimal(totalShoppingCartCost, 1, 2)} + '€'"></td>
-                        <td>
-                            <a th:class="'btn btn-success ' + ${#lists.isEmpty(cartItems) ? 'disabled' : ''}"
-                               th:href="@{/orders/create/{cartId}(cartId=${(shoppincartById.getId())})}">Pagar</a>
-                            <a class="btn btn-warning" th:href="@{/shoppingCarts/{id}/emptyShoppingCart(id=${(shoppincartById.getId())})}">Vaciar carrito</a>
-                            <a class="btn btn-secondary" th:href="@{/products}">Seguir comprando</a>
-                        </td>
-                    </tr>
-
-
-                </table>
-
             </div>
 
+            <div class="col-4">
+                <div>
+                    <table table table-bordered style="width: 100%;">
+                        <thead>
 
+                        <tr style="background-color: #E4E3E3;">
 
-                <div class="alert alert-danger mt-5" role="alert" th:if="${#lists.isEmpty(cartItems)}">
-                    El carrito está vacio.
+                            <th scope="col">Cantidad</th>
+                            <th scope="col">Precio total</th>
+                            <th scope="col">Acciones</th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+
+                                <td th:text="${amountProducts}"></td>
+                            <td th:text="${#numbers.formatDecimal(totalShoppingCartCost, 1, 2)} + '€'"></td>
+                            <td>
+                                <a th:class="' ' + ${#lists.isEmpty(cartItems) ? 'disabled' : ''}" th:href="@{/orders/create/{cartId}(cartId=${(shoppincartById.getId())})}"><button btn btn-light class="button-pay"><i class="bi bi-currency-euro fs-3"></i></button></a>
+                                <a th:href="@{/shoppingCarts/{id}/emptyShoppingCart(id=${(shoppincartById.getId())})}"><button><i class="bi bi-trash3-fill"></i></button></a>
+                                <a th:href="@{/products}"><button><i class="bi bi-reply-all-fill"></i></button></a>
+                            </td>
+
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div class="container-alert">
+                        <div class="alert alert-light mt-5" role="alert" th:if="${#lists.isEmpty(cartItems)}">
+                            El carrito está vacio.
+                        </div>
+                        <div class="alert alert-light mt-5" role="alert" th:if="${#lists.size(cartItems) > 0}">
+                            Hay <span th:text="${amountProducts}"></span> productos pendientes de pago.
+                        </div>
+                    </div>
                 </div>
-                <div class="alert alert-success mt-5" role="alert" th:if="${#lists.size(cartItems) > 0}">
-                    Hay <span th:text="${amountProducts}"></span> productos pendientes de pago.
-                </div>
-
+            </div>
         </div>
     </div>
-
 
 
     <div th:replace="~{footer :: footer1}"></div>
