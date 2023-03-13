@@ -27,7 +27,6 @@
       <table class="table">
         <thead>
         <tr>
-          <th scope="col">Id</th>
           <th scope="col">Name</th>
           <th scope="col">Mature</th>
           <th scope="col">Actions</th>
@@ -35,7 +34,6 @@
         </thead>
         <tbody>
         <tr th:each="category : ${categories}">
-          <td th:text="${category.id}"></td>
           <td th:text="${category.name}"></td>
           <td>
             <a class="badge text-bg-danger"
