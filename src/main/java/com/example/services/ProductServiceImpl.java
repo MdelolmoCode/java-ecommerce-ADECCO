@@ -97,9 +97,9 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> findAllByCategories_Name(String name) {
-        log.info("findByCategories_Name {}", name);
-        return productRepo.findAllByCategories_Name(name);
+    public List<Product> findAllByCategories_Name(String category) {
+        log.info("findByCategories_Name {}", category);
+        return productRepo.findAllByCategories_Name(category);
     }
 
     @Override

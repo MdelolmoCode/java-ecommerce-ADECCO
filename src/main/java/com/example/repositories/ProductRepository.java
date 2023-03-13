@@ -21,7 +21,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     List<Product> findAllByPriceGreaterThan(Double price);
     List<Product> findAllByPriceLessThan(Double price);
     List<Product> findAllByStockLessThan(Long amount);
-    List<Product> findAllByCategories_Name(String name);
+    List<Product> findAllByCategories_Name(String category);
     List<Product> findAllByManufacturer_Cif(String cif);
     List<Product> findAllByCategories_MatureFalse();
     List<Product> findByCategories_Id(Long id);

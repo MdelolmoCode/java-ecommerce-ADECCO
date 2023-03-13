@@ -39,6 +39,12 @@ public class ProductController {
         return "product/product-list";
     }
 
+    @GetMapping("products/categories/{category}") // http://localhost:8080/products/categories/arte
+    public String findAllByCategories_Name(Model model, @PathVariable String category){
+        model.addAttribute("products", productService.findAllByCategories_Name(category));
+        return "product/product-list";
+    }
+
     @GetMapping("products/{id}")
     public String findById(Model model, @PathVariable Long id){
         Optional<Product> productOpt = productService.findByIdWithCategories(id);
@@ -81,4 +87,22 @@ public class ProductController {
         productService.deleteById(id);
         return "redirect:/products";
     }
+
+/*    @GetMapping("/productSearch")
+    public String productSearch(Model model) {
+
+        model.addAttribute("product", new Product());
+
+        return "productSearch";
+    }
+
+    @PostMapping("/productSearch")
+    public String productSearch(Product product, Model model, String name) {
+
+        List<Product> foundProducts = productService.findAllByNameContainsIgnoreCase(name);
+        model.addAttribute("foundProducts", foundProducts);
+
+        return "productSearch";
+    }*/
+
 }

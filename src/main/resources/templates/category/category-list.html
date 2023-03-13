@@ -35,7 +35,8 @@
         <tbody>
         <tr th:each="category : ${categories}">
           <td th:text="${category.id}"></td>
-          <td th:text="${category.name}"></td>
+          <td th:text="${category.name}"
+              th:href="@{/products/categories/{category}(category=${category.name})}"></td>
           <td>
             <a class="badge text-bg-danger"
                th:if="${category.mature == true}">Mature content</a>

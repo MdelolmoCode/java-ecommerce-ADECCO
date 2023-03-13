@@ -20,7 +20,7 @@ public interface ProductService {
     List<Product> findAllByPriceLessThan(Double price);
     List<Product> findAllByStockLeftLessThan(Long amount);
     List<Product> findAllByAvailableTrue();
-    List<Product> findAllByCategories_Name(String name);
+    List<Product> findAllByCategories_Name(String category);
     List<Product> findAllByManufacturer_Cif(String cif);
     List<Product> findAllByCategories_MatureFalse();
     List<Product> findByCategories_Id(Long id);
