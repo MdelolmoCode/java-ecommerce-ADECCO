@@ -14,8 +14,8 @@
 <div class="container text-center">
   <div class="row">
 
-    <h1 th:if="${product.id}" class="h1-title">Modificar Product <span th:text="${product.id}"></span></h1>
-    <h1 th:if="${product.id} == null" class="h1-title">Crear nuevo Product</h1>
+    <h1 th:if="${product.id}" class="h1-title">Modificar producto <span th:text="${product.id}"></span></h1>
+    <h1 th:if="${product.id} == null" class="h1-title">Nuevo producto</h1>
 
     <div class="col"></div>
 
@@ -34,18 +34,18 @@
 
 
         <div class="mb-2">
-          <label for="name" class="form-label">Name</label>
+          <label for="name" class="form-label">Nombre</label>
           <input type="text" class="form-control" id="name" th:field="*{name}" >
         </div>
 
         <div class="mb-2">
-          <label for="description" class="form-label">Description</label>
+          <label for="description" class="form-label">Descripción</label>
           <textarea class="form-control" id="description" rows="3" th:field="*{description}"></textarea>
         </div>
 
         <div class="mb-2">
           <label for="price" placeholder="0.00 €" required name="price" min="0"
-                 value="0.00" step="0.01" title="Price" class="form-label">Price (€)</label>
+                 value="0.00" step="0.01" title="Price" class="form-label">Precio (€)</label>
           <input type="number" min="0" step="0.01" class="form-control" id="price" th:field="*{price}">
         </div>
 
@@ -84,8 +84,8 @@
         </div>
 
         <div th:if="${product.imageUrl}" class="mb-3">
-          <span>Imagen actual</label>
-          <img th:src="|/files/${product.imageUrl}|" class="card-img-top" alt="Imagen de producto" style="aspect-ratio:1;">
+          <span><label>Imagen actual</label></span>
+          <img th:src="|/files/${product.imageUrl}|" class="card-img-top" alt="Imagen de producto" style="aspect-ratio:1;" src="">
           <input class="form-control" type="hidden" id="imageUrl" th:field="*{imageUrl}" readonly>
         </div>
 

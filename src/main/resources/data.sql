@@ -14,7 +14,8 @@ VALUES (1, 'London','England','Deninton','Big London','Road','98230'),
        (4, 'Zaragoza','Spain','Cristobal Colon','Zaragoza','Plaza','58423'),
        (5, 'Sevilla','Spain','España','Sevilla','Plaza','32975'),
        (6, 'Paris','France','Liberte','Ile de France','Avenue','12896'),
-       (7, 'Trmice','República Checa','Dinamo libery','Moravia','Street','89837')
+       (7, 'Trmice','República Checa','Dinamo libery','Moravia','Street','89837'),
+       (9, 'Tokyo', 'Japón', 'Kanamura', 'Arigato', 'Street', '837362')
 ;
 
 TRUNCATE TABLE category;
@@ -26,7 +27,8 @@ VALUES  (1, 'arte',false),
 		(5, 'armas blancas',true),
 		(6, 'armas',true),
 		(7, 'ropa',false),
-		(8, 'bisutería',false)
+		(8, 'bisutería',false),
+		(9, 'juegos', false)
 ;
 
 TRUNCATE TABLE customer;
@@ -63,7 +65,8 @@ INSERT INTO manufacturer (id, cif, name, address_id, phone_number)
 VALUES  (1, 'L16516165', 'Pinturas Jaime', 1, '570278613'),
         (2, 'Q13274406', 'Merceria Evaristo', 3, '940888411'),
         (3, 'X55472064', 'Armeria Josefina', 5, '098088156'),
-        (4, 'L88787787', 'De Walt', 7, '676637328' )
+        (4, 'L88787787', 'De Walt', 7, '676637328'),
+        (5, 'X87363672', 'Nintendo', 9, '97363728')
 ;
 
 TRUNCATE TABLE product;
@@ -82,7 +85,9 @@ VALUES  (1, 'Pincel','Pincel 3/9 negro.',10.99, 10,true,1, 'db_artiom-vallat-v6n
         (12, 'Machete', 'Cuchillo de supervivencia para exteriores.', 100.99, 100,true, 3, 'db_taylor-daugherty-K0GO2Hd1lRw-unsplash.jpg'),
         (13, 'AK-47', 'Arma AK-47 a estrenar.', 300.94, 10,true, 3, 'ak47.jpg'),
         (14, 'Taladro', 'Taladro De Walt 18 vatios.', 150.00, 30, true,4, 'taladro.jpg'),
-        (15, 'Anillo', 'Anillo de boda.', 100.00, 30, true,2, 'anillo.jpg')
+        (15, 'Anillo', 'Anillo de boda.', 100.00, 30, true,2, 'anillo.jpg'),
+        (16, 'Francotirador', 'Francotirador de precisión', 878.50, 20, true, 4, 'francotirador.jpg'),
+        (17, 'Alicates', 'Alicate corte diagonal 160MM', 10.65, 20, true, 4, 'alicates.jpg')
 ;
 
 TRUNCATE TABLE product_categories;
@@ -108,7 +113,9 @@ VALUES (1, 1),
        (13, 6),
        (13, 4),
        (14, 2),
-       (15, 8)
+       (15, 8),
+       (16, 4),
+       (17, 2)
 ;
 
 TRUNCATE TABLE shopping_cart;
@@ -145,22 +152,6 @@ VALUES (1, 1, 1, 1),
        (23, 3, 7, 9),
        (24, 3, 8, 10)
 ;
-
-/*
-TRUNCATE TABLE orders;
-INSERT INTO orders (id, order_number, payment_method, address_id, customer_id)
-VALUES (1, 1, 0, 1, 1),
-       (2, 2, 1, 2, 2),
-       (3, 3, 2, 3, 3)
-;
-
-TRUNCATE TABLE orders_cart_items;
-INSERT INTO orders_cart_items (order_id, cart_items_cart_item_id)
-VALUES (1, 1),
-       (1, 2),
-       (1, 3)
-;
-*/
 
 TRUNCATE TABLE users;
 INSERT INTO users (id, customer_id, username, password)

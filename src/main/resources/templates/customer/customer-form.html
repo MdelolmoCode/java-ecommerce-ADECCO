@@ -13,7 +13,7 @@
 
 <div class="container text-center">
     <h2 th:if="${customer.id}">Modificar datos cliente</h2>
-    <h2 th:if="${customer.id == null}">Crear cliente</h2>
+    <h2 th:if="${customer.id == null}">Nuevo cliente</h2>
 </div>
 
 <form th:action="@{/customers}" method="POST" th:object="${customer}">
@@ -26,19 +26,19 @@
 
             <div class="mb-2 ">
                 <strong><label for="name" class="form-label">Nombre: </label></strong>
-                <input type="text" class="form-control" id="name" placeholder="editar nombre" th:field="*{name}">
+                <input type="text" class="form-control" id="name" placeholder="introduzca nombre" th:field="*{name}">
             </div>
             <div class="mb-2 ">
                 <strong><label for="apellido" class="form-label">Apellido: </label></strong>
-                <input type="text" class="form-control" id="apellido" placeholder="editar apellido" th:field="*{surname}">
+                <input type="text" class="form-control" id="apellido" placeholder="introduzca apellido" th:field="*{surname}">
             </div>
             <div class="mb-2">
                 <strong><label for="telefono" class="form-label">Teléfono: </label></strong>
-                <input type="text" class="form-control" id="telefono" placeholder="editar telefono" th:field="*{phone}">
+                <input type="text" class="form-control" id="telefono" placeholder="introduzca telefono" th:field="*{phone}">
             </div>
             <div class="mb-2">
                 <strong><label for="email" class="form-label">Email: </label></strong>
-                <input type="text" class="form-control" id="email" placeholder="editar email" th:field="*{email}">
+                <input type="text" class="form-control" id="email" placeholder="introduzca email" th:field="*{email}">
             </div>
 
         </div>

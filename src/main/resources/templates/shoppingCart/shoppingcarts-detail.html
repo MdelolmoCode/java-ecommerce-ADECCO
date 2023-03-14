@@ -72,6 +72,10 @@
                                 <a th:class="' ' + ${#lists.isEmpty(cartItems) ? 'disabled' : ''}" th:href="@{/orders/create/{cartId}(cartId=${(shoppincartById.getId())})}"><button btn btn-light class="button-pay"><i class="bi bi-currency-euro fs-3"></i></button></a>
                                 <a th:href="@{/shoppingCarts/{id}/emptyShoppingCart(id=${(shoppincartById.getId())})}"><button btn btn-light class="button-trash"><i class="bi bi-trash3-fill"></i></button></a>
                                 <a th:href="@{/products}"><button btn btn-light class="button-return"><i class="bi bi-reply-all-fill"></i></button></a>
+
+                            </td>
+                            <td>
+
                             </td>
 
                         </tr>
@@ -84,7 +88,9 @@
                         <div class="alert alert-light mt-5" role="alert" th:if="${#lists.size(cartItems) > 0}">
                             Hay <span th:text="${amountProducts}"></span> productos pendientes de pago.
                         </div>
+
                     </div>
+
                 </div>
             </div>
         </div>
