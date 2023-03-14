@@ -36,13 +36,13 @@
                         <td th:text="${#numbers.formatDecimal(cartItem.getPrice(), 1, 2)}+ '€'"></td>
                         <td>
                             <a th:href="@{/shoppingCarts/{id}/{idItem}/addOne(id=${shoppincartById.id}, idItem=${cartItem.id})}">
-                                <button btn btn-light><i class="bi bi-cart-plus"></i></button>
+                                <button btn btn-light class="button-addCart"><i class="bi bi-cart-plus"></i></button>
                             </a>
                             <a th:href="@{/shoppingCarts/{id}/{idItem}/delete(id=${shoppincartById.id}, idItem=${cartItem.id})}">
-                                <button btn btn-light><i class="bi bi-trash3-fill"></i></button>
+                                <button btn btn-light class="button-trash"><i class="bi bi-trash3-fill"></i></button>
                             </a>
                             <a th:href="@{/shoppingCarts/{id}/{idItem}/deleteOne(id=${shoppincartById.id}, idItem=${cartItem.id})}">
-                                <button btn btn-light><i class="bi bi-cart-dash">-</i></button>
+                                <button btn btn-light class="button-lessCart"><i class="bi bi-cart-dash">-</i></button>
                             </a>
                         </td>
                     </tr>
@@ -70,8 +70,8 @@
                             <td th:text="${#numbers.formatDecimal(totalShoppingCartCost, 1, 2)} + '€'"></td>
                             <td>
                                 <a th:class="' ' + ${#lists.isEmpty(cartItems) ? 'disabled' : ''}" th:href="@{/orders/create/{cartId}(cartId=${(shoppincartById.getId())})}"><button btn btn-light class="button-pay"><i class="bi bi-currency-euro fs-3"></i></button></a>
-                                <a th:href="@{/shoppingCarts/{id}/emptyShoppingCart(id=${(shoppincartById.getId())})}"><button btn btn-light><i class="bi bi-trash3-fill"></i></button></a>
-                                <a th:href="@{/products}"><button btn btn-light><i class="bi bi-reply-all-fill"></i></button></a>
+                                <a th:href="@{/shoppingCarts/{id}/emptyShoppingCart(id=${(shoppincartById.getId())})}"><button btn btn-light class="button-trash"><i class="bi bi-trash3-fill"></i></button></a>
+                                <a th:href="@{/products}"><button btn btn-light class="button-return"><i class="bi bi-reply-all-fill"></i></button></a>
                             </td>
 
                         </tr>

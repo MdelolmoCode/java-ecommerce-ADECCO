@@ -88,5 +88,21 @@ body {
 
 .button-pay{
 
+    background: green;
+}
+
+.button-addCart{
     background: #5cadc3;
+}
+
+.button-lessCart{
+    background: yellow;
+}
+
+.button-trash{
+    background: red;
+}
+
+.button-return{
+    background: gray;
 }
