@@ -13,7 +13,8 @@ VALUES (1, 'London','England','Deninton','Big London','Road','98230'),
        (3, 'Pamplona','Spain','San Nicolas','Navarra','Calle','31000'),
        (4, 'Zaragoza','Spain','Cristobal Colon','Zaragoza','Plaza','58423'),
        (5, 'Sevilla','Spain','España','Sevilla','Plaza','32975'),
-       (6, 'Paris','France','Liberte','Ile de France','Avenue','12896')
+       (6, 'Paris','France','Liberte','Ile de France','Avenue','12896'),
+       (7, 'Trmice','República Checa','Dinamo libery','Moravia','Street','89837')
 ;
 
 TRUNCATE TABLE category;
@@ -61,7 +62,8 @@ TRUNCATE TABLE manufacturer;
 INSERT INTO manufacturer (id, cif, name, address_id, phone_number)
 VALUES  (1, 'L16516165', 'Pinturas Jaime', 1, '570278613'),
         (2, 'Q13274406', 'Merceria Evaristo', 3, '940888411'),
-        (3, 'X55472064', 'Armeria Josefina', 5, '098088156')
+        (3, 'X55472064', 'Armeria Josefina', 5, '098088156'),
+        (4, 'L88787787', 'De Walt', 7, '676637328' )
 ;
 
 TRUNCATE TABLE product;
@@ -77,13 +79,15 @@ VALUES  (1, 'Pincel','Pincel 3/9 negro.',10.99, 10,true,1, 'db_artiom-vallat-v6n
         (9, 'Escopeta', 'Escopeta semiautomática.', 70.99, 70,false, 3, 'db_thomas-tucker-VJRk64F2nhs-unsplash.jpg'),
         (10, 'Pistola', 'Pistola.', 80.99, 0,false, 3, 'db_jay-rembert-e0kgA5otj0Q-unsplash.jpg'),
         (11, 'Cuchillo', 'Cuchillo de cocina, hoja de acero inoxidable.', 90.99, 90,true, 3, 'db_marios-gkortsilas-aAiy88ytl0c-unsplash.jpg'),
-        (12, 'Machete', 'Cuchillo de supervivencia para exteriores.', 100.99, 100,true, 3, 'db_taylor-daugherty-K0GO2Hd1lRw-unsplash.jpg')
+        (12, 'Machete', 'Cuchillo de supervivencia para exteriores.', 100.99, 100,true, 3, 'db_taylor-daugherty-K0GO2Hd1lRw-unsplash.jpg'),
+        (13, 'AK-47', 'Arma AK-47 a estrenar.', 300.94, 10,true, 3, 'ak47.jpg'),
+        (14, 'Taladro', 'Taladro De Walt 18 vatios.', 150.00, 30, true,4, 'taladro.jpg'),
+        (15, 'Anillo', 'Anillo de boda.', 100.00, 30, true,2, 'anillo.jpg')
 ;
 
 TRUNCATE TABLE product_categories;
 INSERT INTO product_categories (product_id, categories_id)
 VALUES (1, 1),
-       (1, 2),
        (2, 1),
        (3, 1),
        (4, 1),
@@ -92,7 +96,6 @@ VALUES (1, 1),
        (6, 7),
        (6, 3),
        (7, 7),
-       (8, 7),
        (8, 8),
        (9, 4),
        (9, 6),
@@ -101,7 +104,11 @@ VALUES (1, 1),
        (11, 5),
        (11, 6),
        (12, 5),
-       (12, 6)
+       (12, 6),
+       (13, 6),
+       (13, 4),
+       (14, 2),
+       (15, 8)
 ;
 
 TRUNCATE TABLE shopping_cart;

@@ -43,7 +43,7 @@
         </div>
       </div>
 
-      <div class="alert alert-info" role="alert" th:if="${#lists.isEmpty(products)}">
+      <div class="alert alert-info mt-5" role="alert" th:if="${#lists.isEmpty(products)}">
         <div th:if="${search}">
           <b>No se encuentran resultados para <i><span th:text="${search}"></span></i>.<br></b>
           Revise su ortografía o use términos más generales.
