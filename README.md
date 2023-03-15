@@ -10,8 +10,6 @@
 - María del Olmo Hernández
 - Alejandro Bustamante Ortiz
 - Javier Grijalba Azpiroz
-- Jon Ander Ferro
-- Bayardo Antonio Hidalgo
 
 ### Team Representative: 
 - María del Olmo Hernández 
