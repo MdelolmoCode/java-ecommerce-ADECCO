@@ -34,3 +34,7 @@ Esquema de pasos para el aprendizaje de creación de una aplicación web con Jav
 7. Capa servicio: interfaz e implementación servicio por cada Entidad
 8. Capa controlador
 9. Capa vista (HTML5, Bootstrap, Thymeleaf)
+
+# Ultima versión
+
+La última versión del proyecto se encuentra en la rama master.
